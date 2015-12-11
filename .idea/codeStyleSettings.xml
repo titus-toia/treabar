@@ -8,6 +8,10 @@
         </XML>
       </value>
     </option>
+<<<<<<< HEAD
     <option name="PREFERRED_PROJECT_CODE_STYLE" value="DefaultTitus" />
+=======
+    <option name="PREFERRED_PROJECT_CODE_STYLE" value="Titus" />
+>>>>>>> 4e5bb1960842a3432876771d736fe7dfd1062934
   </component>
 </project>

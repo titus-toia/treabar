@@ -122,6 +122,7 @@ nav.top-bar .profile a > i {
 }
 #dashboard .notifications .tab-title.active .tab-pedestal {
   height: 8px;
+<<<<<<< HEAD
 }
 
 /* Manager */
@@ -169,4 +170,6 @@ ul.lateral-tabs li {
   width: 25%;
   background-color: #fcf529;
   color: #000;
+=======
+>>>>>>> 4e5bb1960842a3432876771d736fe7dfd1062934
 }
