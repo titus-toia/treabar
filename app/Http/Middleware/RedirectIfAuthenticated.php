@@ -6,7 +6,6 @@ use Illuminate\Http\RedirectResponse;
 
 class RedirectIfAuthenticated {
 
-<<<<<<< HEAD
   /**
    * The Guard implementation.
    *
@@ -38,41 +37,5 @@ class RedirectIfAuthenticated {
 
     return $next($request);
   }
-=======
-	/**
-	 * The Guard implementation.
-	 *
-	 * @var Guard
-	 */
-	protected $auth;
-
-	/**
-	 * Create a new filter instance.
-	 *
-	 * @param  Guard  $auth
-	 * @return void
-	 */
-	public function __construct(Guard $auth)
-	{
-		$this->auth = $auth;
-	}
-
-	/**
-	 * Handle an incoming request.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  \Closure  $next
-	 * @return mixed
-	 */
-	public function handle($request, Closure $next)
-	{
-		if ($this->auth->check())
-		{
-			return new RedirectResponse(url('/home'));
-		}
-
-		return $next($request);
-	}
->>>>>>> 4e5bb1960842a3432876771d736fe7dfd1062934
 
 }

@@ -22,13 +22,8 @@
   </ul>
   <section class="top-bar-section">
     <ul class="left">
-<<<<<<< HEAD
       <li class="dashboard page"><a href="{{ url('')  }}">Dashboard</a></li>
       <li class="manager page"><a href="{{ url('manage')  }}">Manage</a></li>
-=======
-      <li class="dashboard page"><a href="#">Dashboard</a></li>
-      <li class="manager page"><a href="#">Manage</a></li>
->>>>>>> 4e5bb1960842a3432876771d736fe7dfd1062934
       <li class="invoices page"><a href="#">Invoice</a></li>
     </ul>
     <ul class="right">
@@ -51,11 +46,7 @@
 <script src="{{ asset('js/jquery.scrollpanel.js') }}"></script>
 <script>
   $(document).foundation();
-<<<<<<< HEAD
-  $.ready(function () {
-=======
   $.ready(function() {
->>>>>>> 4e5bb1960842a3432876771d736fe7dfd1062934
     $('.scrollpanel').scrollpanel();
   });
 </script>
