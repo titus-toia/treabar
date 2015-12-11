@@ -1,0 +1,172 @@
+/* General */
+.scrollpanel .sp-scrollbar {
+  width: 10px;
+  background-color: #ccc;
+  cursor: pointer;
+}
+.scrollpanel .sp-scrollbar .sp-thumb {
+  background-color: #aaa;
+  transition: height 0.2s ease-in-out;
+}
+.scrollpanel .sp-scrollbar.active .sp-thumb {
+  background-color: #999;
+}
+/* Navigation */
+nav.top-bar {
+  background-color: #9dbce2;
+  font-family: "Lato", "Helvetica", Arial, sans-serif;
+  -moz-box-shadow: 0px 0px 0px 1px #bbb;
+  -webkit-box-shadow: 0px 0px 0px 1px #bbb;
+  box-shadow: 0px 0px 0px 1px #bbb;
+}
+nav.top-bar ul li {
+  background-color: #9dbce2;
+}
+nav.top-bar ul a {
+  background-color: inherit !important;
+}
+nav.top-bar ul li > a {
+  font-family: "Lato", "Helvetica", Arial, sans-serif;
+}
+nav.top-bar .dashboard {
+  background-color: #3498db;
+}
+nav.top-bar .dashboard:hover {
+  background-color: #19608f;
+}
+nav.top-bar .manager {
+  background-color: #fcd22a;
+}
+nav.top-bar .manager:hover {
+  background-color: #F1C204;
+}
+nav.top-bar .manager a {
+  color: #59370b !important;
+}
+nav.top-bar .manager:hover a {
+  color: #59370b !important;
+}
+nav.top-bar .invoices {
+  background-color: #a477c4;
+}
+nav.top-bar .invoices:hover {
+  background-color: #8049a7;
+}
+nav.top-bar li.page {
+  width: 5.7rem;
+  text-align: center;
+}
+
+nav.top-bar .fullname {
+  line-height: 2.8125rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #002056;
+}
+nav.top-bar .profile a {
+  height: 2.8125rem;
+}
+nav.top-bar .profile a > i {
+  font-size: 25px;
+}
+
+/* Structure */
+#dashboard {
+  max-width: none;
+  margin: 1px 0px 0px 0px;
+}
+#dashboard, #dashboard > * {
+  height: 100%;
+  max-height: 100%;
+}
+
+/* Dashboard */
+#dashboard {
+  position: absolute;
+  top: 0;
+  padding-top: 2.8125rem
+}
+#dashboard .main {
+  /*border-right: 1px solid gray;*/
+  /*overflow-y: scroll;*/
+}
+#dashboard .notifications {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+#dashboard .notifications .tab-title a {
+  font-family: "Lato", "Helvetica", Arial, sans-serif;
+}
+#dashboard .notifications .tab-title {
+  width: 50%;
+  text-align: center;
+}
+#dashboard .notifications .tab-title a {
+  outline: 0 none;
+  line-height: 16px;
+}
+#dashboard .notifications .tab-title a {
+  font-size: 13px;
+}
+#dashboard .notifications .tab-title.active a {
+  font-size: 16px;
+}
+
+#dashboard .notifications .tab-title .tab-pedestal {
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  bottom: 0;
+  left: 0;
+  background-color: #7d7d7d;
+}
+#dashboard .notifications .tab-title.active .tab-pedestal {
+  height: 8px;
+}
+
+/* Manager */
+
+ul.lateral-tabs {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+ul.lateral-tabs li {
+  float: left;]
+  text-align: center;
+
+  -webkit-transform-origin: 0 0;
+  -moz-transform-origin: 0 0;
+  -o-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: rotate(-90deg) translate(-488px, 0px);
+  -moz-transform: rotate(-90deg) translate(-488px, 0px);
+  -o-transform: rotate(-90deg) translate(-488px, 0px);
+  transform: rotate(-90deg) translate(-488px, 0px);
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+#manage-tasks {
+  width: 20%;
+  background-color: #fcd22a;
+  color: #59370b;
+}
+
+#manage-timesheet {
+  width: 30%;
+  background-color: #442fae;
+  color: #fff;
+}
+
+#manage-chart {
+  width: 25%;
+  background-color: #7125a9;
+  color: #fff;
+}
+
+#manage-feed {
+  width: 25%;
+  background-color: #fcf529;
+  color: #000;
+}
