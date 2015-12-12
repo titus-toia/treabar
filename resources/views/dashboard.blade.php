@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('content')
-  <div id="dashboard" class="row">
+  <div id="dashboard" class="row wrapper">
     <div class="large-8 columns main scrollpanel">
       Dashboard main
     </div>
