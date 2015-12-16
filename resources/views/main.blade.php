@@ -42,14 +42,10 @@
 @yield('content')
 <script src="{{ asset('foundation/js/vendor/jquery.js') }}"></script>
 <script src="{{ asset('foundation/js/foundation.min.js') }}"></script>
-<script src="{{ asset('js/jquery.mousewheel.js') }}"></script>
-<script src="{{ asset('js/jquery.scrollpanel.js') }}"></script>
+<script src="{{ asset('js/jquery.sly.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
 <script>
   $(document).foundation();
-  $.ready(function() {
-    $('.scrollpanel').scrollpanel();
-  });
 </script>
 </body>
 </html>

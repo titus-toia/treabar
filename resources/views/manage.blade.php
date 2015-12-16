@@ -8,43 +8,31 @@
       <div id="manage-feed"><a href="#feed">FEED</a></div>
   </div>
   <div id="manager-projects" class="columns large-11">
-    <ul id="manager-projects-list">
-      <li>
-        <div class="manager-project">
-          <div class="left">
-            <span class="name">IOS Project</span>
-            <span class="date">2015-09-15</span>
-            <ul class="people">
-              <li><img src="http://lorempixel.com/30/35/people/" /></li>
-              <li><img src="http://lorempixel.com/30/35/people/" /></li>
-              <li><img src="http://lorempixel.com/30/35/people/" /></li>
-              <li><img src="http://lorempixel.com/30/35/people/" /></li>
-              <li><img src="http://lorempixel.com/30/35/people/" /></li>
-              <li><img src="http://lorempixel.com/30/35/people/" /></li>
-            </ul>
-            <div class="clearfix"></div>
-            <span class="tracked">Tracked %hrs% hours.</span>
+    <div id="manager-projects-list-wrapper" class="frame">
+      <ul id="manager-projects-list" class="slidee">
+        @for($i = 0; $i < 10; $i++)
+        <li>
+          <div class="manager-project">
+            <div class="left">
+              <span class="name">Project Name</span>
+              <span class="date">{{ date('Y-m-d', strtotime('-1 month'))  }}</span>
+              <ul class="people">
+                @for($keys = array_rand(range(1, 7), rand(2, 4)), $j = 0; $j < count($keys); $j++)
+                <li><img height="35" width="35" src="{{ url('images/dev/user-' . range(1, 7)[$keys[$j]] . '.jpg') }}" /></li>
+                @endfor
+              </ul>
+              <div class="clearfix"></div>
+              <span class="tracked">Tracked {{ rand(10, 150) }} hours.</span>
+            </div>
+            <div class="banner color-{{ rand(1, 5) }}"></div>
           </div>
-          <div class="banner color-1"></div>
-        </div>
-      </li>
-      <li>
-        <div class="manager-project">
-          <div class="left">
-            <span class="name">UX Design</span>
-            <span class="date">2015-09-15</span>
-            <ul class="people">
-              <li><img src="http://lorempixel.com/30/35/people/" /></li>
-              <li><img src="http://lorempixel.com/30/35/people/" /></li>
-              <li><img src="http://lorempixel.com/30/35/people/" /></li>
-              <li><img src="http://lorempixel.com/30/35/people/" /></li>
-            </ul>
-            <span class="tracked">Tracked %hrs% hours.</span>
-          </div>
-          <div class="banner color-2"></div>
-        </div>
-      </li>
-    </ul>
+        </li>
+        @endfor
+      </ul>
+    </div>
+    <div class="scrollbar">
+      <div class="handle"></div>
+    </div>
   </div>
 </div>
 @endsection

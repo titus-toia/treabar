@@ -8,6 +8,12 @@
 .color-3 {
   background-color: #1abc9c;
 }
+.color-4 {
+  background-color: #00953d;
+}
+.color-5 {
+  background-color: #fe374a;
+}
 
 .scrollpanel .sp-scrollbar {
   width: 10px;
@@ -208,11 +214,27 @@ nav.top-bar .profile a > i {
 /* Manager projects*/
 #manager-projects {
   padding-top: 50px;
+  padding-right: 50px;
+}
+#manager-projects-list-wrapper {
+  height: 195px;
+  width: 100%;
+}
+ul#manager-projects-list {
+  list-style: none;
+  margin: 0;
+  height: 100%;
+}
+.scrollbar { width: 100%; height: 2px; }
+.scrollbar .handle {
+  width: 100px; /* overriden if dynamicHandle: 1 */
+  height: 100%;
+  background: #aaa;
 }
 ul#manager-projects-list > li {
   float: left;
   margin-right: 25px;
-  display: block;
+  display: inline-block;
 }
 div.manager-project {
   position: relative;
@@ -220,6 +242,10 @@ div.manager-project {
   height: 175px;
   width: 175px;
   border: 2px solid #bbb;
+  margin-top: 5px;
+}
+li.active div.manager-project {
+
 }
 div.manager-project .left {
   width: 135px;
