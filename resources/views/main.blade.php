@@ -43,9 +43,10 @@
 <script src="{{ asset('foundation/js/vendor/jquery.js') }}"></script>
 <script src="{{ asset('foundation/js/foundation.min.js') }}"></script>
 <script src="{{ asset('js/jquery.sly.js') }}"></script>
-<script src="{{ asset('js/main.js') }}"></script>
 <script>
   $(document).foundation();
+  BASE_URL =  '{{ url('') }}';
 </script>
+<script src="{{ asset('js/main.js') }}"></script>
 </body>
 </html>

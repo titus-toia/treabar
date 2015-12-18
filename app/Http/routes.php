@@ -21,3 +21,7 @@ Route::controllers([
 ]);
 
 Route::get('manage', 'ManagerController@index');
+Route::get('manage/{id}/tasks', 'ManagerController@tasks');
+Route::get('manage/{id}/timesheet', 'ManagerController@timesheet');
+Route::get('manage/{id}/chart', 'ManagerController@chart');
+Route::get('manage/{id}/feed', 'ManagerController@feed');

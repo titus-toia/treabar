@@ -15,6 +15,12 @@
   background-color: #fe374a;
 }
 
+.loading {
+  cursor: wait;
+  z-index: 10000;
+  background: url('../img/loader.gif') no-repeat center;
+}
+
 .scrollpanel .sp-scrollbar {
   width: 10px;
   background-color: #ccc;
@@ -212,9 +218,13 @@ nav.top-bar .profile a > i {
 }
 
 /* Manager projects*/
-#manager-projects {
-  padding-top: 50px;
+#manager-content {
+  padding-top: 25px;
   padding-right: 50px;
+}
+#manager-projects {
+  height: 100%;
+  width: 100%;
 }
 #manager-projects-list-wrapper {
   height: 195px;
@@ -301,4 +311,18 @@ div.manager-project div.banner {
   margin-top: 20px;
   border: 2px solid #bbb;
   height: calc(100% - 230px);
+}
+
+.current-project-listing {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  opacity: 1;
+}
+
+/* Manager pages */
+#manager-page {
+  display: none;
+  height: calc(100% - 5px);
+  width: 100%;
 }
