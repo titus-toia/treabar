@@ -26,7 +26,8 @@
                   <div class="clearfix"></div>
                   <span class="tracked">Tracked {{ rand(10, 150) }} hours.</span>
                 </div>
-                <div class="banner color-{{ rand(1, 5) }}"></div>
+                <?php $color = 'color-' . rand(1, 5) ?>
+                <div class="banner {{ $color }}" data-color="{{ $color }}"></div>
               </div>
             </li>
           @endfor

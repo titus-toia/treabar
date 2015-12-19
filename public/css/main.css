@@ -1,18 +1,18 @@
 /* General */
 .color-1 {
-  background-color: #ef5523;
+  background-color: #ef5523 !important;
 }
 .color-2 {
-  background-color: #00468a;
+  background-color: #00468a !important;
 }
 .color-3 {
-  background-color: #1abc9c;
+  background-color: #1abc9c !important;
 }
 .color-4 {
-  background-color: #00953d;
+  background-color: #00953d !important;
 }
 .color-5 {
-  background-color: #fe374a;
+  background-color: #fe374a !important;
 }
 
 .loading {
@@ -75,14 +75,15 @@ nav.top-bar .invoices {
 nav.top-bar .invoices:hover {
   background-color: #8049a7;
 }
-nav.top-bar li.page {
+.top-bar-section ul li.page > a {
   width: 5.7rem;
   text-align: center;
+  font-size: 13px;
 }
 
 nav.top-bar .fullname {
   line-height: 2.8125rem;
-  font-size: 0.9rem;
+  font-size: 14px;
   font-weight: bold;
   color: #002056;
 }
@@ -91,6 +92,17 @@ nav.top-bar .profile a {
 }
 nav.top-bar .profile a > i {
   font-size: 25px;
+}
+#page-state-button {
+  cursor: pointer;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: none;
+}
+#page-state-button a {
+  text-align: center;
+  font-size: 17px;
+  font-weight: lighter;
 }
 
 /* Structure */
@@ -254,7 +266,10 @@ div.manager-project {
   border: 2px solid #bbb;
   cursor: pointer;
   margin-top: 5px;
-  user-select: none;
+
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
 }
 li.active div.manager-project {
 
@@ -325,4 +340,22 @@ div.manager-project div.banner {
   display: none;
   height: calc(100% - 5px);
   width: 100%;
+}
+
+/* Manager page - Tasks */
+.task .title {
+  width: 100%;
+  height: 35px;
+  text-align: center;
+  font-size: 14px;
+  border: 2px solid #bbb;
+  line-height: 31px;
+  cursor: pointer;
+
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+}
+.task .content {
+  display: none;
 }

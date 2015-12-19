@@ -10,6 +10,12 @@ $('body').on('click', '#manager-tabs div', function() {
   $('#manager-page').hide();
   $('#manage').addClass('loading');
   $.get(BASE_URL + '/manage/' + state.id + '/' + page, function (data) {
+    var $pstate = $('#page-state-button');
+    $pstate.removeClass();
+    $pstate.addClass(state.color);
+    $pstate.find('a').text(state.project_name + ' - ' + $.camelCase('-' + page));
+    $pstate.show();
+
     $('#manager-page').html(data);
     $('#manager-page').show();
     $('#manage').removeClass('loading');
@@ -52,7 +58,11 @@ $(document).ready(function() {
       var $project = $frame.find('.slidee > li:nth(' + pos + ') > div.manager-project');
       var $bridge = $('#bridge');
       var id = $project.data('id');
+
+      //Update state
       state.id = id;
+      state.color = $project.find('.banner').data('color');
+      state.project_name = $project.find('.name').text();
 
       //Select upper box and position bridge
       setTimeout(function() {

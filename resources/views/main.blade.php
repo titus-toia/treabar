@@ -7,7 +7,7 @@
   <title>Treabar</title>
 
   <!-- Fonts -->
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
   <link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css">
 
   <link href="{{ asset('foundation/css/foundation.min.css') }}" rel="stylesheet" type="text/css">
@@ -25,6 +25,7 @@
       <li class="dashboard page"><a href="{{ url('')  }}">Dashboard</a></li>
       <li class="manager page"><a href="{{ url('manage')  }}">Manage</a></li>
       <li class="invoices page"><a href="#">Invoice</a></li>
+      <li id="page-state-button"><a href="#">Page state</a></li>
     </ul>
     <ul class="right">
       <li class="fullname"><span>Full Name</span></li>
