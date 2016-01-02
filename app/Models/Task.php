@@ -1,4 +1,6 @@
 <?php
+
+namespace Treabar\Models;
 use Baum\Node;
 
 /**

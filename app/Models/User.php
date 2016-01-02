@@ -1,6 +1,6 @@
 <?php
 
-namespace Treabar;
+namespace Treabar\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
