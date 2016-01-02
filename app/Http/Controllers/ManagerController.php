@@ -1,8 +1,7 @@
-<?php namespace App\Http\Controllers;
+<?php namespace Treabar\Http\Controllers;
 
 class ManagerController extends Controller {
   public function __construct() {
-    $this->middleware('guest');
   }
 
   public function getData() {

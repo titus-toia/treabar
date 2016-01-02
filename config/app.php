@@ -151,10 +151,10 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        Treabar\Providers\AppServiceProvider::class,
+        Treabar\Providers\AuthServiceProvider::class,
+        Treabar\Providers\EventServiceProvider::class,
+        Treabar\Providers\RouteServiceProvider::class,
 
     ],
 
