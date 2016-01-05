@@ -11,7 +11,7 @@ class CreateTasksTable extends Migration {
    * @return void
    */
   public function up() {
-    Schema::create('tasks', function(Blueprint $table) {
+    Schema::create('tasks', function (Blueprint $table) {
       // These columns are needed for Baum's Nested Set implementation to work.
       // Column names may be changed, but they *must* all exist and be modified
       // in the model.

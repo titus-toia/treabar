@@ -2,6 +2,7 @@
 
 class ManagerController extends Controller {
   public function __construct() {
+    //$this->middleware()
   }
 
   public function getData() {
