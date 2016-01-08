@@ -23,7 +23,7 @@ class CreateTasksTable extends Migration {
       $table->integer('lft')->nullable()->index();
       $table->integer('rgt')->nullable()->index();
       $table->integer('depth')->nullable();
-      $table->integer('project_id', true);
+      $table->integer('project_id')->unsigned();
 
       // Add needed columns here (f.ex: name, slug, path, etc.)
       // $table->string('name', 255);

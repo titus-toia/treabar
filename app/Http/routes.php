@@ -1,34 +1,26 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Routes File
-|--------------------------------------------------------------------------
-|
-| Here is where you will register all of the routes in an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
-Route::get('/', 'DashboardController@index');
-
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| This route group applies the "web" middleware group to every route
-| it contains. The "web" middleware group is defined in your HTTP
-| kernel and includes session state, CSRF protection, and more.
-|
-*/
-Route::get('manage', 'ManagerController@index');
-Route::get('manage/{id}/tasks', 'ManagerController@tasks');
-Route::get('manage/{id}/timesheet', 'ManagerController@timesheet');
-Route::get('manage/{id}/chart', 'ManagerController@chart');
-Route::get('manage/{id}/feed', 'ManagerController@feed');
-
 Route::group(['middleware' => ['web']], function () {
-    //
+  Route::get('/', 'DashboardController@index')->name('dashboard');
+
+  Route::group(['prefix' => 'manage'], function () {
+    Route::get('/', 'ManagerController@index')->name('manager');
+    Route::get('{id}/tasks', 'ManagerController@tasks')->name('manager.tasks');
+    Route::post('{id}/tasks', 'ManagerController@create')->name('manager.tasks.create');
+    Route::post('tasks/{id}/comment', 'ManagerController@update ')->name('manager.tasks.update');
+    Route::put('tasks/{id}', 'ManagerController@update')->name('manager.tasks.update');
+    Route::put('tasks/{id}/move', 'ManagerController@move')->name('manager.tasks.move');
+    Route::delete('tasks/{id}', 'ManagerController@delete')->name('manager.tasks.delete');
+
+    Route::get('{id}/timesheet', 'ManagerController@timesheet')->name('manager.timesheet');
+    Route::get('{id}/chart', 'ManagerController@chart')->name('manager.chart');
+    Route::get('{id}/feed', 'ManagerController@feed')->name('manager.feed');
+
+  });
+
+  Route::group(['prefix' => 'invoice'], function () {
+    Route::get('/', 'InvoiceController@index')->name('invoices');
+  });
 });
+
+

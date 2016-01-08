@@ -1,11 +1,13 @@
 <?php
 
 namespace Treabar\Models;
+
 use Baum\Node;
+use Illuminate\Database\Query\Builder;
 
 /**
-* Task
-*/
+ * Task
+ */
 class Task extends Node {
 
   /**
@@ -101,4 +103,15 @@ class Task extends Node {
   // to hook your own callbacks/observers into this events:
   // http://laravel.com/docs/5.0/eloquent#model-events
 
+  public function comments() {
+    return $this->hasMany('Models\Comment');
+  }
+
+  public function company() {
+    return $this->belongsTo('Models\Company');
+  }
+
+  public function scopeMaster(Builder $query) {
+    return $query->where('parent_id', null);
+  }
 }

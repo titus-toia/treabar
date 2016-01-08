@@ -10,10 +10,10 @@ class CreateProjectUsers extends Migration {
    * @return void
    */
   public function up() {
-    Schema::table('project_users', function (Blueprint $table) {
-      $table->increments('id');
+    Schema::create('project_users', function (Blueprint $table) {
       $table->integer('project_id')->unsigned();
       $table->integer('user_id')->unsigned();
+      $table->primary(['project_id', 'user_id']);
       $table->timestamps();
     });
   }
@@ -24,8 +24,6 @@ class CreateProjectUsers extends Migration {
    * @return void
    */
   public function down() {
-    Schema::table('project_users', function (Blueprint $table) {
-      //
-    });
+    Schema::drop('project_users');
   }
 }
