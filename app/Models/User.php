@@ -29,6 +29,10 @@ class User extends Authenticatable {
     'password', 'remember_token',
   ];
 
+  public function activities() {
+    return $this->hasMany('Models/Activity');
+  }
+
   public function company() {
     return $this->belongsTo('Models/Company');
   }
