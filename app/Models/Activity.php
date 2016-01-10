@@ -7,19 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 class Activity extends Model
 {
   public function task() {
-    return $this->belongsTo('Models/Task');
+    return $this->belongsTo('Treabar\Models\Task');
   }
 
   public function user() {
-    return $this->belongsTo('Models/User');
+    return $this->belongsTo('Treabar\Models\User');
   }
 
   public function project() {
-    return $this->belongsTo('Models/Project');
+    return $this->belongsTo('Treabar\Models\Project');
   }
 
   public function invoice() {
-    return $this->belongsTo('Models\Invoice');
+    return $this->belongsTo('Treabar\Models\Invoice');
   }
 
 }

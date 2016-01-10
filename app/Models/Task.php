@@ -104,11 +104,11 @@ class Task extends Node {
   // http://laravel.com/docs/5.0/eloquent#model-events
 
   public function comments() {
-    return $this->hasMany('Models\Comment');
+    return $this->hasMany('Treabar\Models\Comment');
   }
 
   public function company() {
-    return $this->belongsTo('Models\Company');
+    return $this->belongsTo('Treabar\Models\Company');
   }
 
   public function scopeMaster(Builder $query) {

@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model {
   public function task() {
-    return $this->belongsTo('Models/Task');
+    return $this->belongsTo('Treabar\Models\Task');
   }
 
   public function user() {
-    return $this->belongsTo('Models/User');
+    return $this->belongsTo('Treabar\Models\User');
   }
 
 }

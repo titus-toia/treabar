@@ -6,10 +6,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable {
   const ROLE_ROOT = 'root';
-  const ROLE_ADMIN = 'admin';
+  const ROLE_MANAGER = 'manager';
   const ROLE_DEV = 'dev';
   const ROLE_CLIENT = 'client';
-  const ROLE_MASTER_CLIENT = 'master_client';
 
   /**
    * The attributes that are mass assignable.
@@ -30,24 +29,23 @@ class User extends Authenticatable {
   ];
 
   public function activities() {
-    return $this->hasMany('Models/Activity');
+    return $this->hasMany('Treabar\Models\Activity');
   }
 
   public function company() {
-    return $this->belongsTo('Models/Company');
+    return $this->belongsTo('Treabar\Models\Company');
   }
 
   public function projects() {
-    return $this->belongsToMany('Models\Project');
+    return $this->belongsToMany('Treabar\Models\Project', 'project_users');
   }
 
   public static function roles() {
     return [
       self::ROLE_ROOT,
-      self::ROLE_ADMIN,
+      self::ROLE_MANAGER,
       self::ROLE_DEV,
-      self::ROLE_CLIENT,
-      self::ROLE_MASTER_CLIENT
+      self::ROLE_CLIENT
     ];
   }
 }

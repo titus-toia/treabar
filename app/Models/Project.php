@@ -7,15 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
   public function company() {
-    return $this->belongsTo('Models\Company');
+    return $this->belongsTo('Treabar\Models\Company');
   }
 
   public function tasks() {
-    return $this->hasMany('Models\Task');
+    return $this->hasMany('Treabar\Models\Task');
   }
 
   public function users() {
-    return $this->belongsToMany('Models\User');
+    return $this->belongsToMany('Treabar\Models\User', 'project_users');
   }
 
 }
