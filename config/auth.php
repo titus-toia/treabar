@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Treabar\User::class,
+            'model' => Treabar\Models\User::class,
         ],
 
         // 'users' => [

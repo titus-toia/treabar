@@ -8,6 +8,7 @@
     <div id="manage-feed"><a href="#feed">FEED</a></div>
   </div>
   <div id="manager-content" class="columns large-11">
+    {{ dump($projects)  }}
     <div id="manager-projects">
       <div id="manager-projects-list-wrapper" class="frame">
         <ul id="manager-projects-list" class="slidee">

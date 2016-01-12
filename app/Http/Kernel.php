@@ -28,6 +28,7 @@ class Kernel extends HttpKernel {
       \Illuminate\Session\Middleware\StartSession::class,
       \Illuminate\View\Middleware\ShareErrorsFromSession::class,
       \Treabar\Http\Middleware\VerifyCsrfToken::class,
+      \Treabar\Http\Middleware\Dev::class
     ],
 
     'api' => [
@@ -43,7 +44,7 @@ class Kernel extends HttpKernel {
    * @var array
    */
   protected $routeMiddleware = [
-    'auth' => \Treabar\Http\Middleware\Authenticate::class,
+    'auth' => Middleware\Authenticate::class,
     'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
     'guest' => \Treabar\Http\Middleware\RedirectIfAuthenticated::class,
     'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class

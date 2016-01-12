@@ -28,25 +28,25 @@ class DatabaseSeeder extends Seeder {
       $devs = factory(User::class, User::ROLE_DEV, rand(5, 7))->create(['company_id' => $company_id]);
       $clients = factory(User::class, User::ROLE_CLIENT, rand(1, 3))->create(['company_id' => $company_id]);
 
-      $projects = factory(Project::class, rand(3, 6))->create([
-        'company_id' => $company_id,
-        'client_id' => call_user_func(function() use($faker, $clients) {
-          return $faker->optional()->randomElement($clients->lists('id')->all());
-        })
-      ]);
+      foreach(range(1, rand(3, 6)) as $i) {
+        factory(Project::class)->create([
+          'company_id' => $company_id,
+          'client_id' => $faker->optional()->randomElement($clients->lists('id')->all())
+        ]);
+      }
 
-      factory(Task::class, rand(10, 15))->create([
-        'project_id' => call_user_func(function() use ($faker, $projects) {
-          return $faker->randomElement($projects->lists('id')->all());
-        })
-      ]);
+      $projects = $company->projects();
+      foreach(range(1, rand(10, 15)) as $i) {
+        factory(Task::class)->create([
+          'project_id' => $faker->randomElement($projects->lists('id')->all())
+        ]);
+      }
 
       $project_ids = $projects->lists('id')->all();
       foreach($devs as $dev) {
         $ids = array_values(array_only($project_ids, array_rand($project_ids)));
         $dev->projects()->sync($ids);
       }
-
     }
   }
 

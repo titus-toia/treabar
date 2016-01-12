@@ -1,5 +1,7 @@
 <?php namespace Treabar\Http\Controllers;
 
+use Treabar\Models\User;
+
 class ManagerController extends Controller {
   public function __construct() {
     //$this->middleware()
@@ -10,7 +12,13 @@ class ManagerController extends Controller {
   }
 
   public function index() {
-    return view('manage');
+    $user = \Auth::user();
+    if($user->role === User::ROLE_MANAGER || $user->role === User::ROLE_ROOT)
+      $projects = $user->company->projects;
+    else
+      $projects = $user->projects;
+
+    return view('manage')->with('projects', $projects);
   }
 
   public function tasks() {

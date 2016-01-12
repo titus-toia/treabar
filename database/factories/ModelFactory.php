@@ -46,7 +46,8 @@ $factory->define(Treabar\Models\Company::class, function (Faker\Generator $faker
 $factory->define(Treabar\Models\Project::class, function (Faker\Generator $faker) {
   return [
     'name' => $faker->sentence(3),
-    'slug' => $faker->slug(3)
+    'slug' => $faker->slug(3),
+    'color' => rand(1, 5)
   ];
 });
 
