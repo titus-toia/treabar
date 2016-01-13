@@ -2,10 +2,12 @@
 
 namespace Treabar\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 class Project extends Model
 {
+  public function activities() {
+    return $this->hasManyThrough('Treabar\Models\Activity', 'Treabar\Models\Task');
+  }
+
   public function company() {
     return $this->belongsTo('Treabar\Models\Company');
   }
@@ -16,6 +18,10 @@ class Project extends Model
 
   public function users() {
     return $this->belongsToMany('Treabar\Models\User', 'project_users');
+  }
+
+  public function logged() {
+    return floor($this->activities->sum('duration') / 3600);
   }
 
 }

@@ -90,6 +90,9 @@ nav.top-bar .fullname {
 nav.top-bar .profile a {
   height: 2.8125rem;
 }
+nav.top-bar .profile a.icon {
+  padding-right: 0 !important;
+}
 nav.top-bar .profile a > i {
   font-size: 25px;
 }
@@ -275,13 +278,15 @@ li.active div.manager-project {
 
 }
 div.manager-project .left {
+  overflow: hidden;
   width: 135px;
+  white-space: nowrap;
 }
 div.manager-project span.name {
   margin-top: 5px;
   color: #4b4b4b;
   display: block;
-  font-size: 20px;
+  font-size: 18px;
 }
 div.manager-project span.date {
   color: #4b4b4b;

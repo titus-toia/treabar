@@ -8,30 +8,27 @@
     <div id="manage-feed"><a href="#feed">FEED</a></div>
   </div>
   <div id="manager-content" class="columns large-11">
-    {{ dump($projects)  }}
     <div id="manager-projects">
       <div id="manager-projects-list-wrapper" class="frame">
         <ul id="manager-projects-list" class="slidee">
-          @for($i = 1; $i <= 10; $i++)
+          @foreach($projects as $project)
             <li>
-              <div class="manager-project" data-id="{{ $i }}">
+              <div class="manager-project" data-id="{{ $project->id }}">
                 <div class="left">
-                  <span class="name">Project Name</span>
-                  <span class="date">{{ date('Y-m-d', strtotime('-1 month'))  }}</span>
+                  <span class="name">{{ $project->name }}</span>
+                  <span class="date">{{ $project->createdAt() }}</span>
                   <ul class="people">
-                    @for($keys = array_rand(range(1, 7), rand(2, 4)), $j = 0; $j < count($keys); $j++)
-                      <li><img height="35" width="35"
-                               src="{{ url('img/dev/user-' . range(1, 7)[$keys[$j]] . '.jpg') }}"/></li>
-                    @endfor
+                    @foreach($project->users as $user)
+                      <li><img height="35" width="35" src="{{ $user->icon() }}"/></li>
+                    @endforeach
                   </ul>
                   <div class="clearfix"></div>
-                  <span class="tracked">Tracked {{ rand(10, 150) }} hours.</span>
+                  <span class="tracked">Logged {{ $project->logged() }} hours.</span>
                 </div>
-                <?php $color = 'color-' . rand(1, 5) ?>
-                <div class="banner {{ $color }}" data-color="{{ $color }}"></div>
+                <div class="banner color-{{ $project->color }}" data-color="color-{{ $project->color }}"></div>
               </div>
             </li>
-          @endfor
+          @endforeach
         </ul>
       </div>
       <div class="scrollbar"><div class="handle"></div></div>

@@ -8,6 +8,7 @@ use Treabar\Models\User;
 use Treabar\Models\Company;
 use Treabar\Models\Project;
 use Treabar\Models\Task;
+use Treabar\Models\Activity;
 use Treabar\Models\Comment;
 
 
@@ -24,11 +25,11 @@ class DatabaseSeeder extends Seeder {
 
     foreach(Company::all() as $company) {
       $company_id = $company->id;
-      factory(User::class, User::ROLE_MANAGER)->create(['company_id' => $company_id]);
+      factory(User::class, User::ROLE_MANAGER)->create(['company_id' => $company_id]); //Create the general admin
       $devs = factory(User::class, User::ROLE_DEV, rand(5, 7))->create(['company_id' => $company_id]);
       $clients = factory(User::class, User::ROLE_CLIENT, rand(1, 3))->create(['company_id' => $company_id]);
 
-      foreach(range(1, rand(3, 6)) as $i) {
+      foreach(range(1, rand(5, 9)) as $i) {
         factory(Project::class)->create([
           'company_id' => $company_id,
           'client_id' => $faker->optional()->randomElement($clients->lists('id')->all())
@@ -42,10 +43,18 @@ class DatabaseSeeder extends Seeder {
         ]);
       }
 
-      $project_ids = $projects->lists('id')->all();
+      $tasks = Task::whereIn('project_id', $projects->lists('id')->all())->get();
+      foreach($tasks as $task) {
+        foreach(range(1, rand(2, 10)) as $i) {
+          factory(Activity::class)->create([
+            'task_id' => $task->id,
+            'user_id' => $faker->randomElement($devs->lists('id')->all())
+          ]);
+        }
+      }
+
       foreach($devs as $dev) {
-        $ids = array_values(array_only($project_ids, array_rand($project_ids)));
-        $dev->projects()->sync($ids);
+        $dev->projects()->sync($faker->randomElements($projects->lists('id')->all(), rand(3, 4)));
       }
     }
   }

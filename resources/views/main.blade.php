@@ -28,9 +28,17 @@
       <li id="page-state-button"><a href="#">Page state</a></li>
     </ul>
     <ul class="right">
-      <li class="fullname"><span>Full Name</span></li>
+      <li class="fullname"><span>{{ $logged_user->name }}</span></li>
       <li class="has-dropdown profile">
-        <a href="#"><i class="fi-torso"></i></a>
+        @if($logged_user->icon)
+        <a href="#" class="icon">
+          <img height="45" width="45" src="{{ $logged_user->icon() }}"/>
+          </a>
+        @else
+        <a href="#">
+          <i class="fi-torso"></i>
+        </a>
+        @endif
         <ul class="dropdown">
           <li><a href="#">Profile</a></li>
           <li><a href="#">Log Out</a></li>
@@ -46,7 +54,7 @@
 <script src="{{ asset('js/jquery.sly.js') }}"></script>
 <script>
   $(document).foundation();
-  BASE_URL =  '{{ url('') }}';
+  BASE_URL = '{{ url('') }}';
 </script>
 <script src="{{ asset('js/main.js') }}"></script>
 </body>

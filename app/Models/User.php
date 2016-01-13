@@ -48,4 +48,8 @@ class User extends Authenticatable {
       self::ROLE_CLIENT
     ];
   }
+
+  public function icon() {
+    return url('img/users/' . $this->icon);
+  }
 }

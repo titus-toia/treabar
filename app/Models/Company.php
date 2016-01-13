@@ -2,12 +2,10 @@
 
 namespace Treabar\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 class Company extends Model {
 
   public function projects() {
-    return $this->hasMany('Treabar\Models\User');
+    return $this->hasMany('Treabar\Models\Project');
   }
 
   public function users() {

@@ -23,12 +23,13 @@ class Kernel extends HttpKernel {
    */
   protected $middlewareGroups = [
     'web' => [
-      \Treabar\Http\Middleware\EncryptCookies::class,
+      Middleware\EncryptCookies::class,
       \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
       \Illuminate\Session\Middleware\StartSession::class,
       \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-      \Treabar\Http\Middleware\VerifyCsrfToken::class,
-      \Treabar\Http\Middleware\Dev::class
+      Middleware\VerifyCsrfToken::class,
+      Middleware\Dev::class,
+      Middleware\ComposeViews::class
     ],
 
     'api' => [
@@ -46,7 +47,7 @@ class Kernel extends HttpKernel {
   protected $routeMiddleware = [
     'auth' => Middleware\Authenticate::class,
     'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-    'guest' => \Treabar\Http\Middleware\RedirectIfAuthenticated::class,
+    'guest' => Middleware\RedirectIfAuthenticated::class,
     'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class
   ];
 }

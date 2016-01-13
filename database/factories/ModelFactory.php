@@ -56,3 +56,11 @@ $factory->define(Treabar\Models\Task::class, function (Faker\Generator $faker) {
     'name' => $faker->sentence(2)
   ];
 });
+
+$factory->define(Treabar\Models\Activity::class, function (Faker\Generator $faker) {
+  return [
+    'description' => $faker->text(),
+    'started_at' => \Carbon\Carbon::now()->setTime('10', '30'),
+    'duration' => rand(1, 18) * 300 //multiples of 5 minutes
+  ];
+});
