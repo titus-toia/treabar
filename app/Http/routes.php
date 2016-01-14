@@ -5,7 +5,8 @@ Route::group(['middleware' => ['web']], function () {
 
   Route::group(['prefix' => 'manage'], function () {
     Route::get('/', 'ManagerController@index')->name('manager');
-    Route::get('{id}/tasks', 'ManagerController@tasks')->name('manager.tasks');
+    Route::get('projects', 'ManagerController@projects')->name('manager.projects');
+    Route::get('{project}/tasks', 'ManagerController@tasks')->name('manager.tasks');
     Route::post('{id}/tasks', 'ManagerController@create')->name('manager.tasks.create');
     Route::post('tasks/{id}/comment', 'ManagerController@update ')->name('manager.tasks.update');
     Route::put('tasks/{id}', 'ManagerController@update')->name('manager.tasks.update');

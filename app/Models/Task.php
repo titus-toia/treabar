@@ -3,10 +3,20 @@
 namespace Treabar\Models;
 
 use Baum\Node;
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Task
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Treabar\Models\Comment[] $comments
+ * @property-read \Treabar\Models\Company $company
+ * @property-read \Treabar\Models\Task $parent
+ * @property-read \Baum\Extensions\Eloquent\Collection|\Treabar\Models\Task[] $children
+ * @method static \Illuminate\Database\Query\Builder|\Treabar\Models\Task master()
+ * @method static \Illuminate\Database\Query\Builder|\Baum\Node withoutNode($node)
+ * @method static \Illuminate\Database\Query\Builder|\Baum\Node withoutSelf()
+ * @method static \Illuminate\Database\Query\Builder|\Baum\Node withoutRoot()
+ * @method static \Illuminate\Database\Query\Builder|\Baum\Node limitDepth($limit)
  */
 class Task extends Node {
 
@@ -102,6 +112,9 @@ class Task extends Node {
   // Please refer the Laravel documentation for further instructions on how
   // to hook your own callbacks/observers into this events:
   // http://laravel.com/docs/5.0/eloquent#model-events
+  public function activities() {
+    return $this->hasMany('Treabar\Models\Activity');
+  }
 
   public function comments() {
     return $this->hasMany('Treabar\Models\Comment');
@@ -113,5 +126,9 @@ class Task extends Node {
 
   public function scopeMaster(Builder $query) {
     return $query->where('parent_id', null);
+  }
+
+  public function logged() {
+    return floor($this->activities->sum('duration') / 3600);
   }
 }

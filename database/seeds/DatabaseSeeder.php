@@ -60,9 +60,10 @@ class DatabaseSeeder extends Seeder {
   }
 
   private function truncate() {
-    $tables = array_except(DB::select('SHOW TABLES'), ['migrations']);
+    $tables = DB::select('SHOW TABLES');
     foreach($tables as $table) {
-      DB::table(array_values((array)$table)[0])->truncate();
+      $name = array_values((array)$table)[0];
+      if($name !== 'migrations') DB::table($name)->truncate();
     }
 
     foreach(glob(public_path('img/users/*')) as $file) {

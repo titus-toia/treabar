@@ -53,7 +53,8 @@ $factory->define(Treabar\Models\Project::class, function (Faker\Generator $faker
 
 $factory->define(Treabar\Models\Task::class, function (Faker\Generator $faker) {
   return [
-    'name' => $faker->sentence(2)
+    'name' => $faker->sentence(2),
+    'description' => $faker->paragraph()
   ];
 });
 

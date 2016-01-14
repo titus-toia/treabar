@@ -4,6 +4,13 @@ namespace Treabar\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * Treabar\Models\User
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Treabar\Models\Activity[] $activities
+ * @property-read \Treabar\Models\Company $company
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Treabar\Models\Project[] $projects
+ */
 class User extends Authenticatable {
   const ROLE_ROOT = 'root';
   const ROLE_MANAGER = 'manager';

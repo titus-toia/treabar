@@ -2,6 +2,13 @@
 
 namespace Treabar\Models;
 
+/**
+ * Treabar\Models\Company
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Treabar\Models\Project[] $projects
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Treabar\Models\User[] $users
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Treabar\Models\Invoice[] $invoices
+ */
 class Company extends Model {
 
   public function projects() {

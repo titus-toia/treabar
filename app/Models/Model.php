@@ -2,6 +2,10 @@
 
 namespace Treabar\Models;
 
+/**
+ * Treabar\Models\Model
+ *
+ */
 class Model extends \Illuminate\Database\Eloquent\Model
 {
   public function createdAt() {

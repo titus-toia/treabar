@@ -1,15 +1,15 @@
 <div id="tasks-container">
   <div class="tasks columns large-3">
+    @foreach($tasks as $task)
     <div class="task">
-      <div class="title"><span>Task 1</span></div>
+      <div class="title"><span>{{ $task->name }}</span></div>
       <div class="content">
-        <span class="logged">Logged: 50hrs</span>
+        <span class="logged">Logged: {{ $task->logged()  }} hrs</span>
         <span class="estimated">Estimated: 100hrs</span>
-        <div class="description">
-          Dragon book debugger ellipsis javabean metaclass jsp program generator interpreter nonexecutable statement software library. Return address operand conditional expression declarative programming pdl hiew subversion religion of chi intellij idea.
-        </div>
+        <div class="description">{{ $task->description }}</div>
       </div>
     </div>
+    @endforeach
     <div class="task new">
       <div class="title"><span>New Task...</span></div>
     </div>

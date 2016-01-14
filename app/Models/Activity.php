@@ -2,6 +2,14 @@
 
 namespace Treabar\Models;
 
+/**
+ * Treabar\Models\Activity
+ *
+ * @property-read \Treabar\Models\Task $task
+ * @property-read \Treabar\Models\User $user
+ * @property-read \Treabar\Models\Project $project
+ * @property-read \Treabar\Models\Invoice $invoice
+ */
 class Activity extends Model
 {
   public function task() {

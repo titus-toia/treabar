@@ -1,5 +1,6 @@
 <?php namespace Treabar\Http\Controllers;
 
+use Treabar\Models\Project;
 use Treabar\Models\User;
 
 class ManagerController extends Controller {
@@ -12,17 +13,15 @@ class ManagerController extends Controller {
   }
 
   public function index() {
-    $user = \Auth::user();
-    if($user->role === User::ROLE_MANAGER || $user->role === User::ROLE_ROOT)
-      $projects = $user->company->projects;
-    else
-      $projects = $user->projects;
-
-    return view('manage')->with('projects', $projects);
+    return view('manage')->with('projects', $this->getProjects());
   }
 
-  public function tasks() {
-    return view('manage/tasks');
+  public function projects() {
+    return view('manage.projects')->with('projects', $this->getProjects());
+  }
+
+  public function tasks(Project $project) {
+    return view('manage/tasks')->with('tasks', $project->tasks);
   }
 
   public function timesheet() {
@@ -35,5 +34,15 @@ class ManagerController extends Controller {
 
   public function feed() {
     return view('manage/feed');
+  }
+
+  private function getProjects() { //TODO: Where does this belong? Service layer? Model?
+    $user = \Auth::user();
+    if($user->role === User::ROLE_MANAGER || $user->role === User::ROLE_ROOT)
+      $projects = $user->company->projects;
+    else
+      $projects = $user->projects;
+
+    return $projects;
   }
 }

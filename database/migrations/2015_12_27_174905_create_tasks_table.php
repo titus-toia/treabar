@@ -19,6 +19,7 @@ class CreateTasksTable extends Migration {
       // We add indexes on parent_id, lft, rgt columns by default.
       $table->increments('id');
       $table->string('name');
+      $table->text('description');
       $table->integer('parent_id')->nullable()->index();
       $table->integer('lft')->nullable()->index();
       $table->integer('rgt')->nullable()->index();
