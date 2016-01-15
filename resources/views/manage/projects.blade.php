@@ -23,9 +23,10 @@
 <div class="scrollbar"><div class="handle"></div></div>
 <div id="bridge"></div>
 <div id="current-project" class="columns large-12">
-  @for($i = 1; $i <= 10; $i++)
-    <div class="current-project-listing" data-id="{{ $i }}">
-      Stuff about project #{{ $i }}
+  @foreach($projects as $project)
+    <div class="project-listing" data-id="{{ $project->id }}">
+      Stuff about project #{{ $project->id }}
+      <h3>{{ $project->name }}</h3>
     </div>
-  @endfor
+  @endforeach
 </div>

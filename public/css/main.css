@@ -235,16 +235,12 @@ nav.top-bar .profile a > i {
   color: #000;
 }
 
-/* Manager projects*/
-/*#manager-content {
+#manager-page {
   padding-top: 25px;
   padding-right: 50px;
-}*/
+}
 
-/*#manager-projects {
-  height: 100%;
-  width: 100%;
-}*/
+/*Manager projects */
 #manager-projects-list-wrapper {
   height: 195px;
   width: 100%;
@@ -344,15 +340,6 @@ div.manager-project div.banner {
   opacity: 1;
 }
 
-/* Manager pages */
-#manager-page {
-  /*height: 100%;
-  height: calc(100% - 5px);
-  width: 100%;*/
-  padding-top: 25px;
-  padding-right: 50px;
-}
-
 /* Manager page - Tasks */
 .task .title {
   width: 100%;
@@ -362,11 +349,46 @@ div.manager-project div.banner {
   border: 2px solid #bbb;
   line-height: 31px;
   cursor: pointer;
+  padding-right: 10px;
 
   -webkit-user-select: none; /* Chrome/Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+ */
 }
+.task .title a.edit {
+  float: right;
+  font-size: 18px;
+  visibility: hidden;
+}
+.task.active .title {
+  cursor: default;
+  border-color: #3794dd;
+  color: #3794dd;
+}
+.task.active .title a.edit {
+  visibility: visible;
+}
+
 .task .content {
   display: none;
+  font-size: 14px;
+  border: 2px solid #bbb;
+  border-top-width: 0;
+  padding: 10px;
+
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+}
+.task.active .content {
+}
+
+.task .content .logged {
+  float: left;
+}
+.task .content .estimated {
+  float: right;
+}
+.task .content .description {
+  margin-top: 5px;
 }

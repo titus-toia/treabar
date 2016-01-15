@@ -1,6 +1,7 @@
 <?php namespace Treabar\Http\Controllers;
 
 use Treabar\Models\Project;
+use Treabar\Models\Task;
 use Treabar\Models\User;
 
 class ManagerController extends Controller {
@@ -22,6 +23,14 @@ class ManagerController extends Controller {
 
   public function tasks(Project $project) {
     return view('manage/tasks')->with('tasks', $project->tasks);
+  }
+
+  public function create() {
+    return view('manage.popup-task');
+  }
+
+  public function edit(Project $project, Task $task) {
+    return view('manage.popup-task');
   }
 
   public function timesheet() {

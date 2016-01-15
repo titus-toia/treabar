@@ -53,8 +53,8 @@ function LoadManagerPage(page) {
   });
 }
 
+/* Project page */
 function LoadProjectsPage() {
-  /* Manager Project scroller */
   var $frame = $('#manager-projects-list-wrapper');
   var $scrollbar = $frame.parent().find('.scrollbar');
   var deselect = function() {
@@ -110,3 +110,22 @@ function LoadProjectsPage() {
     }
   });
 }
+
+/* Tasks page */
+$body.on('click', '.task:not(.new) .title', function() {
+  var $task = $(this).closest('.task');
+  if($task.hasClass('active')) return;
+
+  $('.task.active .content').hide(300);
+  $('.task.active').removeClass('active');
+  $task.addClass('active');
+  $task.find('.content').show(100);
+});
+
+$body.on('click', '.task .title a.edit', function() {
+  $('#tasks-modal').foundation('reveal', 'open', $(this).data('ajax'));
+  return false;
+});
+$body.on('click', '.task.new .title', function() {
+  $('#tasks-modal').foundation('reveal', 'open', $(this).data('ajax'));
+});
