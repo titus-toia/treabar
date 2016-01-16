@@ -5,7 +5,7 @@
       <div class="title">
         <span>{{ $task->name }}</span>
         <a class="edit" href="#"
-           data-ajax="{{ route('manager.popups.task-edit', ['project' => $project->id, 'task' => $task->id]) }}">
+           data-ajax="{{ route('manager.tasks.edit', ['project' => $project->id, 'task' => $task->id]) }}">
           <i class="fi-page-edit"></i>
         </a>
       </div>
@@ -18,10 +18,11 @@
     </div>
     @endforeach
     <div class="task new">
-      <div class="title" data-ajax="{{ route('manager.popups.task-create', ['project' => $project->id]) }}">
+      <div class="title" data-ajax="{{ route('manager.tasks.create', ['project' => $project->id]) }}">
         <span>New Task...</span>
       </div>
     </div>
   </div>
 </div>
-<div class="reveal-modal" id="tasks-modal" data-reveal role="dialog"></div>
+
+<div id="slider"></div>

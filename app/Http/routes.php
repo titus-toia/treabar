@@ -7,9 +7,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/', 'ManagerController@index')->name('manager');
     Route::get('projects', 'ManagerController@projects')->name('manager.projects');
     Route::get('{project}/tasks', 'ManagerController@tasks')->name('manager.tasks');
-    Route::get('{project}/tasks/popup', 'ManagerController@create')->name('manager.popups.task-create');
-    Route::get('{project}/tasks/{task}/popup', 'ManagerController@edit')->name('manager.popups.task-edit');
-    Route::post('{id}/tasks', 'ManagerController@store')->name('manager.tasks.store');
+    Route::get('{project}/tasks/create', 'ManagerController@create')->name('manager.tasks.create');
+    Route::get('tasks/{task}/edit', 'ManagerController@edit')->name('manager.tasks.edit');
+    Route::post('{project}/tasks', 'ManagerController@store')->name('manager.tasks.store');
     Route::post('tasks/{id}/comment', 'ManagerController@update ')->name('manager.tasks.update');
     Route::put('tasks/{id}', 'ManagerController@update')->name('manager.tasks.update');
     Route::put('tasks/{id}/move', 'ManagerController@move')->name('manager.tasks.move');

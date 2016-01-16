@@ -33,7 +33,7 @@ function LoadManagerPage(page) {
 
   var url;
   if(page != 'projects')
-    url = [BASE_URL, 'manage', state.id, page].join('/');
+    url = [BASE_URL, 'manage', state.id || 1, page].join('/');
   else
     url = [BASE_URL, 'manage', page].join('/');
 
@@ -102,8 +102,8 @@ function LoadProjectsPage() {
       }, 400);
 
       //Select lower box
-      $('.current-project-listing').hide();
-      $('.current-project-listing[data-id=' + id + ']').show(300);
+      $('.project-listing').hide();
+      $('.project-listing[data-id=' + id + ']').show(300);
     },
     moveStart: function(ev) {
       deselect();
@@ -116,16 +116,26 @@ $body.on('click', '.task:not(.new) .title', function() {
   var $task = $(this).closest('.task');
   if($task.hasClass('active')) return;
 
-  $('.task.active .content').hide(300);
+  $('.task.active .content').hide('blind', { duration: 350, queue: false});
   $('.task.active').removeClass('active');
   $task.addClass('active');
-  $task.find('.content').show(100);
+  //$task.find('.content').show(100);
+  $task.find('.content').show('blind', { duration: 350, queue: false});
 });
 
-$body.on('click', '.task .title a.edit', function() {
-  $('#tasks-modal').foundation('reveal', 'open', $(this).data('ajax'));
+$body.on('click', '.task .title a.edit, .task.new .title', function() {
+  LoadSlider($(this).data('ajax'));
   return false;
 });
-$body.on('click', '.task.new .title', function() {
-  $('#tasks-modal').foundation('reveal', 'open', $(this).data('ajax'));
-});
+
+function LoadSlider(url) {
+  console.log('here');
+  $slider = $('#slider');
+  $slider.addClass('loading');
+  if($slider.is(':hidden')) $slider.show('blind', { direction: 'left', duration: 400});
+
+  $.get(url, function (data) {
+    $slider.html(data);
+    $slider.removeClass('loading');
+  });
+}

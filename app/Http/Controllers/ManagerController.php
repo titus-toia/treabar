@@ -26,11 +26,15 @@ class ManagerController extends Controller {
   }
 
   public function create() {
-    return view('manage.popup-task');
+    return view('manage.form');
   }
 
   public function edit(Project $project, Task $task) {
-    return view('manage.popup-task');
+    return view('manage.form');
+  }
+
+  public function form() {
+    return view('manage.form');
   }
 
   public function timesheet() {
