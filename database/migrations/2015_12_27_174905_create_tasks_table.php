@@ -17,18 +17,17 @@ class CreateTasksTable extends Migration {
       // in the model.
       // Take a look at the model scaffold comments for details.
       // We add indexes on parent_id, lft, rgt columns by default.
-      $table->increments('id');
-      $table->string('name');
-      $table->text('description');
-      $table->integer('parent_id')->nullable()->index();
       $table->integer('lft')->nullable()->index();
       $table->integer('rgt')->nullable()->index();
       $table->integer('depth')->nullable();
+
+      $table->increments('id');
+      $table->string('name');
+      $table->text('description');
+      $table->string('duration');
+      $table->string('user_id')->nullable();
+      $table->integer('parent_id')->nullable()->index();
       $table->integer('project_id')->unsigned();
-
-      // Add needed columns here (f.ex: name, slug, path, etc.)
-      // $table->string('name', 255);
-
       $table->timestamps();
     });
   }

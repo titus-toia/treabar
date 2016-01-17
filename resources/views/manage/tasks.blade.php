@@ -1,5 +1,5 @@
 <div id="tasks-container">
-  <div class="tasks columns large-3">
+  <div class="tasks master columns large-3">
     @foreach($tasks as $task)
     <div class="task">
       <div class="title">
@@ -19,7 +19,7 @@
     @endforeach
     <div class="task new">
       <div class="title" data-ajax="{{ route('manager.tasks.create', ['project' => $project->id]) }}">
-        <span>New Task...</span>
+        <span>New...</span>
       </div>
     </div>
   </div>

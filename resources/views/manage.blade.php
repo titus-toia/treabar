@@ -7,7 +7,6 @@
     <div id="manage-chart"><a href="#chart">CHART</a></div>
     <div id="manage-feed"><a href="#feed">FEED</a></div>
   </div>
-  <div id="manager-page" class="columns large-11">
-  </div>
+  <div id="manager-page" class="columns large-11"></div>
 </div>
 @endsection

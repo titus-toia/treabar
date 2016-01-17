@@ -8,10 +8,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('projects', 'ManagerController@projects')->name('manager.projects');
     Route::get('{project}/tasks', 'ManagerController@tasks')->name('manager.tasks');
     Route::get('{project}/tasks/create', 'ManagerController@create')->name('manager.tasks.create');
-    Route::get('tasks/{task}/edit', 'ManagerController@edit')->name('manager.tasks.edit');
+    Route::get('{project}/tasks/{task}/edit', 'ManagerController@edit')->name('manager.tasks.edit');
     Route::post('{project}/tasks', 'ManagerController@store')->name('manager.tasks.store');
-    Route::post('tasks/{id}/comment', 'ManagerController@update ')->name('manager.tasks.update');
     Route::put('tasks/{id}', 'ManagerController@update')->name('manager.tasks.update');
+    Route::post('tasks/{id}/comment', 'ManagerController@comment ')->name('manager.tasks.comment');
     Route::put('tasks/{id}/move', 'ManagerController@move')->name('manager.tasks.move');
     Route::delete('tasks/{id}', 'ManagerController@delete')->name('manager.tasks.delete');
 

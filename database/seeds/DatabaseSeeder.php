@@ -37,10 +37,15 @@ class DatabaseSeeder extends Seeder {
       }
 
       $projects = $company->projects();
-      foreach(range(1, rand(10, 15)) as $i) {
-        factory(Task::class)->create([
+      foreach(range(1, rand(15, 20)) as $i) {
+        $root = factory(Task::class)->create([
           'project_id' => $faker->randomElement($projects->lists('id')->all())
         ]);
+
+        foreach(range(1, rand(1, 3)) as $j) {
+          $task = factory(Task::class)->create(['project_id' => $root->project_id]);
+          $task->makeChildOf($root);
+        }
       }
 
       $tasks = Task::whereIn('project_id', $projects->lists('id')->all())->get();

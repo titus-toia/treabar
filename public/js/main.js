@@ -129,9 +129,8 @@ $body.on('click', '.task .title a.edit, .task.new .title', function() {
 });
 
 function LoadSlider(url) {
-  console.log('here');
   $slider = $('#slider');
-  $slider.addClass('loading');
+  $slider.html('').addClass('loading');
   if($slider.is(':hidden')) $slider.show('blind', { direction: 'left', duration: 400});
 
   $.get(url, function (data) {
@@ -139,3 +138,17 @@ function LoadSlider(url) {
     $slider.removeClass('loading');
   });
 }
+function CloseSlider() {
+  $('#slider').html('').hide('blind', { direction: 'left', duration: 400});
+}
+
+$body.on('click', '#slider .form-buttons .submit', function() {
+  var $form = $(this).closest('form');
+  $.post($form.attr('action'), $form.serialize(), function() {
+    CloseSlider();
+  });
+});
+
+$body.on('click', '#slider .form-buttons .cancel', function() {
+  CloseSlider();
+});

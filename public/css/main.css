@@ -355,6 +355,12 @@ div.manager-project div.banner {
 #slider * {
   font-family: "Lato", "Helvetica", Arial, sans-serif;
 }
+#slider h3 {
+  cursor: default;
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+}
 
 .task .title {
   width: 100%;
@@ -407,4 +413,19 @@ div.manager-project div.banner {
 }
 .task .content .description {
   margin-top: 5px;
+}
+
+#task-form textarea[name='description'] {
+  height: 200px;
+  resize: none;
+}
+#task-form input[name='duration'] {
+}
+
+#task-form .form-buttons {
+  display: inline-block;
+  float: right;
+}
+#task-form a.button {
+  padding: 7px 20px;
 }

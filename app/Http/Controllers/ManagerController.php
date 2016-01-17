@@ -22,10 +22,17 @@ class ManagerController extends Controller {
   }
 
   public function tasks(Project $project) {
+    $tasks = $project->tasks;
+
+    foreach($tasks as $t) {
+      //$t->desc
+      dd($t->getDescendantsAndSelf()->toHierarchy()->toArray());
+    }
+
     return view('manage/tasks')->with('tasks', $project->tasks);
   }
 
-  public function create() {
+  public function create(Project $project) {
     return view('manage.form');
   }
 
@@ -33,8 +40,12 @@ class ManagerController extends Controller {
     return view('manage.form');
   }
 
-  public function form() {
-    return view('manage.form');
+  public function store(Project $project) {
+
+  }
+
+  public function update(Task $task) {
+
   }
 
   public function timesheet() {
