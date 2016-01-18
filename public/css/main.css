@@ -362,6 +362,11 @@ div.manager-project div.banner {
   -ms-user-select: none; /* IE10+ */
 }
 
+
+#tasks-container .tasks:not(.master) {
+  display: none;
+}
+
 .task .title {
   width: 100%;
   height: 35px;
@@ -398,9 +403,9 @@ div.manager-project div.banner {
   padding: 10px;
   width: 100% !important;
 
-  -webkit-user-select: none; /* Chrome/Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+ */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 .task.active .content {
 }
@@ -413,6 +418,42 @@ div.manager-project div.banner {
 }
 .task .content .description {
   margin-top: 5px;
+}
+
+.tasks .callout {
+  display: none;
+  height: 150px;
+  margin: 10px 0px;
+  padding: 10px;
+  border: 1px solid rgba(10, 10, 10, 0.25);
+  background-color: white;
+  cursor: pointer;
+}
+.tasks .callout:hover {
+  background-color: #eee;
+}
+.tasks .callout:nth-child(1):nth-last-child(2),
+.tasks .callout:nth-child(2):nth-last-child(1) {
+  display: block;
+}
+.tasks .callout > div {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+.tasks .callout div.text {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.tasks .task.new:nth-child(1):nth-last-child(2),
+.tasks .task.new:nth-child(2):nth-last-child(1) {
+  display: none;
 }
 
 #task-form textarea[name='description'] {

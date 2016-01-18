@@ -17,7 +17,8 @@ state = {
 };
 
 var onLoad = {
-  projects: LoadProjectsPage
+  projects: LoadProjectsPage,
+  tasks: LoadTasksPage
 };
 
 var $body = $('body');
@@ -111,24 +112,8 @@ function LoadProjectsPage() {
   });
 }
 
-/* Tasks page */
-$body.on('click', '.task:not(.new) .title', function() {
-  var $task = $(this).closest('.task');
-  if($task.hasClass('active')) return;
-
-  $('.task.active .content').hide('blind', { duration: 350, queue: false});
-  $('.task.active').removeClass('active');
-  $task.addClass('active');
-  //$task.find('.content').show(100);
-  $task.find('.content').show('blind', { duration: 350, queue: false});
-});
-
-$body.on('click', '.task .title a.edit, .task.new .title', function() {
-  LoadSlider($(this).data('ajax'));
-  return false;
-});
-
-function LoadSlider(url) {
+/* Slider */
+function SummonSlider(url) {
   $slider = $('#slider');
   $slider.html('').addClass('loading');
   if($slider.is(':hidden')) $slider.show('blind', { direction: 'left', duration: 400});
@@ -151,4 +136,23 @@ $body.on('click', '#slider .form-buttons .submit', function() {
 
 $body.on('click', '#slider .form-buttons .cancel', function() {
   CloseSlider();
+});
+
+/* Tasks page */
+function LoadTasksPage() {}
+
+$body.on('click', '.task:not(.new) .title', function() {
+  var $task = $(this).closest('.task');
+  if($task.hasClass('active')) return;
+
+  $('.task.active .content').hide('blind', { duration: 350, queue: false});
+  $('.task.active').removeClass('active');
+  $task.addClass('active');
+  //$task.find('.content').show(100);
+  $task.find('.content').show('blind', { duration: 350, queue: false});
+});
+
+$body.on('click', '.task .title a.edit, .task.new .title, .tasks .callout.new ', function() {
+  SummonSlider($(this).data('ajax'));
+  return false;
 });

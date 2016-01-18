@@ -19,12 +19,22 @@ class Project extends Model
     return $this->belongsTo('Treabar\Models\Company');
   }
 
-  public function tasks() {
-    return $this->hasMany('Treabar\Models\Task')->master();
+  public function tasks($topLevel = false) {
+    $relation = $this->hasMany('Treabar\Models\Task');
+    return $topLevel? $relation->master(): $relation;
   }
 
   public function users() {
     return $this->belongsToMany('Treabar\Models\User', 'project_users');
+  }
+
+  //TODO: Might not be needed, delete?
+  public function getTaskHierarchies() {
+    $tasks = $this->tasks->map(function($task) {
+      return $task->getDescendantsAndSelf()->toHierarchy()->first();
+    });
+
+    return $tasks;
   }
 
   public function logged($mins = false) {
