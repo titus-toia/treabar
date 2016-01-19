@@ -363,8 +363,9 @@ div.manager-project div.banner {
 }
 
 
-#tasks-container .tasks:not(.master) {
+#tasks-container .tasks:not(.master) > * {
   display: none;
+  margin-left: 100px;
 }
 
 .task .title {
@@ -380,6 +381,9 @@ div.manager-project div.banner {
   -webkit-user-select: none; /* Chrome/Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+ */
+}
+.task .title:hover {
+  background-color: #DBEEFF;
 }
 .task .title a.edit {
   float: right;
@@ -423,17 +427,15 @@ div.manager-project div.banner {
 .tasks .callout {
   display: none;
   height: 150px;
-  margin: 10px 0px;
   padding: 10px;
   border: 1px solid rgba(10, 10, 10, 0.25);
-  background-color: white;
   cursor: pointer;
 }
 .tasks .callout:hover {
   background-color: #eee;
 }
-.tasks .callout:nth-child(1):nth-last-child(2),
-.tasks .callout:nth-child(2):nth-last-child(1) {
+.tasks.master .callout:nth-child(1):nth-last-child(2),
+.tasks.master .callout:nth-child(2):nth-last-child(1) {
   display: block;
 }
 .tasks .callout > div {
@@ -451,8 +453,8 @@ div.manager-project div.banner {
   -ms-user-select: none;
 }
 
-.tasks .task.new:nth-child(1):nth-last-child(2),
-.tasks .task.new:nth-child(2):nth-last-child(1) {
+.tasks.master .task.new:nth-child(1):nth-last-child(2),
+.tasks.master .task.new:nth-child(2):nth-last-child(1) {
   display: none;
 }
 

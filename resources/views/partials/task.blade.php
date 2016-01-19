@@ -1,7 +1,7 @@
 <div class="task" data-id="{{ $task->id }}"
-  @if($task->parent_id) data-id="{{ $task->parent_id }}" @endif>
+  @if($task->parent_id) data-parent-id="{{ $task->parent_id }}" @endif>
 
-  <div class="title">
+  <div class="title" id="task-title-{{ $task->id }}">
     <span>{{ $task->name }}</span>
     <a class="edit" href="#"
        data-ajax="{{ route('manager.tasks.edit', ['project' => $project->id, 'task' => $task->id]) }}">

@@ -53,10 +53,20 @@
 <script src="{{ asset('foundation/js/foundation.min.js') }}"></script>
 <script src="{{ asset('js/jquery.sly.js') }}"></script>
 <script src="{{ asset('js/jquery-ui-effects.js') }}"></script>
+<script src="{{ asset('js/jsPlumb.js') }}"></script>
 <script>
   $(document).foundation();
-  BASE_URL = '{{ url('') }}';
   $.motion = window.MotionUI;
+
+  jsPlumb.ready(function() {
+    jsPlumb.importDefaults({
+      Connector: ['Flowchart', { stub: 5 }],
+      Endpoint: 'Blank',
+      Anchor: ['RightMiddle', [0, 0.5, -1, 0]]
+    });
+  });
+  BASE_URL = '{{ url('') }}';
+
 </script>
 <script src="{{ asset('js/main.js') }}"></script>
 </body>
