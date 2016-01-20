@@ -42,9 +42,15 @@ class DatabaseSeeder extends Seeder {
           'project_id' => $faker->randomElement($projects->lists('id')->all())
         ]);
 
-        foreach(range(1, rand(1, 3)) as $j) {
+        for($j = 1; $j <= rand(0, 3); $j++) {
           $task = factory(Task::class)->create(['project_id' => $root->project_id]);
           $task->makeChildOf($root);
+
+          //Coin flip for subtask
+          if($faker->boolean()) {
+            $subTask = factory(Task::class)->create(['project_id' => $root->project_id]);
+            $subTask->makeChildOf($task);
+          }
         }
       }
 

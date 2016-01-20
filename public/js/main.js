@@ -139,7 +139,9 @@ $body.on('click', '#slider .form-buttons .cancel', function() {
 });
 
 /* Tasks page */
-function LoadTasksPage() {}
+function LoadTasksPage() {
+  jsPlumb.setContainer($('#manager-page'));
+}
 
 function ShowChildren(parent_id) {
   var $tasks = $('.task[data-id=' + parent_id + ']').closest('.tasks'),
@@ -151,37 +153,46 @@ function ShowChildren(parent_id) {
 
   if($children.length > 0) {
     $children.show();
+    $next_level.find('.task.new').show();
   } else {
     $next_level.find('.callout').show(300);
   }
 }
 
-$body.on('click', '.task:not(.new) .title', function() {
-  var $task = $(this).closest('.task');
-  var $tasks = $task.closest('.tasks');
+function SelectTask(id) {
+  var $task = $('.task[data-id=' + id + ']'),
+    $tasks = $task.closest('.tasks'), //Current stack
+    $previousTasks = $('.tasks.active'); //Previous stack
   if($task.hasClass('active')) return;
 
+  $previousTasks.removeClass('active');
+  $tasks.addClass('active');
   $tasks.find('.task.active .content').hide('blind', { duration: 350, queue: false });
   $tasks.find('.task.active').removeClass('active');
+  $tasks.nextAll().find('.task.active').removeClass('active');
   $task.addClass('active');
   $task.find('.content').show('blind', { duration: 350, queue: false });
 
+  if($tasks.prevAll().index($previousTasks) === -1) jsPlumb.detachEveryConnection();
   var $parent = $('.task[data-id=' + $task.data('parent-id') + ']');
-  jsPlumb.detachEveryConnection();
   if($parent.length > 0) {
-    jsPlumb.connect({
-      source: $parent.find('.title'),
-      target: $task.find('.content')
-    });
+    setTimeout(function () {
+      jsPlumb.connect({
+        source: $parent.find('.title'),
+        target: $task.find('.title')
+      });
+    }, 355);
   }
 
+  ShowChildren(id);
+}
+
+$body.on('click', '.task:not(.new) .title', function() {
+  var id = $(this).closest('.task').data('id');
+  SelectTask(id);
 });
 
 $body.on('click', '.task .title a.edit, .task.new .title, .tasks .callout.new ', function() {
   SummonSlider($(this).data('ajax'));
   return false;
-});
-
-$body.on('click', '.tasks:not(.leaf) .task:not(.new) .title', function() {
-  ShowChildren($(this).closest('.task').data('id'));
 });

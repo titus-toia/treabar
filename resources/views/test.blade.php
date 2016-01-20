@@ -14,65 +14,59 @@
   <link href="{{ asset('foundation/icons/foundation-icons.css') }}" rel="stylesheet" type="text/css">
   <link href="{{ asset('css/foundation-amends.css') }}" rel="stylesheet" type="text/css">
   <script src="{{ asset('foundation/js/vendor/modernizr.js') }}"></script>
+  <style>
+    body {
+      padding: 25px;
+    }
+    div.test {
+      height: 75px;
+      width: 75px;
+      display: inline-block;
+      background-color: sandybrown;
+      margin: 10px;
+    }
+    .left {
+      float: left;
+      position: relative;
+    }
+    .right {
+      float: right;
+      position: relative;
+    }
+  </style>
 </head>
-<body>
-<nav class="top-bar">
-  <ul class="title-area">
-    <li class="name"><!-- Leave this empty --></li>
-  </ul>
-  <section class="top-bar-section">
-    <ul class="left">
-      <li class="dashboard page"><a href="{{ url('')  }}">Dashboard</a></li>
-      <li class="manager page"><a href="{{ url('manage')  }}">Manage</a></li>
-      <li class="invoices page"><a href="#">Invoice</a></li>
-      <li id="page-state-button"><a href="#">Page state</a></li>
-    </ul>
-    <ul class="right">
-      <li class="fullname"><span>{{ $logged_user->name }}</span></li>
-      <li class="has-dropdown profile">
-        @if($logged_user->icon)
-        <a href="#" class="icon">
-          <img height="45" width="45" src="{{ $logged_user->icon() }}"/>
-          </a>
-        @else
-        <a href="#">
-          <i class="fi-torso"></i>
-        </a>
-        @endif
-        <ul class="dropdown">
-          <li><a href="#">Profile</a></li>
-          <li><a href="#">Log Out</a></li>
-        </ul>
-      </li>
-    </ul>
-  </section>
-</nav>
 
-@yield('content')
+<body>
+
+<div class="left" style="width: 60%; float: left">
+  @for($i = 1; $i <= 50; $i++)
+    <div id="div{{ $i }}" class="test"></div>
+  @endfor
+</div>
+<div class="right" style="width: 40%; float: right">
+  @for($i = 51; $i <= 100; $i++)
+    <div id="div{{ $i }}" class="test"></div>
+  @endfor
+</div>
+
+
+
+
 <script src="{{ asset('foundation/js/vendor/jquery.js') }}"></script>
 <script src="{{ asset('foundation/js/foundation.min.js') }}"></script>
 <script src="{{ asset('js/jquery.sly.js') }}"></script>
 <script src="{{ asset('js/jquery-ui-effects.js') }}"></script>
 <script src="{{ asset('js/jsPlumb.js') }}"></script>
 <script>
-  $(document).foundation();
-  $.motion = window.MotionUI;
-
   jsPlumb.ready(function() {
     jsPlumb.importDefaults({
-      PaintStyle:{
-        strokeStyle: '#3794dd',
-        fillStyle: '#3794dd',
-        lineWidth: 4
-      },
       Connector: ['Flowchart', { stub: 5 }],
       Endpoint: 'Blank',
-      Anchor: [[1, 0.5, 1, 0, 3, 0], [0, 0.5, -1, 0, 3, 0]]
+      Anchor: ['RightMiddle', [0, 0.5, -1, 0]]
     });
   });
   BASE_URL = '{{ url('') }}';
 
 </script>
-<script src="{{ asset('js/main.js') }}"></script>
 </body>
 </html>

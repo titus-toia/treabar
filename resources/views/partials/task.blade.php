@@ -8,10 +8,12 @@
       <i class="fi-page-edit"></i>
     </a>
   </div>
+
   <div class="content">
     <span class="logged">Logged: {{ $task->logged() }} hrs</span>
     <span class="estimated">Estimated: {{ $task->duration }} hrs</span>
     <div class="clearfix"></div>
     <div class="description">{{ $task->description }}</div>
   </div>
+
 </div>

@@ -1,3 +1,10 @@
+div.test {
+  height: 75px;
+  width: 75px;
+  display: inline-block;
+  background-color: sandybrown;
+  margin: 10px;
+}
 /* General */
 .color-1 {
   background-color: #ef5523 !important;
@@ -365,7 +372,6 @@ div.manager-project div.banner {
 
 #tasks-container .tasks:not(.master) > * {
   display: none;
-  margin-left: 100px;
 }
 
 .task .title {
