@@ -55,9 +55,9 @@
 <script src="{{ asset('js/jquery-ui-effects.js') }}"></script>
 <script src="{{ asset('js/jsPlumb.js') }}"></script>
 <script>
+  BASE_URL = '{{ url('') }}';
+  state = {{ json_encode(Session::get('state')); }};
   $(document).foundation();
-  $.motion = window.MotionUI;
-
   jsPlumb.ready(function() {
     jsPlumb.importDefaults({
       PaintStyle:{
@@ -67,10 +67,9 @@
       },
       Connector: ['Flowchart', { stub: 5 }],
       Endpoint: 'Blank',
-      Anchor: [[1, 0.5, 1, 0, 3, 0], [0, 0.5, -1, 0, 3, 0]]
+      Anchor: [[1, 0.5, 1, 0, 2, 0], [0, 0.5, -1, 0, 2, 0]]
     });
   });
-  BASE_URL = '{{ url('') }}';
 
 </script>
 <script src="{{ asset('js/main.js') }}"></script>

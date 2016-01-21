@@ -113,13 +113,15 @@ function LoadProjectsPage() {
 }
 
 /* Slider */
-function SummonSlider(url) {
+function SummonSlider(url, data) {
+  console.warn(data)
+  data = data || {}
   $slider = $('#slider');
   $slider.html('').addClass('loading');
   if($slider.is(':hidden')) $slider.show('blind', { direction: 'left', duration: 400});
 
-  $.get(url, function (data) {
-    $slider.html(data);
+  $.get(url, data, function (html) {
+    $slider.html(html);
     $slider.removeClass('loading');
   });
 }
@@ -153,9 +155,10 @@ function ShowChildren(parent_id) {
 
   if($children.length > 0) {
     $children.show();
-    $next_level.find('.task.new').show();
+    $next_level.find('.task.new').attr('data-parent-id', parent_id).show();
   } else {
-    $next_level.find('.callout').show(300);
+    console.log(parent_id)
+    $next_level.find('.callout').attr('data-parent-id', parent_id).show(300);
   }
 }
 
@@ -169,6 +172,7 @@ function SelectTask(id) {
   $tasks.addClass('active');
   $tasks.find('.task.active .content').hide('blind', { duration: 350, queue: false });
   $tasks.find('.task.active').removeClass('active');
+  $tasks.nextAll().find('.task.active .content').hide();
   $tasks.nextAll().find('.task.active').removeClass('active');
   $task.addClass('active');
   $task.find('.content').show('blind', { duration: 350, queue: false });
@@ -193,6 +197,13 @@ $body.on('click', '.task:not(.new) .title', function() {
 });
 
 $body.on('click', '.task .title a.edit, .task.new .title, .tasks .callout.new ', function() {
-  SummonSlider($(this).data('ajax'));
+  var data;
+  if($(this).hasClass('new')) { //Callout
+    data = { parent_id: $(this).data('parent-id') };
+  } else if($(this).closest('.task').hasClass('new')) { //'New task'
+    data = { parent_id: $(this).closest('.task').data('parent-id') };
+  }
+
+  SummonSlider($(this).data('ajax'), data);
   return false;
 });

@@ -95,7 +95,7 @@ class Task extends Node {
   //  *
   //  * @var array
   //  */
-  //protected $scoped = array('project_id');
+  protected $scoped = array('project_id');
 
   //////////////////////////////////////////////////////////////////////////////
 

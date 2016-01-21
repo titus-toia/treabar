@@ -2,6 +2,9 @@
 <form id="task-form" method="post" action="{{ !isset($task)?
     route('manager.tasks.store', ['project' => $project->id]):
     route('manager.tasks.update', ['task' => $task->id]) }}">
+  @if($parent)
+    <span class="under">Under:&nbsp;&nbsp;<span class="info label">{{ $parent->name }}</span></span>
+  @endif
   {{ csrf_field() }}
   <input type="hidden" name="_method" value="{{ isset($task)? 'PUT': 'POST'}}" />
 
@@ -17,7 +20,7 @@
         <textarea name="description">{{ isset($task)? $task->description: '' }}</textarea>
       </label>
     </div>
-    <div class="columns">
+    <div class="large-12 columns">
       <label>Duration
         <input type="text" name="duration" value="{{ isset($task)? $task->duration: '' }}">
       </label>

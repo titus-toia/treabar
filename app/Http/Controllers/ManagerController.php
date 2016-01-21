@@ -1,5 +1,6 @@
 <?php namespace Treabar\Http\Controllers;
 
+use Illuminate\Support\Facades\Input;
 use Treabar\Models\Project;
 use Treabar\Models\Task;
 use Treabar\Models\User;
@@ -26,11 +27,13 @@ class ManagerController extends Controller {
   }
 
   public function create(Project $project) {
-    return view('manage.form');
+    $parent = Task::find(Input::get('parent_id'));
+    return view('manage.form')->with('parent', $parent);
   }
 
   public function edit(Project $project, Task $task) {
-    return view('manage.form');
+    $parent = $task->parent;
+    return view('manage.form')->With('parent', $parent);
   }
 
   public function store(Project $project, Task $task) {

@@ -1,10 +1,3 @@
-div.test {
-  height: 75px;
-  width: 75px;
-  display: inline-block;
-  background-color: sandybrown;
-  margin: 10px;
-}
 /* General */
 .color-1 {
   background-color: #ef5523 !important;
@@ -277,9 +270,9 @@ div.manager-project {
   cursor: pointer;
   margin-top: 5px;
 
-  -webkit-user-select: none; /* Chrome/Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+ */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none
 }
 li.active div.manager-project {
 
@@ -370,11 +363,18 @@ div.manager-project div.banner {
 }
 
 
+#tasks-container {
+  width: inherit;
+}
 #tasks-container .tasks:not(.master) > * {
   display: none;
 }
+.task {
+  width: 100%;
+}
 
 .task .title {
+  position: relative;
   width: 100%;
   height: 35px;
   text-align: center;
@@ -382,19 +382,26 @@ div.manager-project div.banner {
   border: 2px solid #bbb;
   line-height: 31px;
   cursor: pointer;
-  padding-right: 10px;
+  padding: 0px 10px;
+  overflow: hidden;
+  white-space: nowrap;
 
   -webkit-user-select: none; /* Chrome/Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+ */
 }
-.task .title:hover {
-  background-color: #DBEEFF;
+.task .title:hover, .task .title:hover a.edit {
+  background-color: #dbeeff;
 }
 .task .title a.edit {
-  float: right;
+  background-color: white;
+  display: inline-block;
+  position: absolute;
+  right: 0px;
   font-size: 18px;
   visibility: hidden;
+  width: 25px;
+
 }
 .task.active .title {
   cursor: default;
@@ -411,7 +418,7 @@ div.manager-project div.banner {
   border: 2px solid #bbb;
   border-top-width: 0;
   padding: 10px;
-  width: 100% !important;
+  width: inherit !important;
 
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -428,6 +435,13 @@ div.manager-project div.banner {
 }
 .task .content .description {
   margin-top: 5px;
+}
+.task.new span.plus {
+  position: absolute;
+  left: 5px;
+  font-size: 18px;
+  font-weight: lighter;
+  color: #999;
 }
 
 .tasks .callout {
@@ -464,6 +478,10 @@ div.manager-project div.banner {
   display: none;
 }
 
+#task-form .under {
+  font-size: 14px;
+  color: rgb(77, 77, 77);
+}
 #task-form textarea[name='description'] {
   height: 200px;
   resize: none;
