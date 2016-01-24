@@ -1,20 +1,17 @@
 /* Hashbang code */
-$(function() {
-  $(window).on('hashchange', function() {
-    var hash = location.hash;
-    $('#manager-tabs').find('div').removeClass('selected');
-    $('#manager-tabs').find('a').each(function() {
-      if($(this).attr('href') === hash) $(this).parent().addClass('selected');
-    });
-
-    LoadManagerPage(hash.substr(1));
+$(window).on('hashchange', function() {
+  var hash = location.hash;
+  $('#manager-tabs').find('div').removeClass('selected');
+  $('#manager-tabs').find('a').each(function() {
+    if($(this).attr('href') === hash) $(this).parent().addClass('selected');
   });
 
-  $(window).trigger('hashchange');
+  LoadManagerPage(hash.substr(1));
 });
 
-state = {
-};
+$(function() {
+  $(window).trigger('hashchange');
+});
 
 var onLoad = {
   projects: LoadProjectsPage,
@@ -25,34 +22,6 @@ var $body = $('body');
 $body.on('click', '#page-state-button', function() {
   LoadManagerPage('projects');
 });
-
-/* Manager navigation */
-function LoadManagerPage(page) {
-  page = page || 'projects';
-  $('#manage').addClass('loading');
-  $('#manager-page').hide();
-
-  var url;
-  if(page != 'projects')
-    url = [BASE_URL, 'manage', state.id || 1, page].join('/');
-  else
-    url = [BASE_URL, 'manage', page].join('/');
-
-  $.get(url, function (data) {
-    var $pstate = $('#page-state-button');
-    if(page != 'projects') {
-      $pstate.attr('class', state.color).show(200);
-      $pstate.find('a').text(state.project_name + ' - ' + $.camelCase('-' + page))
-    } else {
-      $pstate.hide(200);
-    }
-
-    $('#manager-page').html(data).show();
-    $('#manage').removeClass('loading');
-
-    onLoad[page] && onLoad[page]();
-  });
-}
 
 /* Project page */
 function LoadProjectsPage() {
@@ -112,9 +81,36 @@ function LoadProjectsPage() {
   });
 }
 
+/* Manager navigation */
+function LoadManagerPage(page) {
+  page = page || 'projects';
+  $('#manage').addClass('loading');
+  $('#manager-page').hide();
+
+  var url;
+  if(page != 'projects')
+    url = [BASE_URL, 'manage', state.id || 1, page].join('/');
+  else
+    url = [BASE_URL, 'manage', page].join('/');
+
+  $.get(url, function (data) {
+    var $pstate = $('#page-state-button');
+    if(page != 'projects') {
+      $pstate.attr('class', state.color).show(200);
+      $pstate.find('a').text(state.project_name + ' - ' + $.camelCase('-' + page))
+    } else {
+      $pstate.hide(200);
+    }
+
+    $('#manager-page').html(data).show();
+    $('#manage').removeClass('loading');
+
+    onLoad[page] && onLoad[page]();
+  });
+}
+
 /* Slider */
 function SummonSlider(url, data) {
-  console.warn(data)
   data = data || {}
   $slider = $('#slider');
   $slider.html('').addClass('loading');
@@ -122,6 +118,7 @@ function SummonSlider(url, data) {
 
   $.get(url, data, function (html) {
     $slider.html(html);
+    $(document).foundation('dropdown', 'reflow');
     $slider.removeClass('loading');
   });
 }

@@ -56,7 +56,7 @@
 <script src="{{ asset('js/jsPlumb.js') }}"></script>
 <script>
   BASE_URL = '{{ url('') }}';
-  state = {{ json_encode(Session::get('state')); }};
+  state = {{ json_encode(Session::get('state')) }};
   $(document).foundation();
   jsPlumb.ready(function() {
     jsPlumb.importDefaults({
@@ -72,6 +72,7 @@
   });
 
 </script>
+<script src="{{ asset('js/lib.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
 </body>
 </html>

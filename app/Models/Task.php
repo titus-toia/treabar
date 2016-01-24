@@ -124,6 +124,10 @@ class Task extends Node {
     return $this->belongsTo('Treabar\Models\Company');
   }
 
+  public function user() {
+    return $this->belongsTo('Treabar\Models\User');
+  }
+
   public function scopeMaster(Builder $query) {
     return $query->where('parent_id', null);
   }

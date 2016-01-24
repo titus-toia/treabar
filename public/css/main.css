@@ -351,6 +351,7 @@ div.manager-project div.banner {
   overflow: hidden;
   height: 100%;
   width: 300px;
+  background-color: white;
 }
 #slider * {
   font-family: "Lato", "Helvetica", Arial, sans-serif;
@@ -495,4 +496,51 @@ div.manager-project div.banner {
 }
 #task-form a.button {
   padding: 7px 20px;
+}
+#user-dropdown {
+  outline: none;
+  margin-top: -1px;
+}
+#user-dropdown-head {
+  margin-bottom: 1rem;
+}
+#user-dropdown:before, #user-dropdown:after {;
+  border: inset 0px;
+  border-color: transparent transparent transparent transparent;
+}
+.user-image-div.head {
+  width: 200px;
+  cursor: pointer;
+  border: 1px solid rgb(204, 204, 204);
+  font-size: 14px;
+  line-height: 14px;
+}
+.user-image-div.head:hover {
+  background-color: rgb(238, 238, 238);
+}
+.user-image-div {
+  padding: 0.5rem 0.5rem 0.5rem 2.3rem;
+  color: #555555;
+}
+.user-image-div {
+  height: 2.13rem;
+  position: relative;
+}
+.user-image-div i {
+  position: absolute;
+  display: block;
+  left: 0;
+  top: 0;
+  font-size: 2rem;
+  margin-left: 0.06rem;
+  margin-top: 0.06rem;
+  width: 2rem;
+  text-align: center;
+}
+.user-image-div img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 2.0rem;
+  width: 2.0rem;
 }

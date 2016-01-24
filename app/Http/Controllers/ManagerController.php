@@ -28,12 +28,18 @@ class ManagerController extends Controller {
 
   public function create(Project $project) {
     $parent = Task::find(Input::get('parent_id'));
-    return view('manage.form')->with('parent', $parent);
+    $users = $project->users;
+    return view('manage.form')
+      ->with('parent', $parent)
+      ->with('users', $users);
   }
 
   public function edit(Project $project, Task $task) {
     $parent = $task->parent;
-    return view('manage.form')->With('parent', $parent);
+    $users = $project->users;
+    return view('manage.form')
+      ->with('parent', $parent)
+      ->with('users', $users);
   }
 
   public function store(Project $project, Task $task) {
