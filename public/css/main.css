@@ -345,7 +345,7 @@ div.manager-project div.banner {
   display: none;
   position: absolute;
   border-left: 2px solid #bbb;
-  padding: 15px;
+  padding: 12px;
   right: 0;
   top: 0;
   overflow: hidden;
@@ -391,7 +391,7 @@ div.manager-project div.banner {
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+ */
 }
-.task .title:hover, .task .title:hover a.edit {
+.task .title:hover, .task .title:hover a.edit, .task .title:hover a.comments {
   background-color: #dbeeff;
 }
 .task .title a.edit {
@@ -404,12 +404,22 @@ div.manager-project div.banner {
   width: 25px;
 
 }
+.task .title a.comments {
+  background-color: white;
+  display: inline-block;
+  position: absolute;
+  left: 0px;
+  font-size: 18px;
+  visibility: hidden;
+  width: 25px;
+
+}
 .task.active .title {
   cursor: default;
   border-color: #3794dd;
   color: #3794dd;
 }
-.task.active .title a.edit {
+.task.active .title a.edit, .task.active .title a.comments {
   visibility: visible;
 }
 
@@ -485,7 +495,6 @@ div.manager-project div.banner {
 }
 #task-form textarea[name='description'] {
   height: 200px;
-  resize: none;
 }
 #task-form input[name='duration'] {
 }

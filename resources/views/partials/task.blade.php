@@ -2,6 +2,10 @@
   @if($task->parent_id) data-parent-id="{{ $task->parent_id }}" @endif>
 
   <div class="title" id="task-title-{{ $task->id }}">
+    <a class="comments" href="#"
+       data-ajax="{{ route('manager.tasks.comments', ['task' => $task->id]) }}">
+      <i class="fi-comment"></i>
+    </a>
     <span>{{ $task->name }}</span>
     <a class="edit" href="#"
        data-ajax="{{ route('manager.tasks.edit', ['project' => $project->id, 'task' => $task->id]) }}">

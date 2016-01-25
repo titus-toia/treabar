@@ -65,3 +65,9 @@ $factory->define(Treabar\Models\Activity::class, function (Faker\Generator $fake
     'duration' => rand(1, 18) * 300 //multiples of 5 minutes
   ];
 });
+
+$factory->define(Treabar\Models\Comment::class, function (Faker\Generator $faker) {
+  return [
+    'content' => $faker->text()
+  ];
+});

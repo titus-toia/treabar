@@ -27,7 +27,7 @@
       <label for="user-dropdown-head">Assignee</label>
       <div id="user-dropdown-head" class="user-image-div head" data-dropdown="user-dropdown"
            data-options="align:right" aria-expanded="false">
-      @if($task->user)
+      @if(isset($task) && $task->user)
         <img src="{{ $task->user->icon() }}" /><span>{{ $task->user->icon() }}</span>
       @else
         <i class="fi-torso"></i>

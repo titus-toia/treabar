@@ -26,10 +26,14 @@ class ManagerController extends Controller {
     return view('manage/tasks')->with('tasks', $project->tasks);
   }
 
+  public function comments(Task $task) {
+    return view('manage/task-comments')->with('comments', $task->comments);
+  }
+
   public function create(Project $project) {
     $parent = Task::find(Input::get('parent_id'));
     $users = $project->users;
-    return view('manage.form')
+    return view('manage.task-form')
       ->with('parent', $parent)
       ->with('users', $users);
   }
@@ -37,7 +41,7 @@ class ManagerController extends Controller {
   public function edit(Project $project, Task $task) {
     $parent = $task->parent;
     $users = $project->users;
-    return view('manage.form')
+    return view('manage.task-form')
       ->with('parent', $parent)
       ->with('users', $users);
   }

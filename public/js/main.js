@@ -193,7 +193,8 @@ $body.on('click', '.task:not(.new) .title', function() {
   SelectTask(id);
 });
 
-$body.on('click', '.task .title a.edit, .task.new .title, .tasks .callout.new ', function() {
+$body.on('click','.task .title a.edit, .task .title a.comments, ' +
+  '.task.new .title, .tasks .callout.new ', function() {
   var data;
   if($(this).hasClass('new')) { //Callout
     data = { parent_id: $(this).data('parent-id') };
