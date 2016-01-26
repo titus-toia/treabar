@@ -54,6 +54,10 @@ class ManagerController extends Controller {
 
   }
 
+  public function delete(Task $task) {
+    return json_encode(['status' => 'ok']);
+  }
+
   public function timesheet() {
     return view('manage/timesheet');
   }

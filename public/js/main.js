@@ -109,34 +109,6 @@ function LoadManagerPage(page) {
   });
 }
 
-/* Slider */
-function SummonSlider(url, data) {
-  data = data || {}
-  $slider = $('#slider');
-  $slider.html('').addClass('loading');
-  if($slider.is(':hidden')) $slider.show('blind', { direction: 'left', duration: 400});
-
-  $.get(url, data, function (html) {
-    $slider.html(html);
-    $(document).foundation('dropdown', 'reflow');
-    $slider.removeClass('loading');
-  });
-}
-function CloseSlider() {
-  $('#slider').html('').hide('blind', { direction: 'left', duration: 400});
-}
-
-$body.on('click', '#slider .form-buttons .submit', function() {
-  var $form = $(this).closest('form');
-  $.post($form.attr('action'), $form.serialize(), function() {
-    CloseSlider();
-  });
-});
-
-$body.on('click', '#slider .form-buttons .cancel', function() {
-  CloseSlider();
-});
-
 /* Tasks page */
 function LoadTasksPage() {
   jsPlumb.setContainer($('#manager-page'));
@@ -191,17 +163,4 @@ function SelectTask(id) {
 $body.on('click', '.task:not(.new) .title', function() {
   var id = $(this).closest('.task').data('id');
   SelectTask(id);
-});
-
-$body.on('click','.task .title a.edit, .task .title a.comments, ' +
-  '.task.new .title, .tasks .callout.new ', function() {
-  var data;
-  if($(this).hasClass('new')) { //Callout
-    data = { parent_id: $(this).data('parent-id') };
-  } else if($(this).closest('.task').hasClass('new')) { //'New task'
-    data = { parent_id: $(this).closest('.task').data('parent-id') };
-  }
-
-  SummonSlider($(this).data('ajax'), data);
-  return false;
 });

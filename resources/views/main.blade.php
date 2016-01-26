@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Treabar</title>
 
@@ -57,6 +58,11 @@
 <script>
   BASE_URL = '{{ url('') }}';
   state = {{ json_encode(Session::get('state')) }};
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
   $(document).foundation();
   jsPlumb.ready(function() {
     jsPlumb.importDefaults({
