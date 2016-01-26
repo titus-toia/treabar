@@ -124,10 +124,9 @@ function ShowChildren(parent_id) {
 
   if($children.length > 0) {
     $children.show();
-    $next_level.find('.task.new').attr('data-parent-id', parent_id).show();
+    $next_level.find('.task.new').attr('data-payload', JSON.stringify({ parent_id: parent_id })).show();
   } else {
-    console.log(parent_id)
-    $next_level.find('.callout').attr('data-parent-id', parent_id).show(300);
+    $next_level.find('.callout').attr('data-payload', JSON.stringify({ parent_id: parent_id })).show(300);
   }
 }
 
