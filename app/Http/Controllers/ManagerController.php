@@ -1,6 +1,7 @@
 <?php namespace Treabar\Http\Controllers;
 
 use Illuminate\Support\Facades\Input;
+use Treabar\Models\Activity;
 use Treabar\Models\Project;
 use Treabar\Models\Task;
 use Treabar\Models\User;
@@ -22,50 +23,57 @@ class ManagerController extends Controller {
     return view('manage.projects')->with('projects', $this->getProjects());
   }
 
+  /* Manager */
   public function tasks(Project $project) {
     return view('manage/tasks')->with('tasks', $project->tasks);
   }
-
   public function comments(Task $task) {
     return view('manage/task-comments')->with('comments', $task->comments);
   }
-
-  public function create(Project $project) {
+  public function createTask(Project $project) {
     $parent = Task::find(Input::get('parent_id'));
     $users = $project->users;
     return view('manage.task-form')
       ->with('parent', $parent)
       ->with('users', $users);
   }
-
-  public function edit(Project $project, Task $task) {
+  public function editTask(Project $project, Task $task) {
     $parent = $task->parent;
     $users = $project->users;
     return view('manage.task-form')
       ->with('parent', $parent)
       ->with('users', $users);
   }
-
-  public function store(Project $project, Task $task) {
-
-  }
-
-  public function update(Task $task) {
+  public function storeTask(Project $project, Task $task) {
 
   }
+  public function updateTask(Task $task) {
 
-  public function delete(Task $task) {
+  }
+  public function deleteTask(Task $task) {
     return json_encode(['status' => 'ok']);
   }
 
-  public function timesheet() {
-    return view('manage/timesheet');
+  /* Timesheet */
+  public function timesheet(Project $project) {
+    return view('manage/timesheet')->with('activities', $project->activities);
+  }
+  public function storeActivity(Project $project, Task $task) {
+
+  }
+  public function editActivity(Activity $activity) {
+
+  }
+  public function deleteActivity(Activity $activity) {
+
   }
 
+  /* Chart */
   public function chart() {
     return view('manage/chart');
   }
 
+  /* Feed */
   public function feed() {
     return view('manage/feed');
   }

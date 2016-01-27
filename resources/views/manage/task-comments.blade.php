@@ -1,6 +1,6 @@
 <div class="task-comments">
   @foreach($comments as $comment)
-  <div class="comment" data-id="{{ $comment->id }}">
+  <div class="comment clearfix" data-id="{{ $comment->id }}">
     <div class="icon">
       <img src="{{ $comment->user->icon() }}" />
     </div>
@@ -11,10 +11,9 @@
       <p>{{ $comment->content }}</p>
     </div>
   </div>
-  <div class="clearfix"></div>
   @endforeach
 </div>
-<form id="task-comment">
+<form id="task-comment" method="post" action="{{ route('manager.tasks.comment', ['task' => $task->id]) }}">
   <textarea name="content"></textarea>
   <div class="form-buttons">
     <a class="button tiny submit">Submit</a>

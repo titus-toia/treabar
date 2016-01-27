@@ -12,6 +12,8 @@ namespace Treabar\Models;
  */
 class Activity extends Model
 {
+  protected $dates = ['started_at', 'created_at', 'updated_at', 'deleted_at'];
+
   public function task() {
     return $this->belongsTo('Treabar\Models\Task');
   }
@@ -28,4 +30,17 @@ class Activity extends Model
     return $this->belongsTo('Treabar\Models\Invoice');
   }
 
+  public function startedAt() {
+    return $this->started_at->format('H:i');
+  }
+
+  public function finishedAt() {
+    return $this->started_at->addSeconds($this->duration)->format('H:i');
+  }
+
+  public function duration() {
+    $hours = floor($this->duration / 3600);
+    $minutes = floor(($this->duration % 3600) / 60);
+    return "{$hours}h {$minutes}m";
+  }
 }
