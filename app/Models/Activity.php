@@ -41,6 +41,6 @@ class Activity extends Model
   public function duration() {
     $hours = floor($this->duration / 3600);
     $minutes = floor(($this->duration % 3600) / 60);
-    return "{$hours}h {$minutes}m";
+    return $hours? "{$hours}h {$minutes}m": "{$minutes}m";
   }
 }

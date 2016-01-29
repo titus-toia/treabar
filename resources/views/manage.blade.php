@@ -9,4 +9,5 @@
   </div>
   <div id="manager-page" class="columns large-11"></div>
 </div>
+<div id="slider"></div>
 @endsection

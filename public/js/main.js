@@ -15,7 +15,8 @@ $(function() {
 
 var onLoad = {
   projects: LoadProjectsPage,
-  tasks: LoadTasksPage
+  tasks: LoadTasksPage,
+  timesheet: LoadTimesheetPage
 };
 
 var $body = $('body');
@@ -163,3 +164,20 @@ $body.on('click', '.task:not(.new) .title', function() {
   var id = $(this).closest('.task').data('id');
   SelectTask(id);
 });
+
+/* Timesheet */
+function LoadTimesheetPage() {
+  var $frame = $('#timesheet-wrapper');
+  var $scrollbar = $frame.parent().find('.scrollbar');
+
+  $frame.sly({
+    speed: 300,
+    easing: 'linear',
+    scrollBar: $scrollbar,
+    scrollBy: 100,
+    dragHandle: 1,
+    dynamicHandle: 1,
+    clickBar: 1
+  });
+  $scrollbar.addClass('large-offset-1'); //Sly deleted all other classes so we have to apply it manually
+}

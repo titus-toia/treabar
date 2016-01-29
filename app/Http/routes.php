@@ -17,8 +17,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::delete('tasks/{task}', 'ManagerController@deleteTask')->name('manager.tasks.delete');
 
     Route::get('{project}/timesheet', 'ManagerController@timesheet')->name('manager.timesheet');
+    Route::get('{project}/timesheet/create', 'ManagerController@createActivity')->name('manager.timesheet.create');
+    Route::get('{project}/timesheet/{activity}/edit', 'ManagerController@editActivity')->name('manager.timesheet.edit');
     Route::post('{project}/timesheet', 'ManagerController@storeActivity')->name('manager.timesheet.store');
     Route::put('{project}/timesheet/{activity}', 'ManagerController@updateActivity')->name('manager.timesheet.update');
+    Route::delete('timesheet/{activity}', 'ManagerController@deleteActivity')->name('manager.timesheet.delete');
 
     Route::get('{id}/chart', 'ManagerController@chart')->name('manager.chart');
     Route::get('{id}/feed', 'ManagerController@feed')->name('manager.feed');

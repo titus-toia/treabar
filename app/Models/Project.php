@@ -28,12 +28,10 @@ class Project extends Model
     return $this->belongsToMany('Treabar\Models\User', 'project_users');
   }
 
-  //TODO: Might not be needed, delete?
   public function getTaskHierarchies() {
-    $tasks = $this->tasks->map(function($task) {
+    $tasks = $this->tasks(true)->get()->map(function($task) {
       return $task->getDescendantsAndSelf()->toHierarchy()->first();
     });
-
     return $tasks;
   }
 

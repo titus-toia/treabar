@@ -14,5 +14,3 @@
     @include('partials.task-new', ['params' => ['project' => $project->id]])
   </div>
 </div>
-
-<div id="slider"></div>

@@ -23,7 +23,7 @@ class ManagerController extends Controller {
     return view('manage.projects')->with('projects', $this->getProjects());
   }
 
-  /* Manager */
+  /* Tasks */
   public function tasks(Project $project) {
     return view('manage/tasks')->with('tasks', $project->tasks);
   }
@@ -58,14 +58,18 @@ class ManagerController extends Controller {
   public function timesheet(Project $project) {
     return view('manage/timesheet')->with('activities', $project->activities);
   }
-  public function storeActivity(Project $project, Task $task) {
-
+  public function createActivity(Project $project) {
+    return view('manage.activity-form');
   }
-  public function editActivity(Activity $activity) {
-
+  public function storeActivity(Project $project) {
+  }
+  public function editActivity(Project $project, Activity $activity) {
+    $tasks = $project->getTaskHierarchies();
+    return view('manage.activity-form')->with('tasks', $tasks);
+  }
+  public function updateActivity(Project $project, Activity $activity) {
   }
   public function deleteActivity(Activity $activity) {
-
   }
 
   /* Chart */
