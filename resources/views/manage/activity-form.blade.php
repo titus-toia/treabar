@@ -12,8 +12,68 @@
   #activity-form textarea {
     height: 200px;
   }
-  .task-facets {
+  .faceter {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+  .faceter .head {
+    border: 1px solid rgb(204, 204, 204);
+    padding: 8px;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .faceter .facets-control {
+    background: white;
     display: none;
+    position: absolute;
+    bottom: 2.13rem;
+    left: 0;
+    width: 100%;
+    border: 1px solid #ccc;
+  }
+  .facets {
+    display: none;
+  }
+  .facet {
+    position: relative;
+    clear: both;
+    height: 2.13rem;
+    font-size: 14px;
+    line-height: 2.13rem;
+    width: 100%;
+    cursor: pointer;
+  }
+  .facet:hover {
+    background-color: rgb(238, 238, 238);
+  }
+  .facet:hover .handle-prev , .facet:hover .handle-next {
+    background: rgb(238, 238, 238);
+  }
+  .facet .name {
+    display: inline-block;
+    overflow: hidden;
+    width: calc(100% - 2rem);
+    padding: 0 5px;
+    white-space: nowrap;
+  }
+  .facet .handle-prev, .facet .handle-next {
+    background-color: white;
+    height: 100%;
+    width: 1rem;
+    text-align: center;
+  }
+  .facet .handle-prev {
+    transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -ms-transform: scaleX(-1);
+  }
+  .facet .handle-prev i, .facet .handle-next i {
+    display: block;
+  }
+  .facet .handle-prev:hover i, .facet .handle-next:hover i {
+    background: #aaa;
   }
 </style>
 
@@ -21,7 +81,6 @@
 <form id="activity-form" method="post" action="{{ !isset($activity)?
     route('manager.timesheet.store', ['project' => $project->id]):
     route('manager.timesheet.update', ['project' => $project->id, 'activity' => $activity->id]) }}">
-
   {{ csrf_field() }}
   <input type="hidden" name="_method" value="{{ isset($activity)? 'PUT': 'POST'}}" />
 
@@ -47,8 +106,16 @@
     </div>
   </div>
   <div class="row">
-    <div class="task-facets">
-      @each('partials.task-facet', $tasks, 'task')
+    <div class="faceter columns large-8 end">
+      <input type="hidden" name="task_id" value="{{ isset($activity)? $activity->task_id: ''  }}" />
+      <label>
+        Task
+        <div class="head">
+          <span class="display">{{ isset($activity)? $activity->task->name: ''  }}</span>
+        </div>
+      </label>
+      <div class="facets-control"></div>
+      <div class="facets">@each('partials.task-facet', $tasks, 'task')</div>
     </div>
   </div>
 

@@ -1,3 +1,75 @@
+//Task hierarchy browser plugin
+(function($) {
+  $.fn.faceter = function(settings) {
+    return this.each(function () {
+      var $elem = $(this);
+      var _settings = $.extend($.fn.faceter.default, settings || {});
+      var plugin = new Faceter(_settings, $elem);
+      plugin.init();
+    });
+  };
+  $.fn.faceter.default = {};
+
+  function Faceter(settings, $elem) {
+    this.settings = settings;
+    this.$elem = $elem;
+    this.$control = $elem.find('.facets-control');
+    this.$facets = $elem.find('.facets:first');
+    this.open = false;
+
+    return this;
+  }
+
+  Faceter.prototype.init = function() {
+    var self = this;
+    var $head = this.$elem.find('div.head');
+
+    $head.on('click', function() {
+      !self.open? self.openTopLevel(): self.close();
+    });
+
+    this.$elem.on('click', '.handle-prev i', function() {
+      var parent_id = $(this).closest('.facet').data('parent-id'),
+        $siblingFacets = $(this).closest('.faceter').find('.facets[data-parent-id=' + parent_id + ']'),
+        $parentFacets = $siblingFacets.closest('.facet').closest('.facets');
+
+      self.openFacets($parentFacets);
+      //$facets.hide('slide', { direction: 'left', duration: 350, queue: false });
+      //$parentFacets.show('slide', { direction: 'left', duration: 350, queue: false });
+    });
+    this.$elem.on('click', '.handle-next i', function() {
+      var id = $(this).closest('.facet').data('id'),
+        $facet = $(this).closest('.faceter').find('.facet[data-id=' + id + ']'),
+        $childFacets = $facet.find('.children');
+
+      //self.$control.hide('slide', { direction: 'left', duration: 100 });
+      self.openFacets($childFacets);
+      //$facets.hide('slide', { direction: 'right', duration: 350, queue: false });
+      //$childFacets.show('slide', { direction: 'right', duration: 350, queue: false });
+    });
+
+  };
+
+  Faceter.prototype.openTopLevel = function() {
+    var $facets = this.$elem.find('div.facets:first');
+    this.openFacets($facets);
+  };
+  Faceter.prototype.openFacets = function(facets) {
+    console.log(facets);
+    this.$control.html(facets.html());
+    this.$control.show();
+    this.open = true;
+  };
+  Faceter.prototype.close = function() {
+    this.$control.html('');
+    this.$control.hide();
+    this.open = false;
+  };
+})(jQuery);
+$(function() {
+  $('.faceter').faceter();
+});
+
 //User dropdown functionality
 $(document).on('click', '.f-dropdown.treabar-control li', function() {
   var $this = $(this),
