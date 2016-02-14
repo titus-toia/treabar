@@ -58,6 +58,7 @@ class DatabaseSeeder extends Seeder {
       foreach($tasks as $task) {
         foreach(range(1, rand(2, 10)) as $i) {
           factory(Activity::class)->create([
+            'project_id' => $task->project_id,
             'task_id' => $task->id,
             'user_id' => $faker->randomElement($devs->lists('id')->all())
           ]);

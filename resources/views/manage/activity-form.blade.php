@@ -124,3 +124,6 @@
     <a class="button small cancel">Cancel</a>
   </div>
 </form>
+<script>
+  $('#activity-form').find('.faceter').faceter();
+</script>

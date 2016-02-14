@@ -10,20 +10,16 @@ namespace Treabar\Models;
  * @property-read \Treabar\Models\Project $project
  * @property-read \Treabar\Models\Invoice $invoice
  */
-class Activity extends Model
+class Activity extends Feedable
 {
   protected $dates = ['started_at', 'created_at', 'updated_at', 'deleted_at'];
 
-  public function task() {
-    return $this->belongsTo('Treabar\Models\Task');
+  public function content() {
+    return $this->description;
   }
 
   public function user() {
     return $this->belongsTo('Treabar\Models\User');
-  }
-
-  public function project() {
-    return $this->belongsTo('Treabar\Models\Project');
   }
 
   public function invoice() {

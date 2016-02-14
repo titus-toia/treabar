@@ -12,7 +12,11 @@ namespace Treabar\Models;
 class Project extends Model
 {
   public function activities() {
-    return $this->hasManyThrough('Treabar\Models\Activity', 'Treabar\Models\Task');
+    return $this->hasMany('Treabar\Models\Activity');
+  }
+
+  public function comments() {
+    return $this->hasMany('Treabar\Models\Comment');
   }
 
   public function company() {
@@ -27,6 +31,7 @@ class Project extends Model
   public function users() {
     return $this->belongsToMany('Treabar\Models\User', 'project_users');
   }
+
 
   public function getTaskHierarchies() {
     $tasks = $this->tasks(true)->get()->map(function($task) {

@@ -8,13 +8,12 @@ namespace Treabar\Models;
  * @property-read \Treabar\Models\Task $task
  * @property-read \Treabar\Models\User $user
  */
-class Comment extends Model {
-  public function task() {
-    return $this->belongsTo('Treabar\Models\Task');
+class Comment extends Feedable {
+  public function content() {
+    return $this->content;
   }
 
   public function user() {
     return $this->belongsTo('Treabar\Models\User');
   }
-
 }

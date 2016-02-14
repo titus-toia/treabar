@@ -13,7 +13,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('{project}/tasks', 'ManagerController@storeTask')->name('manager.tasks.store');
     Route::post('tasks/{task}/comment', 'ManagerController@comment')->name('manager.tasks.comment');
     Route::put('tasks/{task}', 'ManagerController@updateTask')->name('manager.tasks.update');
-    Route::put('tasks/{task}/move', 'ManagerController@move')->name('manager.tasks.move');
+    Route::put('tasks/{task}/move', 'ManagerController@moveTask')->name('manager.tasks.move');
+    Route::put('tasks/{task}/complete', 'ManagerController@completeTask')->name('manager.tasks.complete');
     Route::delete('tasks/{task}', 'ManagerController@deleteTask')->name('manager.tasks.delete');
 
     Route::get('{project}/timesheet', 'ManagerController@timesheet')->name('manager.timesheet');
@@ -23,8 +24,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::put('{project}/timesheet/{activity}', 'ManagerController@updateActivity')->name('manager.timesheet.update');
     Route::delete('timesheet/{activity}', 'ManagerController@deleteActivity')->name('manager.timesheet.delete');
 
-    Route::get('{id}/chart', 'ManagerController@chart')->name('manager.chart');
-    Route::get('{id}/feed', 'ManagerController@feed')->name('manager.feed');
+    Route::get('{project}/chart', 'ManagerController@chart')->name('manager.chart');
+    Route::get('{project}/feed', 'ManagerController@feed')->name('manager.feed');
 
   });
 

@@ -57,7 +57,10 @@
   </div>
 
   <div class="form-buttons">
-    <a class="button small submit">Submit</a>
-    <a class="button small cancel">Cancel</a>
+    @if(isset($task))
+    <a data-ajax="{{ route('manager.tasks.complete', ['task' => $task->id]) }}" class="button tiny submit">Complete Task</a>
+    @endif
+    <a class="button tiny submit">Submit</a>
+    <a class="button tiny cancel">Cancel</a>
   </div>
 </form>

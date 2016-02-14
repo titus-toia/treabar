@@ -124,6 +124,10 @@ class Task extends Node {
     return $this->belongsTo('Treabar\Models\Company');
   }
 
+  public function project() {
+    return $this->belongsTo('Treabar\Models\Project');
+  }
+
   public function user() {
     return $this->belongsTo('Treabar\Models\User');
   }

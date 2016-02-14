@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Input;
 use Treabar\Models\Activity;
+use Treabar\Models\Feedable;
 use Treabar\Models\Project;
 use Treabar\Models\Task;
 use Treabar\Models\User;
@@ -50,6 +51,12 @@ class ManagerController extends Controller {
   public function updateTask(Task $task) {
 
   }
+  public function moveTask(Task $task) {
+
+  }
+  public function completeTask(Task $task) {
+
+  }
   public function deleteTask(Task $task) {
     return json_encode(['status' => 'ok']);
   }
@@ -78,8 +85,9 @@ class ManagerController extends Controller {
   }
 
   /* Feed */
-  public function feed() {
-    return view('manage/feed');
+  public function feed(Project $project) {
+    $feed = Feedable::ofProject($project);
+    return view('manage/feed')->with('feed', $feed);
   }
 
   private function getProjects() { //TODO: Where does this belong? Service layer? Model?

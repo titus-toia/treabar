@@ -28,24 +28,20 @@
       !self.open? self.openTopLevel(): self.close();
     });
 
+    this.$elem.on('click', '.facet .name', function() {
+      self.select($(this));
+    });
     this.$elem.on('click', '.handle-prev i', function() {
       var parent_id = $(this).closest('.facet').data('parent-id'),
         $siblingFacets = $(this).closest('.faceter').find('.facets[data-parent-id=' + parent_id + ']'),
         $parentFacets = $siblingFacets.closest('.facet').closest('.facets');
-
       self.openFacets($parentFacets);
-      //$facets.hide('slide', { direction: 'left', duration: 350, queue: false });
-      //$parentFacets.show('slide', { direction: 'left', duration: 350, queue: false });
     });
     this.$elem.on('click', '.handle-next i', function() {
       var id = $(this).closest('.facet').data('id'),
         $facet = $(this).closest('.faceter').find('.facet[data-id=' + id + ']'),
         $childFacets = $facet.find('.children');
-
-      //self.$control.hide('slide', { direction: 'left', duration: 100 });
       self.openFacets($childFacets);
-      //$facets.hide('slide', { direction: 'right', duration: 350, queue: false });
-      //$childFacets.show('slide', { direction: 'right', duration: 350, queue: false });
     });
 
   };
@@ -55,7 +51,6 @@
     this.openFacets($facets);
   };
   Faceter.prototype.openFacets = function(facets) {
-    console.log(facets);
     this.$control.html(facets.html());
     this.$control.show();
     this.open = true;
@@ -65,10 +60,14 @@
     this.$control.hide();
     this.open = false;
   };
+  Faceter.prototype.select = function($item) {
+    var name = $item.text();
+    this.$elem.find('input[type=hidden]').val($item.data('id'));
+    this.$elem.find('.head .display').text(name);
+    this.close();
+  }
+
 })(jQuery);
-$(function() {
-  $('.faceter').faceter();
-});
 
 //User dropdown functionality
 $(document).on('click', '.f-dropdown.treabar-control li', function() {
