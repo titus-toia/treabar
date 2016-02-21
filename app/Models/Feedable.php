@@ -1,7 +1,8 @@
 <?php
 namespace Treabar\Models;
 
-use Illuminate\Database\Eloquent\Collection;
+
+use Illuminate\Support\Collection;
 
 abstract class Feedable extends Model implements FeedableInterface {
   public function content() {
@@ -11,7 +12,7 @@ abstract class Feedable extends Model implements FeedableInterface {
   public static function ofProject(Project $project) {
     $activities = $project->activities;
     $comments = $project->comments;
-    $feed = (new Collection())->merge($activities)->merge($comments);
+    $feed = (new Collection($activities))->merge($comments);
 
     return $feed;
   }
@@ -26,5 +27,9 @@ abstract class Feedable extends Model implements FeedableInterface {
 
   public function task() {
     return $this->belongsTo('Treabar\Models\Task');
+  }
+
+  public function timestamp() {
+    return $this->created_at;
   }
 }

@@ -8,4 +8,5 @@ interface FeedableInterface {
 
   public function task();
 
+  public function timestamp();
 }

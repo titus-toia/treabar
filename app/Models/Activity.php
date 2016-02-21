@@ -18,6 +18,10 @@ class Activity extends Feedable
     return $this->description;
   }
 
+  public function timestamp() {
+    return $this->started_at->addSeconds($this->duration);
+  }
+
   public function user() {
     return $this->belongsTo('Treabar\Models\User');
   }

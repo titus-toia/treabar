@@ -1,1 +1,12 @@
-{{ dd($feed) }}
+<div id="feed-container" class="vertical-feed">
+  <div id="feed-wrapper" class="vertical-feed-wrapper small-12 large-7 large-offset-1 columns">
+    <div class="slidee">
+      @foreach($feed as $item)
+        <div class="feed clearfix">
+          {{ $item->content() }}
+        </div>
+      @endforeach
+    </div>
+  </div>
+  <div class="scrollbar"><div class="handle"><div class="mousearea"></div></div></div>
+</div>

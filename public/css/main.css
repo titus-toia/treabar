@@ -622,9 +622,6 @@ div.manager-project div.banner {
 }
 
 /* Timesheet */
-#timesheet-container {
-  padding: 0px 0px;
-}
 .activity {
   padding: 5px 15px;
   font-size: 13px;
@@ -697,24 +694,26 @@ div.manager-project div.banner {
 .activity .actions a:hover {
   color: #008CBA;
 }
-#timesheet-container {
+/* Timesheet and Feed*/
+.vertical-feed {
+  padding: 0;
   height: inherit;
 }
-#timesheet-wrapper {
+.vertical-feed-wrapper {
   height: inherit;
 }
-#timesheet-wrapper ~ .scrollbar {
+.vertical-feed-wrapper ~ .scrollbar {
   height: 100%;
   width: 3px;
   background: #ccc;
 }
-#timesheet-wrapper ~ .scrollbar .handle {
+.vertical-feed-wrapper ~ .scrollbar .handle {
   height: 25px;
   width: 100%;
   background: #292a33;
   cursor: pointer;
 }
-#timesheet-wrapper ~ .scrollbar .handle .mousearea {
+.vertical-feed-wrapper ~ .scrollbar .handle .mousearea {
   position: absolute;
   top: 0;
   left: -10px;

@@ -1,5 +1,5 @@
-<div id="timesheet-container">
-  <div id="timesheet-wrapper" class="small-12 large-7 large-offset-1 columns">
+<div id="timesheet-container" class="vertical-feed">
+  <div id="timesheet-wrapper" class="vertical-feed-wrapper small-12 large-7 large-offset-1 columns">
     <div class="slidee">
     @foreach($activities as $activity)
       <div class="activity clearfix">
