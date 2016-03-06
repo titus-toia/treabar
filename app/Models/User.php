@@ -56,6 +56,15 @@ class User extends Authenticatable {
     ];
   }
 
+  public function getProjects() {
+    if($this->role === self::ROLE_MANAGER || $this->role === self::ROLE_ROOT)
+      $projects = $this->company->projects;
+    else
+      $projects = $this->projects;
+
+    return $projects;
+  }
+
   public function icon() {
     return url('img/users/' . $this->icon);
   }

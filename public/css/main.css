@@ -1,18 +1,23 @@
 /* General */
 .color-1 {
   background-color: #ef5523 !important;
+  color: whitesmoke;
 }
 .color-2 {
   background-color: #00468a !important;
+  color: whitesmoke;
 }
 .color-3 {
   background-color: #1abc9c !important;
+  color: whitesmoke;
 }
 .color-4 {
   background-color: #00953d !important;
+  color: whitesmoke;
 }
 .color-5 {
   background-color: #fe374a !important;
+  color: whitesmoke;
 }
 
 .loading {
@@ -165,12 +170,21 @@ nav.top-bar .profile a > i {
   height: 8px;
 }
 
+.project-label {
+  font-size: 11px;
+  padding: 4px 7px;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: top;
+  margin-bottom: 2px;
+}
+
+/* Manager tabs */
 #manager-tabs {
   width: 30px;
   padding: 0;
 }
 
-/* Manager tabs */
 #manager-tabs div {
   width: 30px;
   position: relative;
@@ -723,7 +737,7 @@ div.manager-project div.banner {
 
 /* Feed */
 .feed {
-  padding: 5px 15px;
+  padding: 1px 15px;
   font-size: 13px;
   min-height: 32px;
   position: relative;
@@ -737,6 +751,11 @@ div.manager-project div.banner {
 .feed .icon img {
   height: 32px;
   width: 32px;
+}
+.feed i {
+  font-size: 32px;
+  line-height: 32px;
+  color: #444;
 }
 .feed div.content {
   float: right;

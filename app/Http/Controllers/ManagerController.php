@@ -17,11 +17,11 @@ class ManagerController extends Controller {
   }
 
   public function index() {
-    return view('manage')->with('projects', $this->getProjects());
+    return view('manage')->with('projects', \Auth::user()->getProjects());
   }
 
   public function projects() {
-    return view('manage.projects')->with('projects', $this->getProjects());
+    return view('manage.projects')->with('projects', \Auth::user()->getProjects());
   }
 
   /* Tasks */
@@ -88,15 +88,5 @@ class ManagerController extends Controller {
   public function feed(Project $project) {
     $feed = Feedable::ofProject($project);
     return view('manage/feed')->with('feed', $feed);
-  }
-
-  private function getProjects() { //TODO: Where does this belong? Service layer? Model?
-    $user = \Auth::user();
-    if($user->role === User::ROLE_MANAGER || $user->role === User::ROLE_ROOT)
-      $projects = $user->company->projects;
-    else
-      $projects = $user->projects;
-
-    return $projects;
   }
 }

@@ -5,7 +5,7 @@
       @foreach($feed as $item)
         <div class="feed clearfix">
           <div class="icon">
-            <img src="{{ $item->icon() }}" />
+            <i class="fi-{{ $item->icon() }}"></i>
           </div>
           <div class="content">
             <span class="date right">{{ $item->timestamp()->diffForHumans() }}</span>

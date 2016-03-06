@@ -14,6 +14,10 @@ abstract class Feedable extends Model implements FeedableInterface {
     $comments = $project->comments;
     $feed = (new Collection($activities))->merge($comments);
 
+    $feed = $feed->sort(function($a, $b) {
+      return $a->timestamp() < $b->timestamp();
+    });
+
     return $feed;
   }
 

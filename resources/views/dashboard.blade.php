@@ -1,5 +1,8 @@
 @extends('main')
 
+<style>
+</style>
+
 @section('content')
   <div id="dashboard" class="row wrapper">
     <div class="large-8 columns main scrollpanel">
@@ -16,6 +19,9 @@
       </ul>
       <div class="tabs-content">
         <div class="content active" id="discussion-panel">
+          @foreach($projects as $project)
+            <span class="project-label color-{{ $project->color }}">{{ $project->name }}</span>
+          @endforeach
           <p>This is the first panel of the basic tab example. You can place all sorts of content here including a
             grid.</p>
         </div>

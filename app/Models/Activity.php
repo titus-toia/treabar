@@ -28,14 +28,14 @@ class Activity extends Feedable
 
   public function icon() {
     if($this->type === self::TYPE_ACTIVITY) {
-      return url('img/activity.png');
+      return 'clock';
     } else if($this->type === self::TYPE_COMPLETION) {
-      return url('img/check.png');
+      return 'check';
     } else {
       try {
         return $this->user->icon();
       } catch(\Exception $e) {
-        return url('img/feed.png');
+        return 'torso';
       }
     }
   }

@@ -11,7 +11,10 @@ class DashboardController extends Controller
 {
   public function __construct() {
   }
+
+
+
   public function index() {
-    return view('dashboard');
+    return view('dashboard')->with('projects', \Auth::user()->getProjects());
   }
 }

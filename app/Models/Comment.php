@@ -14,7 +14,7 @@ class Comment extends Feedable {
   }
 
   public function icon() {
-    return url('img/comment.png');
+    return 'comment';
   }
 
   public function user() {
