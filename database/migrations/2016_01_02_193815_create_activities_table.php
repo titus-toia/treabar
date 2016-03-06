@@ -15,6 +15,7 @@ class CreateActivitiesTable extends Migration {
       $table->string('description');
       $table->dateTime('started_at');
       $table->integer('duration')->unsigned();
+      $table->string('type');
       $table->integer('task_id')->nullable()->unsigned();
       $table->integer('invoice_id')->nullable()->unsigned();
       $table->integer('project_id')->unsigned();

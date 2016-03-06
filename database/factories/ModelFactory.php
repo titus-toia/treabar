@@ -11,6 +11,7 @@
 |
 */
 use Treabar\Models\User;
+use Treabar\Models\Activity;
 
 $factory->define(User::class, function (Faker\Generator $faker) {
   return [
@@ -61,6 +62,8 @@ $factory->define(Treabar\Models\Task::class, function (Faker\Generator $faker) {
 $factory->define(Treabar\Models\Activity::class, function (Faker\Generator $faker) {
   return [
     'description' => $faker->text(),
+    'type' => $faker->randomElement(
+      array_merge(array_fill(0, 5, Activity::TYPE_ACTIVITY), [Activity::TYPE_COMPLETION])),
     'started_at' => \Carbon\Carbon::now()->setTime('10', '30'),
     'duration' => rand(1, 18) * 300 //multiples of 5 minutes
   ];

@@ -10,7 +10,11 @@ namespace Treabar\Models;
  */
 class Comment extends Feedable {
   public function content() {
-    return $this->content;
+    return "{$this->user->name} commented on task {$this->task->name}.";
+  }
+
+  public function icon() {
+    return url('img/comment.png');
   }
 
   public function user() {

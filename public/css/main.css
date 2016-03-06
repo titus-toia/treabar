@@ -720,3 +720,33 @@ div.manager-project div.banner {
   width: 22px;
   height: 100%;
 }
+
+/* Feed */
+.feed {
+  padding: 5px 15px;
+  font-size: 13px;
+  min-height: 32px;
+  position: relative;
+}
+.feed .icon {
+  display: block;
+  float: left;
+  width: 32px;
+  height: 100%;
+}
+.feed .icon img {
+  height: 32px;
+  width: 32px;
+}
+.feed div.content {
+  float: right;
+  width: calc(100% - 32px);
+  padding-left: 5px;
+  height: 100%
+}
+.feed span {
+  font-size: 11px;
+}
+.feed span:not {
+  margin-left: 5px;
+}

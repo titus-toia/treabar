@@ -13,9 +13,31 @@ namespace Treabar\Models;
 class Activity extends Feedable
 {
   protected $dates = ['started_at', 'created_at', 'updated_at', 'deleted_at'];
+  const TYPE_ACTIVITY = 'activity';
+  const TYPE_COMPLETION = 'completion';
 
   public function content() {
-    return $this->description;
+    if($this->type === self::TYPE_ACTIVITY) {
+      return "{$this->user->name} completed logged {$this->duration()} in task {$this->task->name}.";
+    } else if($this->type === self::TYPE_COMPLETION) {
+      return "{$this->user->name} completed task {$this->task->name}.";
+    } else {
+      return $this->description;
+    }
+  }
+
+  public function icon() {
+    if($this->type === self::TYPE_ACTIVITY) {
+      return url('img/activity.png');
+    } else if($this->type === self::TYPE_COMPLETION) {
+      return url('img/check.png');
+    } else {
+      try {
+        return $this->user->icon();
+      } catch(\Exception $e) {
+        return url('img/feed.png');
+      }
+    }
   }
 
   public function timestamp() {
