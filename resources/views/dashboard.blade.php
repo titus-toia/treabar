@@ -17,16 +17,27 @@
             <div class="tab-pedestal"></div>
           </a></li>
       </ul>
+      <div class="project-picker hide">
+        @foreach($projects as $project)
+          <span class="project-label color-{{ $project->color }}">{{ $project->name }}</span>
+        @endforeach
+      </div>
       <div class="tabs-content">
         <div class="content active" id="discussion-panel">
-          @foreach($projects as $project)
-            <span class="project-label color-{{ $project->color }}">{{ $project->name }}</span>
-          @endforeach
-          <p>This is the first panel of the basic tab example. You can place all sorts of content here including a
-            grid.</p>
+          <div class="vertical-feed-wrapper">
+            <div class="slidee">
+              <p>Enter discussion content here</p>
+            </div>
+          </div>
+          <div class="scrollbar"><div class="handle"><div class="mousearea"></div></div></div>
         </div>
         <div class="content" id="activity-panel">
-          <p>This is the second panel of the basic tab example. This is the second panel of the basic tab example.</p>
+          <div class="vertical-feed-wrapper">
+            <div class="slidee">
+              <p>Enter activity content here</p>
+            </div>
+          </div>
+          <div class="scrollbar"><div class="handle"><div class="mousearea"></div></div></div>
         </div>
       </div>
     </aside>

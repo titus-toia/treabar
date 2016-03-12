@@ -11,6 +11,23 @@ $(window).on('hashchange', function() {
 
 $(function() {
   $(window).trigger('hashchange');
+  if($('#dashboard').length) {
+    //Notification panels
+    $('.tabs-content .content').each(function(i, tab) {
+      var $frame = $(tab).find('.vertical-feed-wrapper');
+      var $scrollbar = $frame.parent().find('.scrollbar');
+
+      $frame.sly({
+        speed: 300,
+        easing: 'linear',
+        scrollBar: $scrollbar,
+        scrollBy: 100,
+        dragHandle: 1,
+        dynamicHandle: 1,
+        clickBar: 1
+      });
+    });
+  }
 });
 
 var onLoad = {

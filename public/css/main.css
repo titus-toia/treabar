@@ -149,7 +149,7 @@ nav.top-bar .profile a > i {
 }
 #dashboard .notifications .tab-title a {
   outline: 0 none;
-  line-height: 16px;
+  line-height: 1rem;
 }
 #dashboard .notifications .tab-title a {
   font-size: 13px;
@@ -157,7 +157,6 @@ nav.top-bar .profile a > i {
 #dashboard .notifications .tab-title.active a {
   font-size: 16px;
 }
-
 #dashboard .notifications .tab-title .tab-pedestal {
   position: absolute;
   width: 100%;
@@ -170,6 +169,24 @@ nav.top-bar .profile a > i {
   height: 8px;
 }
 
+#dashboard .notifications .tabs-content {
+  height: calc(100% - 3rem);
+  margin-bottom: 0;
+}
+#dashboard .notifications .vertical-feed-wrapper {
+   width: calc(100% - 9px);
+   float: left;
+}
+#dashboard .notifications .scrollbar {
+  height: calc(100% - 5px);
+  float: left;
+}
+#dashboard .notifications .scrollbar .handle .mousearea {
+  left: -7px;
+  width: 16px;
+}
+
+
 .project-label {
   font-size: 11px;
   padding: 4px 7px;
@@ -177,6 +194,14 @@ nav.top-bar .profile a > i {
   display: inline-block;
   vertical-align: top;
   margin-bottom: 2px;
+}
+
+.project-picker {
+  padding-top: 5px;
+}
+
+#dashboard .tabs-content .content {
+  padding-top: 5px;
 }
 
 /* Manager tabs */
