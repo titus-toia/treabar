@@ -10,15 +10,14 @@ namespace Treabar\Models;
  * @property-read \Treabar\Models\Project $project
  * @property-read \Treabar\Models\Invoice $invoice
  */
-class Activity extends Feedable
-{
+class Activity extends Feedable {
   protected $dates = ['started_at', 'created_at', 'updated_at', 'deleted_at'];
   const TYPE_ACTIVITY = 'activity';
   const TYPE_COMPLETION = 'completion';
 
   public function content() {
     if($this->type === self::TYPE_ACTIVITY) {
-      return "{$this->user->name} completed logged {$this->duration()} in task {$this->task->name}.";
+      return "{$this->user->name} logged {$this->duration()} in task {$this->task->name}.";
     } else if($this->type === self::TYPE_COMPLETION) {
       return "{$this->user->name} completed task {$this->task->name}.";
     } else {

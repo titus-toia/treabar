@@ -21,6 +21,10 @@ abstract class Feedable extends Model implements FeedableInterface {
     return $feed;
   }
 
+  public static function ofProjects(\Illuminate\Database\Eloquent\Collection $projects) {
+    return static::whereIn('project_id', $projects->pluck('id'))->orderBy('created_at', 'desc')->simplePaginate(30);
+  }
+
   public static function ofCompany(Company $company) {
 
   }

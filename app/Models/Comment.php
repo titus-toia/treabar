@@ -1,6 +1,7 @@
 <?php
 
 namespace Treabar\Models;
+use Illuminate\Support\Collection;
 
 /**
  * Treabar\Models\Comment

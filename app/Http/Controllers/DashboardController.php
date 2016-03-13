@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use Treabar\Http\Requests;
 use Treabar\Http\Controllers\Controller;
+use Treabar\Models\Activity;
+use Treabar\Models\Comment;
 
 class DashboardController extends Controller
 {
@@ -13,8 +15,16 @@ class DashboardController extends Controller
   }
 
 
-
   public function index() {
-    return view('dashboard')->with('projects', \Auth::user()->getProjects());
+    $projects = \Auth::user()->getProjects();
+    $comments = Comment::ofProjects($projects);
+    $activities = Activity::ofProjects($projects);
+
+    return view('dashboard', [
+      'projects' => $projects,
+      'activities' => $activities,
+      'comments' => $comments
+    ]);
   }
+
 }

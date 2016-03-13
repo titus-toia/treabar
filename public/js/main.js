@@ -13,7 +13,7 @@ $(function() {
   $(window).trigger('hashchange');
   if($('#dashboard').length) {
     //Notification panels
-    $('.tabs-content .content').each(function(i, tab) {
+    $('.tabs-content .tab').each(function(i, tab) {
       var $frame = $(tab).find('.vertical-feed-wrapper');
       var $scrollbar = $frame.parent().find('.scrollbar');
 

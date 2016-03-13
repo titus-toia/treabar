@@ -169,24 +169,6 @@ nav.top-bar .profile a > i {
   height: 8px;
 }
 
-#dashboard .notifications .tabs-content {
-  height: calc(100% - 3rem);
-  margin-bottom: 0;
-}
-#dashboard .notifications .vertical-feed-wrapper {
-   width: calc(100% - 9px);
-   float: left;
-}
-#dashboard .notifications .scrollbar {
-  height: calc(100% - 5px);
-  float: left;
-}
-#dashboard .notifications .scrollbar .handle .mousearea {
-  left: -7px;
-  width: 16px;
-}
-
-
 .project-label {
   font-size: 11px;
   padding: 4px 7px;
@@ -200,9 +182,61 @@ nav.top-bar .profile a > i {
   padding-top: 5px;
 }
 
-#dashboard .tabs-content .content {
-  padding-top: 5px;
+#dashboard .notifications .tabs-content {
+  height: calc(100% - 3rem);
+  margin-bottom: 0;
 }
+#dashboard .tabs-content .tab {
+  padding-top: 5px;
+  height: 100%;
+}
+#dashboard .notifications .vertical-feed-wrapper {
+   width: calc(100% - 15px);
+   float: left;
+}
+#dashboard .notifications .comment span.name {
+  padding-top: 3px;
+}
+#dashboard .notifications .scrollbar {
+  height: calc(100% - 5px);
+  margin-left: 6px;
+  float: left;
+}
+#dashboard .notifications .scrollbar .handle .mousearea {
+  left: -7px;
+  width: 16px;
+}
+.notifications .tabs-content .project-label {
+  font-size: 9px;
+  padding: 2px 4px;
+  margin-left: 5px;
+  display: inline-block;
+}
+
+#dashboard .feed {
+  padding-left: 0;
+}
+#dashboard .feed .project-label {
+  margin-left: 0;
+}
+#dashboard .feed .content {
+  margin-left: 0;
+}
+#dashboard .feed p {
+  margin-bottom: 10px;
+}
+#dashboard .feed .icon {
+  width: 20px;
+}
+#dashboard .feed .icon img {
+  height: 32px;
+  width: 32px;
+}
+#dashboard .feed i {
+  font-size: 32px;
+  line-height: 32px;
+}
+
 
 /* Manager tabs */
 #manager-tabs {
@@ -619,7 +653,6 @@ div.manager-project div.banner {
   display: block;
   float: left;
   width: 35px;
-  height: 100%;
 }
 .comment .icon img {
   height: 35px;
@@ -628,7 +661,6 @@ div.manager-project div.banner {
 .comment div.content {
   float: right;
   width: calc(100% - 40px);
-  height: 100%
 }
 .comment span.name {
   font-size: 9px;
@@ -690,12 +722,18 @@ div.manager-project div.banner {
   margin-left: 5px;
 }
 .activity .name {
+  float: left;
   text-transform: uppercase;
 }
+.activity .task {
+  float: right;
+}
 .activity .interval {
+  float: right;
   font-weight: bold;
 }
 .activity .date {
+  float: right;
   color: #898989;
 }
 .activity p {
@@ -771,7 +809,6 @@ div.manager-project div.banner {
   display: block;
   float: left;
   width: 32px;
-  height: 100%;
 }
 .feed .icon img {
   height: 32px;
@@ -782,11 +819,16 @@ div.manager-project div.banner {
   line-height: 32px;
   color: #444;
 }
+.feed p {
+  font-size: 13px;
+}
 .feed div.content {
   float: right;
   width: calc(100% - 32px);
   padding-left: 5px;
-  height: 100%
+}
+.feed .date {
+  float: right;
 }
 .feed span {
   font-size: 11px;

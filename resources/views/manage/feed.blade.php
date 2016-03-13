@@ -8,7 +8,7 @@
             <i class="fi-{{ $item->icon() }}"></i>
           </div>
           <div class="content">
-            <span class="date right">{{ $item->timestamp()->diffForHumans() }}</span>
+            <span class="date">{{ $item->timestamp()->diffForHumans() }}</span>
             <p>{{ $item->content() }}</p>
           </div>
         </div>

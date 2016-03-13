@@ -23,18 +23,18 @@
         @endforeach
       </div>
       <div class="tabs-content">
-        <div class="content active" id="discussion-panel">
+        <div class="tab content active" id="discussion-panel">
           <div class="vertical-feed-wrapper">
             <div class="slidee">
-              <p>Enter discussion content here</p>
+              @include('partials.notifications-discussion', ['comments' => $comments])
             </div>
           </div>
           <div class="scrollbar"><div class="handle"><div class="mousearea"></div></div></div>
         </div>
-        <div class="content" id="activity-panel">
+        <div class="tab content" id="activity-panel">
           <div class="vertical-feed-wrapper">
             <div class="slidee">
-              <p>Enter activity content here</p>
+              @include('partials.notifications-activity', ['activities' => $activities])
             </div>
           </div>
           <div class="scrollbar"><div class="handle"><div class="mousearea"></div></div></div>

@@ -69,6 +69,11 @@
 
 })(jQuery);
 
+//Auto-update plugin
+(function() {
+
+})(jQuery);
+
 //User dropdown functionality
 $(document).on('click', '.f-dropdown.treabar-control li', function() {
   var $this = $(this),

@@ -8,10 +8,10 @@
           <span class="duration">{{ $activity->duration() }}</span>
         </div>
         <div class="content">
-          <span class="name left"><b>{{ $activity->user->name }}</b></span>
-          <span class="date right">{{ $activity->createdAt() }}</span>
-          <span class="task label info right">{{ $activity->task->name }}</span>
-          <span class="interval right">{{ $activity->startedAt() . ' - ' . $activity->finishedAt() }}</span>
+          <span class="name"><b>{{ $activity->user->name }}</b></span>
+          <span class="date">{{ $activity->createdAt() }}</span>
+          <span class="task label info">{{ $activity->task->name }}</span>
+          <span class="interval">{{ $activity->startedAt() . ' - ' . $activity->finishedAt() }}</span>
           <div class="clearfix"></div>
           <p>{{ $activity->description }}</p>
         </div>
