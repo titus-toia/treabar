@@ -25,7 +25,7 @@ class ManagerController extends Controller {
   }
 
   public function createProject() {
-    return view('manage.project-form');
+    return view('manage.project-form')->with('users', \Auth::user()->company->users);
   }
 
   public function storeProject() {
@@ -33,7 +33,9 @@ class ManagerController extends Controller {
   }
 
   public function editProject(Project $project) {
-
+    return view('manage.project-form')
+      ->with('project', $project)
+      ->with('users', \Auth::user()->company->users);
   }
 
   public function updateProject(Project $project) {

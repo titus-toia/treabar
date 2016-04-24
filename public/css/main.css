@@ -616,8 +616,33 @@ div.manager-project div.banner {
   font-size: 14px;
   line-height: 14px;
   color: #555555;
-  height: 30px;
+  height: 32px;
   position: relative;
+}
+
+.user-image-div.small {
+  padding: 0.1rem 0rem 0.1rem 1.6rem;
+  font-size: 13px;
+  height: 1.6rem;
+}
+.user-image-div.small img {
+  height: 1.4rem;
+  width: 1.4rem;
+}
+.user-image-div.small .delete {
+  visibility: hidden;
+  float: right;
+  font-size: 10px;
+}
+.user-image-div.small .delete:hover {
+  cursor: pointer;
+}
+.project-users .user-image-div:hover .delete {
+  visibility: visible;
+}
+#project-form .form-buttons {
+  display: inline-block;
+  float: right;
 }
 
 /* Slider - Task form */
@@ -668,6 +693,8 @@ div.manager-project div.banner {
   color: #555555;
   height: 2.13rem;
   position: relative;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .user-image-div i {
   position: absolute;

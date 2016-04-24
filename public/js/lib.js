@@ -75,18 +75,33 @@
 })(jQuery);
 
 //User dropdown functionality
-$(document).on('click', '.f-dropdown.treabar-control li', function() {
+$(document).on('click', '.f-dropdown.treabar-single-dropdown li', function() {
   var $this = $(this),
     id = $this.data('id'),
     parent = $this.closest('.f-dropdown'),
     data_field = $this.closest('form').find('input[name=' + parent.data('field') + ']'),
     contents = $this.children().first().html();
-  console.warn(contents);
 
   data_field.val(id);
   parent.prev().html(contents);
   $this.closest('.f-dropdown').removeClass('open').removeClass('f-open-dropdown');
 });
+
+$(document).on('click', '.f-dropdown.treabar-multi-dropdown li', function() {
+  var $this = $(this),
+    parent = $this.closest('.f-dropdown'),
+    fields = $this.closest('form').find('#' + parent.data('container')),
+    contents = $this.children().first().clone();
+
+  //console.warn('#' + parent.data('container'));
+  var $input = contents.find('input');
+  $input.removeAttr('disabled');
+  if(!fields.find('input[value=' + $input.val() + ']').length) {
+    fields.append(contents);
+  }
+  $this.closest('.f-dropdown').removeClass('open').removeClass('f-open-dropdown');
+});
+
 
 function CloseSlider() {
   $('#slider').html('').hide('blind', { direction: 'left', duration: 400});

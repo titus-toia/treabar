@@ -34,7 +34,7 @@
         <span>No one assigned.</span>
       @endif
       </div>
-      <ul id="user-dropdown" class="f-dropdown treabar-control" data-field="user_id" data-dropdown-content aria-hidden="true" tabindex="-1">
+      <ul id="user-dropdown" class="f-dropdown treabar-single-dropdown" data-field="user_id" data-dropdown-content aria-hidden="true" tabindex="-1">
         <li>
           <div class="user-image-div">
             <i class="fi-torso"></i><span>No one assigned.</span>

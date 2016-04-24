@@ -17,13 +17,9 @@
       <label for="project-dropdown-color">Color</label>
       <div id="project-dropdown-color" class="project-color" data-dropdown="color-dropdown"
            data-options="align:right" aria-expanded="false">
-        @if(isset($project))
-          <div style="height: 30px; width: 30px;" class="color-{{ $project->color }}"></div>
-        @else
-          <div style="height: 30px; width: 30px;" class="color-1"></div>
-        @endif
+        <div style="height: 30px; width: 30px;" class="color-{{ isset($project)? $project->color: '1' }}"></div>
       </div>
-      <ul id="color-dropdown" class="f-dropdown treabar-control" data-field="color" data-dropdown-content aria-hidden="true" tabindex="-1">
+      <ul id="color-dropdown" class="f-dropdown treabar-single-dropdown" data-field="color" data-dropdown-content aria-hidden="true" tabindex="-1">
         @for($i = 1; $i <= \Treabar\Models\Project::COLOR_COUNT; $i++)
           <li data-id="{{ $i }}">
             <div>
@@ -35,7 +31,35 @@
     </div>
 
     <div class="large-12 columns">
+      <label for="user-dropdown-head">Add Users to Project</label>
+      <div id="user-dropdown-head" class="user-image-div head" data-dropdown="user-dropdown"
+           data-options="align:right" aria-expanded="false" style="padding-left: 5px">
+        Select User
+      </div>
+      <ul id="user-dropdown" class="f-dropdown treabar-multi-dropdown" data-container="project-users"
+          data-dropdown-content aria-hidden="true" tabindex="-1">
+        @foreach($users as $user)
+          <li data-id="{{ $user->id }}">
+            <div class="user-image-div small">
+              <img src="{{ $user->icon() }}" /><span>{{ $user->name}}</span>
+              <input type="hidden" disabled name="user_ids[]" value="{{ $user->id }}" />
+              <span class="delete">&#10006;</span>
+            </div>
+          </li>
+        @endforeach
+      </ul>
 
+      <div class="project-users" id="project-users">
+      @if(isset($project))
+        @foreach($project->users as $user)
+          <div class="user-image-div small">
+            <img src="{{ $user->icon() }}" /><span>{{ $user->name}}</span>
+            <input type="hidden" name="user_ids[]" value="{{ $user->id }}" />
+            <span class="delete">&#10006;</span>
+          </div>
+        @endforeach
+      @endif
+      </div>
     </div>
   </div>
 
@@ -44,3 +68,8 @@
     <a class="button tiny cancel">Cancel</a>
   </div>
 </form>
+<script>
+  $('form').on('click', 'span.delete', function() {
+    $(this).parent().remove();
+  });
+</script>
