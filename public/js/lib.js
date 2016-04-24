@@ -91,6 +91,18 @@ function CloseSlider() {
   $('#slider').html('').hide('blind', { direction: 'left', duration: 400});
 }
 
+function DefaultSly($frame, $scrollbar) {
+  $frame.sly({
+    speed: 300,
+    easing: 'linear',
+    scrollBar: $scrollbar,
+    scrollBy: 100,
+    dragHandle: 1,
+    dynamicHandle: 1,
+    clickBar: 1
+  });
+}
+
 //Ajax link functionality
 function AjaxHandler(self) {
   var url = self.data('url'),

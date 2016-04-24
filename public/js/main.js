@@ -11,22 +11,20 @@ $(window).on('hashchange', function() {
 
 $(function() {
   $(window).trigger('hashchange');
-  if($('#dashboard').length) {
-    //Notification panels
-    $('.tabs-content .tab').each(function(i, tab) {
-      var $frame = $(tab).find('.vertical-feed-wrapper');
-      var $scrollbar = $frame.parent().find('.scrollbar');
 
-      $frame.sly({
-        speed: 300,
-        easing: 'linear',
-        scrollBar: $scrollbar,
-        scrollBy: 100,
-        dragHandle: 1,
-        dynamicHandle: 1,
-        clickBar: 1
-      });
+  var tabScroll = function($tab) {
+    var $content = $($tab.find('a').attr('href'));
+    var $frame = $content.find('.vertical-feed-wrapper');
+    var $scrollbar = $frame.parent().find('.scrollbar');
+
+    DefaultSly($frame, $scrollbar);
+  };
+
+  if($('#dashboard').length) {
+    $('.tabs').on('toggled', function(e, tab) {
+      tabScroll($(tab));
     });
+    tabScroll($('.tabs .tab-title.active'));
   }
 });
 
@@ -188,15 +186,7 @@ function LoadTimesheetPage() {
   var $frame = $('#timesheet-wrapper');
   var $scrollbar = $frame.parent().find('.scrollbar');
 
-  $frame.sly({
-    speed: 300,
-    easing: 'linear',
-    scrollBar: $scrollbar,
-    scrollBy: 100,
-    dragHandle: 1,
-    dynamicHandle: 1,
-    clickBar: 1
-  });
+  DefaultSly($frame, $scrollbar);
   $scrollbar.addClass('large-offset-1'); //Sly deleted all other classes so we have to apply it manually
 }
 
@@ -205,14 +195,6 @@ function LoadFeedPage() {
   var $frame = $('#feed-wrapper');
   var $scrollbar = $frame.parent().find('.scrollbar');
 
-  $frame.sly({
-    speed: 300,
-    easing: 'linear',
-    scrollBar: $scrollbar,
-    scrollBy: 100,
-    dragHandle: 1,
-    dynamicHandle: 1,
-    clickBar: 1
-  });
+  DefaultSly($frame, $scrollbar);
   $scrollbar.addClass('large-offset-1'); //Sly deleted all other classes so we have to apply it manually
 }
