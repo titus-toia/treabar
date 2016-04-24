@@ -12,6 +12,7 @@ use Treabar\Models\Comment;
 class DashboardController extends Controller
 {
   public function __construct() {
+    view()->share('page', 'dashboard');
   }
 
 

@@ -9,6 +9,10 @@ use Treabar\Http\Requests;
 use Treabar\Http\Controllers\Controller;
 
 class InvoiceController extends Controller {
+  public function __construct() {
+    view()->share('page', 'invoices');
+  }
+
   public function index() {
   }
 }

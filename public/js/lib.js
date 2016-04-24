@@ -81,6 +81,7 @@ $(document).on('click', '.f-dropdown.treabar-control li', function() {
     parent = $this.closest('.f-dropdown'),
     data_field = $this.closest('form').find('input[name=' + parent.data('field') + ']'),
     contents = $this.children().first().html();
+  console.warn(contents);
 
   data_field.val(id);
   parent.prev().html(contents);

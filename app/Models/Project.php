@@ -11,6 +11,7 @@ namespace Treabar\Models;
  */
 class Project extends Model
 {
+  const COLOR_COUNT = 5;
   public function activities() {
     return $this->hasMany('Treabar\Models\Activity');
   }
@@ -31,7 +32,6 @@ class Project extends Model
   public function users() {
     return $this->belongsToMany('Treabar\Models\User', 'project_users');
   }
-
 
   public function getTaskHierarchies() {
     $tasks = $this->tasks(true)->get()->map(function($task) {

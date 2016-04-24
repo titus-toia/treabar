@@ -1,12 +1,14 @@
 /* Hashbang code */
 $(window).on('hashchange', function() {
   var hash = location.hash;
-  $('#manager-tabs').find('div').removeClass('selected');
-  $('#manager-tabs').find('a').each(function() {
-    if($(this).attr('href') === hash) $(this).parent().addClass('selected');
-  });
+  if(page == 'manager') {
+    $('#manager-tabs').find('div').removeClass('selected');
+    $('#manager-tabs').find('a').each(function () {
+      if ($(this).attr('href') === hash) $(this).parent().addClass('selected');
+    });
 
-  LoadManagerPage(hash.substr(1));
+    LoadManagerPage(hash.substr(1));
+  }
 });
 
 $(function() {
@@ -20,7 +22,7 @@ $(function() {
     DefaultSly($frame, $scrollbar);
   };
 
-  if($('#dashboard').length) {
+  if(page == 'dashboard') {
     $('.tabs').on('toggled', function(e, tab) {
       tabScroll($(tab));
     });
@@ -37,7 +39,9 @@ var onLoad = {
 
 var $body = $('body');
 $body.on('click', '#page-state-button', function() {
-  LoadManagerPage('projects');
+  if(page == 'manager') {
+    LoadManagerPage('projects');
+  }
 });
 
 /* Project page */
@@ -112,7 +116,7 @@ function LoadManagerPage(page) {
 
   $.get(url, function (data) {
     var $pstate = $('#page-state-button');
-    if(page != 'projects') {
+    if(page != 'projects') { //Show project name
       $pstate.attr('class', state.color).show(200);
       $pstate.find('a').text(state.project_name + ' - ' + $.camelCase('-' + page))
     } else {
@@ -121,6 +125,9 @@ function LoadManagerPage(page) {
 
     $('#manager-page').html(data).show();
     $('#manage').removeClass('loading');
+
+    $('.custom-buttons').hide().css('visibility', 'hidden');
+    $('.custom-buttons' + '.' + window.page + '-' + page).show().css('visibility', 'visible');
 
     onLoad[page] && onLoad[page]();
   });

@@ -9,7 +9,7 @@ use Treabar\Models\User;
 
 class ManagerController extends Controller {
   public function __construct() {
-    //$this->middleware()
+    view()->share('page', 'manager');
   }
 
   public function getData() {
@@ -22,6 +22,22 @@ class ManagerController extends Controller {
 
   public function projects() {
     return view('manage.projects')->with('projects', \Auth::user()->getProjects());
+  }
+
+  public function createProject() {
+    return view('manage.project-form');
+  }
+
+  public function storeProject() {
+
+  }
+
+  public function editProject(Project $project) {
+
+  }
+
+  public function updateProject(Project $project) {
+
   }
 
   /* Tasks */

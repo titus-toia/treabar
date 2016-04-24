@@ -112,8 +112,20 @@ nav.top-bar .profile a > i {
 }
 #page-state-button a {
   text-align: center;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: lighter;
+}
+.custom-buttons {
+  display: none;
+  visibility: hidden;
+}
+.custom-buttons li {
+  text-align: left;
+  font-weight: lighter;
+  background-color: #3498db !important;
+}
+.custom-buttons li a {
+  color: white !important;
 }
 
 /* Structure */
@@ -573,6 +585,41 @@ div.manager-project div.banner {
   display: none;
 }
 
+
+/* Slider - Project form */
+#color-dropdown {
+  outline: none;
+  margin-top: -1px;
+}
+#color-dropdown li {
+  float: left;
+  margin-right: 3px;
+  margin-bottom: 3px;
+}
+#color-dropdown li:nth-child(6n-1) {
+  display: block;
+}
+#color-dropdown-head {
+  margin-bottom: 1rem;
+}
+#color-dropdown {
+  padding-top: 1px;
+}
+#color-dropdown:before, #color-dropdown:after {;
+  border: inset 0px;
+  border-color: transparent transparent transparent transparent;
+}
+.project-color {
+  width: 200px;
+  cursor: pointer;
+  border: 1px solid rgb(204, 204, 204);
+  font-size: 14px;
+  line-height: 14px;
+  color: #555555;
+  height: 30px;
+  position: relative;
+}
+
 /* Slider - Task form */
 #task-form div.columns {
   padding: 0;
@@ -611,6 +658,7 @@ div.manager-project div.banner {
   border: 1px solid rgb(204, 204, 204);
   font-size: 14px;
   line-height: 14px;
+
 }
 .user-image-div.head:hover {
   background-color: rgb(238, 238, 238);
@@ -618,8 +666,6 @@ div.manager-project div.banner {
 .user-image-div {
   padding: 0.5rem 0.5rem 0.5rem 2.3rem;
   color: #555555;
-}
-.user-image-div {
   height: 2.13rem;
   position: relative;
 }
