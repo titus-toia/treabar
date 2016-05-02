@@ -12,7 +12,7 @@
       </label>
     </div>
 
-    <div class="large-12 columns">
+    <div class="large-12 columns" style="margin-bottom: 20px;">
       <input type="hidden" name="color" value="{{ isset($project)? $project->color: '' }}" />
       <label for="project-dropdown-color">Color</label>
       <div id="project-dropdown-color" class="project-color" data-dropdown="color-dropdown"
@@ -30,7 +30,7 @@
       </ul>
     </div>
 
-    <div class="large-12 columns">
+    <div class="large-12 columns" style="margin-bottom: 20px;">
       <label for="user-dropdown-head">Add Users to Project</label>
       <div id="user-dropdown-head" class="user-image-div head" data-dropdown="user-dropdown"
            data-options="align:right" aria-expanded="false" style="padding-left: 5px">

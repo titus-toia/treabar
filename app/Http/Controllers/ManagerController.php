@@ -73,7 +73,6 @@ class ManagerController extends Controller {
 
   }
   public function completeTask(Task $task) {
-
   }
   public function deleteTask(Task $task) {
     return json_encode(['status' => 'ok']);
