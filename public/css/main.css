@@ -716,8 +716,17 @@ div.manager-project div.banner {
 }
 
 /* Slider - Task comments*/
-.task-comments {
+#task-comments-container {
   height: calc(100% - 120px);
+}
+#task-comments-container .scrollbar {
+  float: left;
+  margin-left: 6px;
+}
+
+.task-comments {
+  float: left;
+  width: calc(100% - 9px);
   overflow: hidden;
 }
 .task-comments .comment {
@@ -733,7 +742,7 @@ div.manager-project div.banner {
 }
 .comment div.content {
   float: right;
-  width: calc(100% - 40px);
+  width: calc(100% - 45px);
 }
 .comment span.name {
   font-size: 9px;
@@ -850,7 +859,7 @@ div.manager-project div.banner {
   height: inherit;
 }
 .vertical-feed-wrapper {
-  height: inherit;
+  height: 100%;
 }
 .vertical-feed-wrapper ~ .scrollbar {
   height: 100%;
