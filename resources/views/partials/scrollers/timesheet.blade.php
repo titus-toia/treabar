@@ -2,13 +2,16 @@
 
 @section('before')
 <div id="timesheet-container" class="vertical-feed">
-  <div id="timesheet-wrapper" class="vertical-feed-wrapper small-12 large-7 large-offset-1 columns">
+  <div id="timesheet-wrapper"
+       class="vertical-feed-wrapper update small-12 large-7 large-offset-1 columns"
+       data-id="{{ $activities->count()? $activities->last()->id: '' }}"
+       data-url="{{ route('manager.timesheet', ['project' => $project->id]) }}">
     <div class="slidee">
 @endsection
 
 @section('data')
   @foreach($activities as $activity)
-    <div class="activity clearfix">
+    <div class="activity clearfix" data-id="{{ $activity->id }}">
       <div class="icon">
         <img src="{{ $activity->user->icon() }}" />
         <span class="duration">{{ $activity->duration() }}</span>

@@ -80,7 +80,17 @@ class ManagerController extends Controller {
 
   /* Timesheet */
   public function timesheet(Project $project) {
-    return view('manage/timesheet')->with('activities', $project->activities);
+    $after = Input::get('after');
+
+    $activities = $project->activities();
+    if($after) $activities = $project->activities()->where('id', '<', $after);
+    $activities = $activities->take(15)->get();
+
+    return view('manage/timesheet', [
+      'project' => $project,
+      'activities' => $activities,
+      'only_data' => $after? true: false,
+    ]);
   }
   public function createActivity(Project $project) {
     return view('manage.activity-form');

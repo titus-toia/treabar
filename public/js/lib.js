@@ -108,6 +108,23 @@ function CloseSlider() {
 }
 
 function DefaultSly($frame, $scrollbar) {
+  var events = {};
+  if($frame.hasClass('update')) {
+    events.moveEnd = function(ev) {
+      var pos = this.pos;
+      if(pos.cur == pos.end) { //We are at the bottom, start loading
+        $.get($frame.data('url'), {
+          after: $frame.data('id')
+        }, function(html) {
+          var id = $(html).last().data('id');
+          $frame.data('id', id);
+          $frame.find('.slidee').append(html);
+          $frame.sly('reload');
+        });
+      }
+    };
+  }
+
   $frame.sly({
     speed: 300,
     easing: 'linear',
@@ -116,7 +133,7 @@ function DefaultSly($frame, $scrollbar) {
     dragHandle: 1,
     dynamicHandle: 1,
     clickBar: 1
-  });
+  }, events);
 }
 
 //Ajax link functionality
