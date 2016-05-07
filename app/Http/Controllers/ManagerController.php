@@ -47,7 +47,7 @@ class ManagerController extends Controller {
     return view('manage/tasks')->with('tasks', $project->tasks);
   }
   public function comments(Task $task) {
-    return view('manage/task-comments')->with('comments', $task->comments);
+    return view('partials/scrollers/task-comments')->with('comments', $task->comments);
   }
   public function createTask(Project $project) {
     $parent = Task::find(Input::get('parent_id'));

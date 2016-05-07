@@ -24,20 +24,10 @@
       </div>
       <div class="tabs-content">
         <div class="tab content active" id="discussion-panel">
-          <div class="vertical-feed-wrapper">
-            <div class="slidee">
-              @include('partials.notifications-discussion', ['comments' => $comments])
-            </div>
-          </div>
-          <div class="scrollbar"><div class="handle"><div class="mousearea"></div></div></div>
+          @include('partials.scrollers.notifications-discussion', ['comments' => $comments])
         </div>
         <div class="tab content" id="activity-panel">
-          <div class="vertical-feed-wrapper">
-            <div class="slidee">
-              @include('partials.notifications-activity', ['activities' => $activities])
-            </div>
-          </div>
-          <div class="scrollbar"><div class="handle"><div class="mousearea"></div></div></div>
+          @include('partials.scrollers.notifications-activity', ['activities' => $activities])
         </div>
       </div>
     </aside>

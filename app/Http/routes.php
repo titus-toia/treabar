@@ -41,5 +41,5 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 Route::get('test', function() {
-  return View::make('test');
+  return \View::make('partials.scrollers.testScroll')->with('only_data', true);
 });
