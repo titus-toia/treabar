@@ -13,7 +13,7 @@ class Project extends Model
 {
   const COLOR_COUNT = 5;
   public function activities() {
-    return $this->hasMany('Treabar\Models\Activity')->orderBy('id', 'desc');
+    return $this->hasMany('Treabar\Models\Activity');
   }
 
   public function comments() {

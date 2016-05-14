@@ -3,7 +3,7 @@
 @section('before')
 <div class="vertical-feed-wrapper">
   <div class="slidee">
-@endsection
+@overwrite
 
 @section('data')
   @foreach($comments as $comment)
@@ -20,10 +20,10 @@
     </div>
   </div>
   @endforeach
-@endsection
+@overwrite
 
 @section('after')
   </div>
 </div>
 <div class="scrollbar"><div class="handle"><div class="mousearea"></div></div></div>
-@endsection
+@overwrite

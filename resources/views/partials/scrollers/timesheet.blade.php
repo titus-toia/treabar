@@ -4,14 +4,14 @@
 <div id="timesheet-container" class="vertical-feed">
   <div id="timesheet-wrapper"
        class="vertical-feed-wrapper update small-12 large-7 large-offset-1 columns"
-       data-id="{{ $activities->count()? $activities->last()->id: '' }}"
+       data-created="{{ $activities->count()? $activities->last()->created_at: \Carbon\Carbon::today() }}"
        data-url="{{ route('manager.timesheet', ['project' => $project->id]) }}">
     <div class="slidee">
-@endsection
+@overwrite
 
 @section('data')
   @foreach($activities as $activity)
-    <div class="activity clearfix" data-id="{{ $activity->id }}">
+    <div class="activity clearfix" data-id="{{ $activity->id }}" data-created="{{ $activity->created_at }}">
       <div class="icon">
         <img src="{{ $activity->user->icon() }}" />
         <span class="duration">{{ $activity->duration() }}</span>
@@ -36,11 +36,11 @@
       </ul>
     </div>
   @endforeach
-@endsection
+@overwrite
 
 @section('after')
     </div>
   </div>
   <div class="scrollbar"><div class="handle"><div class="mousearea"></div></div></div>
 </div>
-@endsection
+@overwrite

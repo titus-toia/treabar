@@ -5,7 +5,7 @@
 <div id="task-comments-container" class="vertical-feed">
   <div id="task-comments-wrapper" class="task-comments vertical-feed-wrapper">
     <div class="slidee">
-@endsection
+@overwrite
 
 @section('data')
   @foreach($comments as $comment)
@@ -21,7 +21,7 @@
       </div>
     </div>
   @endforeach
-@endsection
+@overwrite
 
 @section('after')
     </div>
@@ -43,4 +43,4 @@ var $scrollbar = $frame.parent().find('.scrollbar');
 
 DefaultSly($frame, $scrollbar);
 </script>
-@endsection
+@overwrite

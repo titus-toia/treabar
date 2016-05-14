@@ -5,17 +5,38 @@ namespace Treabar\Models;
 use Illuminate\Support\Collection;
 
 abstract class Feedable extends Model implements FeedableInterface {
+  const AFTER = 'after';
+  const BEFORE = 'before';
   public function content() {
     throw new \BadMethodCallException("Method not implemented");
   }
 
-  public static function ofProject(Project $project) {
-    $activities = $project->activities;
-    $comments = $project->comments;
-    $feed = (new Collection($activities))->merge($comments);
+  public static function ofProject(Project $project, $time = null, $direction = self::BEFORE) {
+    $activities = self::feed($project->activities(), $time, $direction, 8);
+    $comments = self::feed($project->comments(), $time, $direction, 8);
 
+    if($activities->count() && $comments->count()) {
+      $last_activity = $activities->last()->created_at;
+      $last_comment = $comments->last()->created_at;
+
+      $condition = $direction == self::BEFORE? ($last_activity > $last_comment): ($last_activity < $last_comment);
+      $interval = [$last_comment, $last_activity];
+      if($direction != self::BEFORE) $interval = array_reverse($interval);
+
+      if($condition) {
+        $activities = $activities->merge(
+          $project->activities()->whereBetween('created_at', $interval)->get()
+        );
+      } else {
+        $comments = $comments->merge(
+          $project->comments()->whereBetween('created_at', array_reverse($interval))->get()
+        );
+      }
+    }
+
+    $feed = (new Collection($activities))->merge($comments);
     $feed = $feed->sort(function($a, $b) {
-      return $a->timestamp() < $b->timestamp();
+      return $a->created_at < $b->created_at;
     });
 
     return $feed;
@@ -39,5 +60,25 @@ abstract class Feedable extends Model implements FeedableInterface {
 
   public function timestamp() {
     return $this->created_at;
+  }
+
+  public static function feed($eloquent = null, $time = null, $direction = self::BEFORE, $pageSize = 15) {
+    if(!$eloquent) $eloquent = static::query();
+    $eloquent = $eloquent->orderBy('created_at', 'desc');
+
+    $ineq = $direction == self::BEFORE? '<': '>';
+    $query = clone $eloquent->getQuery();
+    if($time) $query = $query->where('created_at', $ineq, $time);
+    $result = $query->take($pageSize)->get();
+
+    if($result->count()) { //Take all siblings in the last time instance, if any.
+      $query = clone $eloquent->getQuery();
+      $last = $result->last();
+      $query = $query->where('created_at', '=', $last->created_at)->where('id', '!=', $last->id);
+      $siblings = $query->get();
+      $result = $result->merge($siblings);
+    }
+
+    return $result;
   }
 }

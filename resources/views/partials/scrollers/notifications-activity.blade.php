@@ -3,7 +3,7 @@
 @section('before')
 <div class="vertical-feed-wrapper">
   <div class="slidee">
-@endsection
+@overwrite
 
 @section('data')
   @foreach($activities as $item)
@@ -18,10 +18,10 @@
       </div>
     </div>
   @endforeach
-@endsection
+@overwrite
 
 @section('after')
   </div>
 </div>
 <div class="scrollbar"><div class="handle"><div class="mousearea"></div></div></div>
-@endsection
+@overwrite

@@ -109,15 +109,17 @@ function CloseSlider() {
 
 function DefaultSly($frame, $scrollbar) {
   var events = {};
+
+  //Dynamic update for this slider
   if($frame.hasClass('update')) {
     events.moveEnd = function(ev) {
       var pos = this.pos;
       if(pos.cur == pos.end) { //We are at the bottom, start loading
         $.get($frame.data('url'), {
-          after: $frame.data('id')
+          before: $frame.data('created')
         }, function(html) {
-          var id = $(html).last().data('id');
-          $frame.data('id', id);
+          var created = $(html).last().data('created');
+          $frame.data('created', created);
           $frame.find('.slidee').append(html);
           $frame.sly('reload');
         });

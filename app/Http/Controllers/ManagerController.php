@@ -1,5 +1,6 @@
 <?php namespace Treabar\Http\Controllers;
 
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Input;
 use Treabar\Models\Activity;
 use Treabar\Models\Feedable;
@@ -80,16 +81,12 @@ class ManagerController extends Controller {
 
   /* Timesheet */
   public function timesheet(Project $project) {
-    $after = Input::get('after');
-
-    $activities = $project->activities();
-    if($after) $activities = $project->activities()->where('id', '<', $after);
-    $activities = $activities->take(15)->get();
+    $activities = $this->GetFeed($project->activities(), $onlyData);
 
     return view('manage/timesheet', [
       'project' => $project,
       'activities' => $activities,
-      'only_data' => $after? true: false,
+      'only_data' => $onlyData
     ]);
   }
   public function createActivity(Project $project) {
@@ -113,7 +110,25 @@ class ManagerController extends Controller {
 
   /* Feed */
   public function feed(Project $project) {
-    $feed = Feedable::ofProject($project);
-    return view('manage/feed')->with('feed', $feed);
+    $this->GetFeed(null, $onlyData, $before);
+    $feed = Feedable::ofProject($project, $before);
+
+    return view('manage/feed', [
+      'project' => $project,
+      'feed' => $feed,
+      'only_data' => $onlyData
+    ]);
+  }
+
+  private function GetFeed($eloquent = null, &$onlyData, &$before) {
+    $before = Input::get('before');
+    $onlyData = $before? true: false;
+
+    if($eloquent) {
+      $feed = Feedable::feed($eloquent, $before);
+      return $feed;
+    }
+
+    return true;
   }
 }
