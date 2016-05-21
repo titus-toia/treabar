@@ -1,6 +1,5 @@
 <?php namespace Treabar\Http\Controllers;
 
-use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Input;
 use Treabar\Models\Activity;
 use Treabar\Models\Feedable;
@@ -11,10 +10,6 @@ use Treabar\Models\User;
 class ManagerController extends Controller {
   public function __construct() {
     view()->share('page', 'manager');
-  }
-
-  public function getData() {
-
   }
 
   public function index() {
@@ -120,13 +115,12 @@ class ManagerController extends Controller {
     ]);
   }
 
-  private function GetFeed($eloquent = null, &$onlyData, &$before) {
+  private function GetFeed($eloquent = null, &$onlyData, &$before = null) {
     $before = Input::get('before');
     $onlyData = $before? true: false;
 
     if($eloquent) {
-      $feed = Feedable::feed($eloquent, $before);
-      return $feed;
+      return Feedable::feed($eloquent, $before);
     }
 
     return true;

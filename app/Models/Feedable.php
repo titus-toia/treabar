@@ -2,7 +2,9 @@
 namespace Treabar\Models;
 
 
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Collection;
+use Symfony\Component\Debug\Exception\FatalErrorException;
 
 abstract class Feedable extends Model implements FeedableInterface {
   const AFTER = 'after';
@@ -43,7 +45,7 @@ abstract class Feedable extends Model implements FeedableInterface {
   }
 
   public static function ofProjects(\Illuminate\Database\Eloquent\Collection $projects) {
-    return static::whereIn('project_id', $projects->pluck('id'))->orderBy('created_at', 'desc')->simplePaginate(30);
+    return static::whereIn('project_id', $projects->pluck('id'))->orderBy('created_at', 'desc');
   }
 
   public static function ofCompany(Company $company) {
@@ -67,12 +69,13 @@ abstract class Feedable extends Model implements FeedableInterface {
     $eloquent = $eloquent->orderBy('created_at', 'desc');
 
     $ineq = $direction == self::BEFORE? '<': '>';
-    $query = clone $eloquent->getQuery();
+    $query = self::cloneEloquent($eloquent);
+
     if($time) $query = $query->where('created_at', $ineq, $time);
     $result = $query->take($pageSize)->get();
 
     if($result->count()) { //Take all siblings in the last time instance, if any.
-      $query = clone $eloquent->getQuery();
+      $query = self::cloneEloquent($eloquent);
       $last = $result->last();
       $query = $query->where('created_at', '=', $last->created_at)->where('id', '!=', $last->id);
       $siblings = $query->get();
@@ -80,5 +83,15 @@ abstract class Feedable extends Model implements FeedableInterface {
     }
 
     return $result;
+  }
+
+  private static function cloneEloquent($eloquent) {
+    if($eloquent instanceof Relation) {
+      $query = clone $eloquent->getQuery();
+    } else {
+      $query = clone $eloquent;
+    }
+
+    return $query;
   }
 }

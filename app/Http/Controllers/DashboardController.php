@@ -2,12 +2,11 @@
 
 namespace Treabar\Http\Controllers;
 
-use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Input;
 use Treabar\Http\Requests;
-use Treabar\Http\Controllers\Controller;
 use Treabar\Models\Activity;
 use Treabar\Models\Comment;
+use Treabar\Models\Feedable;
 
 class DashboardController extends Controller
 {
@@ -15,11 +14,34 @@ class DashboardController extends Controller
     view()->share('page', 'dashboard');
   }
 
+  public function activityFeed() {
+    $projects = \Auth::user()->getProjects();
+    $before = Input::get('before');
+    $feed = Feedable::feed(Activity::ofProjects($projects), $before);
+
+    return view('partials.scrollers.notifications-activity', [
+      'activities' => $feed,
+      'only_data' => true
+    ]);
+  }
+
+  public function discussionFeed() {
+    $projects = \Auth::user()->getProjects();
+    $before = Input::get('before');
+    $feed = Feedable::feed(Comment::ofProjects($projects), $before);
+
+    return view('partials.scrollers.notifications-discussion', [
+      'comments' => $feed,
+      'only_data' => true
+    ]);
+  }
+
+
 
   public function index() {
     $projects = \Auth::user()->getProjects();
-    $comments = Comment::ofProjects($projects);
-    $activities = Activity::ofProjects($projects);
+    $comments = Feedable::feed(Comment::ofProjects($projects));
+    $activities = Feedable::feed(Activity::ofProjects($projects));
 
     return view('dashboard', [
       'projects' => $projects,

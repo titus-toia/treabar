@@ -3,6 +3,12 @@
 Route::group(['middleware' => ['web']], function () {
   Route::get('/', 'DashboardController@index')->name('dashboard');
 
+  Route::group(['prefix' => 'dashboard'], function () {
+    Route::get('/', 'DashboardController@index');
+    Route::get('discussion/feed', 'DashboardController@discussionFeed')->name('dashboard.discussion.feed');
+    Route::get('activity/feed', 'DashboardController@activityFeed')->name('dashboard.activity.feed');
+  });
+
   Route::group(['prefix' => 'manage'], function () {
     Route::get('/', 'ManagerController@index')->name('manager');
     Route::get('projects', 'ManagerController@projects')->name('manager.projects');
