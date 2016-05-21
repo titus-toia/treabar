@@ -17,7 +17,7 @@
   <script src="{{ asset('foundation/js/vendor/modernizr.js') }}"></script>
 </head>
 <body>
-<nav class="top-bar">
+<nav class="top-bar {{ $page }}">
   <ul class="title-area">
     <li class="name"><!-- Leave this empty --></li>
   </ul>
@@ -25,7 +25,7 @@
     <ul class="left">
       <li class="dashboard page"><a href="{{ url('')  }}">Dashboard</a></li>
       <li class="manager page"><a href="{{ url('manage')  }}">Manage</a></li>
-      <li class="invoices page"><a href="#">Invoice</a></li>
+      <li class="invoices page"><a href="{{ url('invoice')  }}">Invoice</a></li>
       <li id="page-state-button"><a href="#">Page state</a></li>
     </ul>
     <ul class="left custom-buttons manager-projects">
