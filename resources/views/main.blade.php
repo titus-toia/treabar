@@ -23,9 +23,9 @@
   </ul>
   <section class="top-bar-section">
     <ul class="left">
-      <li class="dashboard page"><a href="{{ url('')  }}">Dashboard</a></li>
-      <li class="manager page"><a href="{{ url('manage')  }}">Manage</a></li>
-      <li class="invoices page"><a href="{{ url('invoice')  }}">Invoice</a></li>
+      <li class="dashboard page {{ $page =='dashboard'? 'active': '' }}"><a href="{{ url('')  }}">Dashboard</a></li>
+      <li class="manager page {{ $page =='manager'? 'active': '' }}"><a href="{{ url('manage')  }}">Manage</a></li>
+      <li class="invoices page {{ $page =='invoices'? 'active': '' }} "><a href="{{ url('invoice')  }}">Invoice</a></li>
       <li id="page-state-button"><a href="#">Page state</a></li>
     </ul>
     <ul class="left custom-buttons manager-projects">

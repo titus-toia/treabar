@@ -69,6 +69,12 @@ nav.top-bar ul a {
 nav.top-bar ul li > a {
   font-family: "Lato", "Helvetica", Arial, sans-serif;
 }
+nav.top-bar ul li.page:not(.active):not(:hover) {
+  background-color: #ccc;
+}
+nav.top-bar ul li.page:not(.active):not(:hover) a {
+  color: black;
+}
 nav.top-bar .dashboard {
   background-color: #3498db;
 }
@@ -81,10 +87,10 @@ nav.top-bar .manager {
 nav.top-bar .manager:hover {
   background-color: #F1C204;
 }
-nav.top-bar .manager a {
+nav.top-bar ul li.manager.page.active:not(.hover) a {
   color: #59370b !important;
 }
-nav.top-bar .manager:hover a {
+nav.top-bar ul li.manager.page:hover a {
   color: #59370b !important;
 }
 nav.top-bar .invoices {
