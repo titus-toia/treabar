@@ -15,7 +15,7 @@ class Dev {
    */
   public function handle($request, Closure $next) {
     Auth::loginUsingId(2); //1 is always root; 2 is the manager of the first company
-    \Session::put('state', new \stdClass());
+    \Session::put('state', \Session::get('state')?: new \stdClass());
     return $next($request);
   }
 }

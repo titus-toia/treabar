@@ -74,6 +74,7 @@
     }
   });
   $(document).foundation();
+
   jsPlumb.ready(function() {
     jsPlumb.importDefaults({
       PaintStyle:{
@@ -84,6 +85,15 @@
       Connector: ['Flowchart', { stub: 5 }],
       Endpoint: 'Blank',
       Anchor: [[1, 0.5, 1, 0, 2, 0], [0, 0.5, -1, 0, 2, 0]]
+    });
+  });
+  $(window).bind('beforeunload', function() {
+    $.ajax(BASE_URL + '/state', {
+      method: 'POST',
+      async : false,
+      data: {
+        state: state
+      }
     });
   });
 

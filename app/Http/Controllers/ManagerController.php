@@ -25,7 +25,18 @@ class ManagerController extends Controller {
   }
 
   public function storeProject() {
+    $project = Project::create([
+      'name' => Input::get('name'),
+      'slug' => str_slug(Input::get('name')),
+      'color' => Input::get('color'),
+      'client_id' => Input::get('client_id'),
+      'company_id' => Input::get('company_id')?: \Auth::user()->company_id
+    ]);
+    foreach(Input::get('user_ids') as $user_id) {
+      $project->users()->attach($user_id);
+    }
 
+    return $project;
   }
 
   public function editProject(Project $project) {

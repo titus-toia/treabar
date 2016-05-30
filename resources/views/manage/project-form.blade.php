@@ -4,6 +4,9 @@
     route('manager.projects.update', ['project' => $project->id]) }}">
   {{ csrf_field() }}
   <input type="hidden" name="_method" value="{{ isset($project)? 'PUT': 'POST'}}" />
+  @if(!isset($project))
+    <input type="hidden" name="company_id" value="{{ \Auth::user()->company_id  }}" />
+  @endif
 
   <div class="row">
     <div class="large-12 columns">
@@ -11,7 +14,6 @@
         <input type="text" name="name" value="{{ isset($project)? $project->name: '' }}">
       </label>
     </div>
-
     <div class="large-12 columns" style="margin-bottom: 20px;">
       <input type="hidden" name="color" value="{{ isset($project)? $project->color: '' }}" />
       <label for="project-dropdown-color">Color</label>

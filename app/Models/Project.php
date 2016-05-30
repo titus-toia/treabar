@@ -12,6 +12,7 @@ namespace Treabar\Models;
 class Project extends Model
 {
   const COLOR_COUNT = 5;
+  protected $guarded = [];
   public function activities() {
     return $this->hasMany('Treabar\Models\Activity');
   }
