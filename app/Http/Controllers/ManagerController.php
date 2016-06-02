@@ -1,5 +1,6 @@
 <?php namespace Treabar\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Input;
 use Treabar\Models\Activity;
 use Treabar\Models\Feedable;
@@ -32,9 +33,7 @@ class ManagerController extends Controller {
       'client_id' => Input::get('client_id'),
       'company_id' => Input::get('company_id')?: \Auth::user()->company_id
     ]);
-    foreach(Input::get('user_ids') as $user_id) {
-      $project->users()->attach($user_id);
-    }
+    $project->users()->sync(Input::get('user_ids'));
 
     return $project;
   }
@@ -46,16 +45,24 @@ class ManagerController extends Controller {
   }
 
   public function updateProject(Project $project) {
-
+    $project->update([
+      'name' => Input::get('name'),
+      'slug' => str_slug(Input::get('name')),
+      'color' => Input::get('color'),
+      'client_id' => Input::get('client_id')
+    ]);
+    $project->users()->sync(Input::get('user_ids'));
   }
 
   /* Tasks */
   public function tasks(Project $project) {
     return view('manage/tasks')->with('tasks', $project->tasks);
   }
+
   public function comments(Task $task) {
     return view('partials/scrollers/task-comments')->with('comments', $task->comments);
   }
+
   public function createTask(Project $project) {
     $parent = Task::find(Input::get('parent_id'));
     $users = $project->users;
@@ -63,6 +70,24 @@ class ManagerController extends Controller {
       ->with('parent', $parent)
       ->with('users', $users);
   }
+
+  public function storeTask(Project $project) {
+    $task = Task::create([
+      'name' => Input::get('name'),
+      'description' => Input::get('description'),
+      'duration' => Input::get('duration'),
+      'user_id' => Input::get('user_id'),
+      'project_id' => $project->id
+    ]);
+
+    $parent = Task::find(Input::get('parent_id'));
+    if($parent) {
+      $task->makeChildOf($parent);
+    }
+
+    return $task;
+  }
+
   public function editTask(Project $project, Task $task) {
     $parent = $task->parent;
     $users = $project->users;
@@ -70,19 +95,40 @@ class ManagerController extends Controller {
       ->with('parent', $parent)
       ->with('users', $users);
   }
-  public function storeTask(Project $project, Task $task) {
 
-  }
   public function updateTask(Task $task) {
+    $task->update([
+      'name' => Input::get('name'),
+      'description' => Input::get('description'),
+      'duration' => Input::get('duration'),
+      'user_id' => Input::get('user_id')
+    ]);
 
+    return $task;
   }
+
   public function moveTask(Task $task) {
+    $parent = Task::find(Input::get('parent_id'));
+    $task->makeChildOf($parent);
 
+    return $task;
   }
+
   public function completeTask(Task $task) {
+    $task->update(['finished' => true]);
+    Activity::create([
+      'description' => "Task {$task->name} completed.",
+      'type' => Activity::TYPE_COMPLETION,
+      'started_at' => Carbon::now(),
+      'task_id' => $task->id,
+      'user_id' => $task->user_id,
+      'project_id' => $task->project_id
+    ]);
+
+    return $task;
   }
   public function deleteTask(Task $task) {
-    return json_encode(['status' => 'ok']);
+    $task->delete();
   }
 
   /* Timesheet */
@@ -91,7 +137,7 @@ class ManagerController extends Controller {
 
     return view('manage/timesheet', [
       'project' => $project,
-      'activities' => $activities,
+      'activities' => $activities,-
       'only_data' => $onlyData
     ]);
   }
@@ -99,14 +145,52 @@ class ManagerController extends Controller {
     return view('manage.activity-form');
   }
   public function storeActivity(Project $project) {
+    $started_at = new Carbon(Input::get('started_at'));
+    $finished_at = new Carbon(Input::get('finished_at'));
+    $diff = $started_at->diffInSeconds($finished_at);
+
+    if($diff < 0) {
+      abort(500, 'Finished at should be after started at');
+    }
+
+    $activity = Activity::create([
+      'description' => Input::get('description'),
+      'started_at' => $started_at,
+      'duration' => $diff,
+      'type' => Activity::TYPE_ACTIVITY,
+      'task_id' => Input::get('task_id'),
+      'user_id' => \Auth::user()->id,
+      'project_id' => $project->id
+    ]);
+
+    return $activity;
   }
+
   public function editActivity(Project $project, Activity $activity) {
     $tasks = $project->getTaskHierarchies();
     return view('manage.activity-form')->with('tasks', $tasks);
   }
+
   public function updateActivity(Project $project, Activity $activity) {
+    $started_at = new Carbon(Input::get('started_at'));
+    $finished_at = new Carbon(Input::get('finished_at'));
+    $diff = $started_at->diffInSeconds($finished_at);
+
+    if($diff < 0) {
+      abort(500, 'Finished at should be after started at');
+    }
+
+    $activity->update([
+      'description' => Input::get('description'),
+      'started_at' => $started_at,
+      'duration' => $diff,
+      'type' => Activity::TYPE_ACTIVITY,
+      'task_id' => Input::get('task_id')
+    ]);
   }
+
   public function deleteActivity(Activity $activity) {
+    $activity->delete();
   }
 
   /* Chart */
