@@ -1,11 +1,13 @@
 <h3>{{ isset($task)? 'EDIT TASK': 'NEW TASK' }}</h3>
 <form id="task-form" method="post" action="{{ !isset($task)?
     route('manager.tasks.store', ['project' => $project->id]):
-    route('manager.tasks.update', ['task' => $task->id]) }}">
+    route('manager.tasks.update', ['task' => $task->id]) }}"
+    data-submit="refresh">
   @if($parent)
     <span class="under">Under:&nbsp;&nbsp;<span class="info label">{{ $parent->name }}</span></span>
   @endif
   {{ csrf_field() }}
+  <input type="hidden" class="holder" value="{{ isset($task)? $task->id: '' }}" />
   <input type="hidden" name="_method" value="{{ isset($task)? 'PUT': 'POST'}}" />
 
   @if(!isset($task) && $parent)
@@ -57,10 +59,15 @@
   </div>
 
   <div class="form-buttons">
-    @if(isset($task))
-    <a data-ajax="{{ route('manager.tasks.complete', ['task' => $task->id]) }}" class="button tiny submit">Complete Task</a>
+    @if(isset($task) && !$task->finished && $task->depth == 0)
+    <a data-url="{{ route('manager.tasks.complete', ['task' => $task->id]) }}" class="button tiny submit">Complete Task</a>
     @endif
     <a class="button tiny submit">Submit</a>
     <a class="button tiny cancel">Cancel</a>
   </div>
 </form>
+<script>
+  state.change({
+    task_id: $('#task-form').find('.holder').val()
+  });
+</script>

@@ -2,13 +2,15 @@
 $(window).on('hashchange', function() {
   var hash = location.hash;
   if(page == 'manager') {
-    $('#manager-tabs').find('div').removeClass('selected');
-    $('#manager-tabs').find('a').each(function () {
-      if ($(this).attr('href') === hash) $(this).parent().addClass('selected');
-    });
-
     LoadManagerPage(hash.substr(1));
   }
+});
+
+$('#manager-tabs').find('> div').click(function() {
+  $(this).find('a')[0].click();
+});
+$('#manager-tabs').find('> div a').click(function(e) {
+  e.stopPropagation();
 });
 
 $(function() {
@@ -79,9 +81,11 @@ function LoadProjectsPage() {
       var id = $project.data('id');
 
       //Update state
-      state.id = id;
-      state.color = $project.find('.banner').data('color');
-      state.project_name = $project.find('.name').text();
+      state.change({
+        id: id,
+        color: $project.find('.banner').data('color'),
+        project_name: $project.find('.name').text()
+      });
 
       //Select upper box and position bridge
       setTimeout(function() {
@@ -105,6 +109,12 @@ function LoadProjectsPage() {
 /* Manager navigation */
 function LoadManagerPage(page) {
   page = page || 'projects';
+
+  $('#manager-tabs').find('div').removeClass('selected');
+  $('#manager-tabs').find('a').each(function () {
+    if ($(this).attr('href') === '#' + page) $(this).parent().addClass('selected');
+  });
+
   $('#manage').addClass('loading');
   $('#manager-page').hide();
 
@@ -136,6 +146,25 @@ function LoadManagerPage(page) {
 /* Tasks page */
 function LoadTasksPage() {
   jsPlumb.setContainer($('#manager-page'));
+
+  //Show relevant task
+  if(state.task_id) {
+    var chain = [];
+    chain.push(state.task_id);
+
+    var parent_id = $('.task[data-id=' + state.task_id + ']').data('parent-id');
+    while(parent_id) {
+      chain.push(parent_id);
+      var $parent = $('.task[data-id=' + parent_id + ']');
+      parent_id = $parent.data('parent-id');
+    }
+    chain.reverse();
+
+    for(var i = 0; i < chain.length; i++) {
+      var $task = $('.task[data-id=' + chain[i] + ']');
+      SelectTask(chain[i]);
+    }
+  }
 }
 
 function ShowChildren(parent_id) {

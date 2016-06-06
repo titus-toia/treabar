@@ -6,7 +6,7 @@ Route::group(['middleware' => ['web']], function () {
   Route::get('/', 'DashboardController@index')->name('dashboard');
   Route::post('state', function() {
     $state = Input::get('state');
-    \Session::put('state', json_decode($state));
+    \Session::put('state', $state);
   });
 
   Route::group(['prefix' => 'dashboard'], function () {

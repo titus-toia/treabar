@@ -93,7 +93,6 @@ $(document).on('click', '.f-dropdown.treabar-multi-dropdown li', function() {
     fields = $this.closest('form').find('#' + parent.data('container')),
     contents = $this.children().first().clone();
 
-  //console.warn('#' + parent.data('container'));
   var $input = contents.find('input');
   $input.removeAttr('disabled');
   if(!fields.find('input[value=' + $input.val() + ']').length) {
@@ -139,7 +138,7 @@ function DefaultSly($frame, $scrollbar) {
 }
 
 //Ajax link functionality
-function AjaxHandler(self) {
+function AjaxHandler(self) {console.log('here');
   var url = self.data('url'),
     method = self.data('method') || 'get',
     payload = self.data('payload') || { _method: method },
@@ -186,9 +185,13 @@ $(document).on('click', '[data-ajax-interact]', function() {
 });
 
 $(document).on('click', '#slider .form-buttons .submit', function() {
+  var url = $(this).data('url');
   var $form = $(this).closest('form');
-  $.post($form.attr('action'), $form.serialize(), function() {
+  $.post(url || $form.attr('action'), $form.serialize(), function() {
     CloseSlider();
+    if($form.data('submit') == 'refresh') {
+      $(window).trigger('hashchange');
+    }
   });
 });
 

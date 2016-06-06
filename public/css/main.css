@@ -553,6 +553,18 @@ div.manager-project div.banner {
   color: #008CBA; /* Default foundation for a's */
 }
 
+.task .content a.invoice {
+  display: block;
+  color: #888;
+  font-size: 18px;
+  line-height: 18px;
+  margin-bottom: -5px;
+  float: left;
+}
+.task .content a.invoice:hover {
+  color: #008CBA;
+}
+
 .task .content .logged {
   float: left;
 }
@@ -561,6 +573,7 @@ div.manager-project div.banner {
 }
 .task .content .description {
   margin-top: 5px;
+  margin-bottom: 5px;
 }
 .task.new span.plus {
   position: absolute;

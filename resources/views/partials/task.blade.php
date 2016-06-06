@@ -17,9 +17,13 @@
 
   <div class="content">
     <span class="logged">Logged: {{ $task->logged() }} hrs</span>
-    <span class="estimated">Estimated: {{ $task->duration }} hrs</span>
+    <span class="estimated">Estimated: {{ $task->duration }}</span>
     <div class="clearfix"></div>
     <div class="description">{{ $task->description }}</div>
+    @if($task->finished && $task->depth == 0)
+      <a class="invoice" href="#"><i class="fi-price-tag" data-invoice="{{ $task->invoice_id?: 'new' }}"></i></a>
+    @endif
+
     <a class="delete" href="#" data-ajax-interact data-method="delete"
        data-url="{{ route('manager.tasks.delete', ['project' => $project->id]) }}"
        data-confirm="Are you sure you want to delete this task?">

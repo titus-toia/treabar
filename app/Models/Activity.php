@@ -12,6 +12,7 @@ namespace Treabar\Models;
  */
 class Activity extends Feedable {
   protected $dates = ['started_at', 'created_at', 'updated_at', 'deleted_at'];
+  protected $guarded = [];
   const TYPE_ACTIVITY = 'activity';
   const TYPE_COMPLETION = 'completion';
 

@@ -39,9 +39,10 @@ class ManagerController extends Controller {
   }
 
   public function editProject(Project $project) {
-    return view('manage.project-form')
-      ->with('project', $project)
-      ->with('users', \Auth::user()->company->users);
+    return view('manage.project-form', [
+      'project' => $project,
+      'users' => \Auth::user()->company->users
+    ]);
   }
 
   public function updateProject(Project $project) {
@@ -91,9 +92,11 @@ class ManagerController extends Controller {
   public function editTask(Project $project, Task $task) {
     $parent = $task->parent;
     $users = $project->users;
-    return view('manage.task-form')
-      ->with('parent', $parent)
-      ->with('users', $users);
+    return view('manage.task-form', [
+      'task' => $task,
+      'parent' => $parent,
+      'users' => $users
+    ]);
   }
 
   public function updateTask(Task $task) {
@@ -116,6 +119,7 @@ class ManagerController extends Controller {
 
   public function completeTask(Task $task) {
     $task->update(['finished' => true]);
+
     Activity::create([
       'description' => "Task {$task->name} completed.",
       'type' => Activity::TYPE_COMPLETION,
@@ -168,7 +172,7 @@ class ManagerController extends Controller {
 
   public function editActivity(Project $project, Activity $activity) {
     $tasks = $project->getTaskHierarchies();
-    return view('manage.activity-form')->with('tasks', $tasks);
+    return view('manage.activity-form', ['activity' => $activity, 'tasks' => $tasks]);
   }
 
   public function updateActivity(Project $project, Activity $activity) {

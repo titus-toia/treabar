@@ -66,7 +66,17 @@
 <script src="{{ asset('js/jsPlumb.js') }}"></script>
 <script>
   BASE_URL = '{{ url('') }}';
-  state = {{ json_encode(Session::get('state')) }};
+  state = {!! json_encode(Session::get('state')) !!};
+  state.change = function(obj) {
+    state = $.extend(state, obj);
+    $.ajax(BASE_URL + '/state', {
+      method: 'POST',
+      data: {
+        state: JSON.parse(JSON.stringify(state)) //Object function properties are called, so we have to reconstruct the object
+      }
+    });
+  };
+
   page = '{{ $page }}';
   $.ajaxSetup({
     headers: {
@@ -85,15 +95,6 @@
       Connector: ['Flowchart', { stub: 5 }],
       Endpoint: 'Blank',
       Anchor: [[1, 0.5, 1, 0, 2, 0], [0, 0.5, -1, 0, 2, 0]]
-    });
-  });
-  $(window).bind('beforeunload', function() {
-    $.ajax(BASE_URL + '/state', {
-      method: 'POST',
-      async : false,
-      data: {
-        state: state
-      }
     });
   });
 
