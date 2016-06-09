@@ -191,6 +191,8 @@ $(document).on('click', '#slider .form-buttons .submit', function() {
     CloseSlider();
     if($form.data('submit') == 'refresh') {
       $(window).trigger('hashchange');
+    } else if($form.data('submit') == 'sly') {
+      
     }
   });
 });

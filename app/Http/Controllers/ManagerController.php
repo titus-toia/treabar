@@ -125,7 +125,7 @@ class ManagerController extends Controller {
       'type' => Activity::TYPE_COMPLETION,
       'started_at' => Carbon::now(),
       'task_id' => $task->id,
-      'user_id' => $task->user_id,
+      'user_id' => \Auth::user()->id,
       'project_id' => $task->project_id
     ]);
 
@@ -137,7 +137,8 @@ class ManagerController extends Controller {
 
   /* Timesheet */
   public function timesheet(Project $project) {
-    $activities = $this->GetFeed($project->activities(), $onlyData);
+    $activities = $this->GetFeed($project->activities()->where('type',
+      Activity::TYPE_ACTIVITY), $onlyData);
 
     return view('manage/timesheet', [
       'project' => $project,

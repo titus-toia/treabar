@@ -30,7 +30,7 @@
       <div id="user-dropdown-head" class="user-image-div head" data-dropdown="user-dropdown"
            data-options="align:right" aria-expanded="false">
       @if(isset($task) && $task->user)
-        <img src="{{ $task->user->icon() }}" /><span>{{ $task->user->icon() }}</span>
+        <img src="{{ $task->user->icon() }}" /><span>{{ $task->user->name }}</span>
       @else
         <i class="fi-torso"></i>
         <span>No one assigned.</span>
@@ -45,7 +45,7 @@
         @foreach($users as $user)
         <li data-id="{{ $user->id }}">
           <div class="user-image-div">
-            <img src="{{ $user->icon() }}" /><span>{{ $user->name}}</span>
+            <img src="{{ $user->icon() }}" /><span>{{ $user->name }}</span>
           </div>
         </li>
         @endforeach
