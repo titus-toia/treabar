@@ -111,7 +111,7 @@
       <label>
         Task
         <div class="head">
-          <span class="display">{{ isset($activity)? $activity->task->name: ''  }}</span>
+          <span class="display">{{ isset($activity)? $activity->task->name: 'Pick a Task'  }}</span>
         </div>
       </label>
       <div class="facets-control"></div>

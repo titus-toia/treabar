@@ -101,9 +101,11 @@ $(document).on('click', '.f-dropdown.treabar-multi-dropdown li', function() {
   $this.closest('.f-dropdown').removeClass('open').removeClass('f-open-dropdown');
 });
 
+//
+
 
 function CloseSlider() {
-  $('#slider').html('').hide('blind', { direction: 'left', duration: 400});
+  $('#slider').html('').hide('blind', { direction: 'right', duration: 400});
 }
 
 function DefaultSly($frame, $scrollbar) {

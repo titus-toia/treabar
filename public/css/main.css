@@ -26,18 +26,34 @@
   background: url('../img/loader.gif') no-repeat center;
 }
 
-.scrollpanel .sp-scrollbar {
-  width: 10px;
-  background-color: #ccc;
+/*Widgets */
+.vertical-button-control {
+  height: 36px;
+  position: absolute;
+  border: 2px solid #bbb;
+  opacity: 0.7;
+  text-align: center;
   cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none
+
+  transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+  -ms-transform: translateX(-50%) translateY(-50%) rotate(-90deg);
+  -webkit-transform: translateX(-50%) translateY(-50%) rotate(-90deg);
 }
-.scrollpanel .sp-scrollbar .sp-thumb {
-  background-color: #aaa;
-  transition: height 0.2s ease-in-out;
+
+.vertical-button-control:hover {
+  opacity: 1;
+
+  -webkit-transition: opacity .15s ease-in-out;
+  -moz-transition: opacity .15s ease-in-out;
+  -ms-transition: opacity .15s ease-in-out;
+  -o-transition: opacity .15s ease-in-out;
+  transition: opacity .15s ease-in-out;
 }
-.scrollpanel .sp-scrollbar.active .sp-thumb {
-  background-color: #999;
-}
+
 /* Navigation */
 nav.top-bar {
   font-family: "Lato", "Helvetica", Arial, sans-serif;
@@ -344,7 +360,13 @@ nav.top-bar .profile a > i {
   padding-right: 50px;
 }
 
-/* Manager projects */
+#new-project {
+  width: 175px;
+  top: 118px;
+  left: -10px;
+  padding-top: 4px;
+  padding-right: 4px;
+}
 #manager-projects-list-wrapper {
   height: 195px;
   width: 100%;
@@ -377,6 +399,7 @@ div.manager-project {
   cursor: pointer;
   margin-top: 5px;
 
+  user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none
@@ -465,6 +488,7 @@ div.manager-project div.banner {
 }
 #slider h3 {
   cursor: default;
+  user-select: none;
   -webkit-user-select: none; /* Chrome/Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+ */
@@ -493,6 +517,7 @@ div.manager-project div.banner {
   overflow: hidden;
   white-space: nowrap;
 
+  user-select: none;
   -webkit-user-select: none; /* Chrome/Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+ */
@@ -537,6 +562,7 @@ div.manager-project div.banner {
   padding: 10px;
   width: inherit !important;
 
+  user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -607,6 +633,7 @@ div.manager-project div.banner {
   vertical-align: middle;
   text-align: center;
 
+  user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -807,6 +834,13 @@ div.manager-project div.banner {
 }
 
 /* Timesheet */
+#new-activity {
+  width: 150px;
+  top: 100px;
+  left: 80px;
+  padding-top: 4px;
+  padding-right: 4px;
+}
 .activity {
   padding: 5px 15px;
   font-size: 13px;

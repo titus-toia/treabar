@@ -1,3 +1,7 @@
+<div id="new-project" class="vertical-button-control" data-ajax-interact data-display="slider"
+     data-url="{{ route('manager.projects.create') }}">
+  <span><i class="fi-plus"></i>&nbsp;&nbsp;New Project</span>
+</div>
 <div id="manager-projects-list-wrapper" class="frame">
   <ul id="manager-projects-list" class="slidee">
     @foreach($projects as $project)
@@ -30,3 +34,11 @@
     </div>
   @endforeach
 </div>
+<!--
+<div id="new-project">
+    <div data-ajax-interact data-display="slider"
+       data-url="{{ route('manager.projects.create') }}">
+      <i class="fi-plus"></i>&nbsp;&nbsp;New Project
+    </a>
+  </div>
+  -->

@@ -142,12 +142,13 @@ class ManagerController extends Controller {
 
     return view('manage/timesheet', [
       'project' => $project,
-      'activities' => $activities,-
+      'activities' => $activities,
       'only_data' => $onlyData
     ]);
   }
   public function createActivity(Project $project) {
-    return view('manage.activity-form');
+    $tasks = $project->getTaskHierarchies();
+    return view('manage.activity-form', ['tasks' => $tasks]);
   }
   public function storeActivity(Project $project) {
     $started_at = new Carbon(Input::get('started_at'));
