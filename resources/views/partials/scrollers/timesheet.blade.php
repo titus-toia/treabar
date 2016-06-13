@@ -4,7 +4,8 @@
 <div id="timesheet-container" class="vertical-feed">
   <div id="timesheet-wrapper"
        class="vertical-feed-wrapper update small-12 large-7 large-offset-1 columns"
-       data-created="{{ $activities->count()? $activities->last()->created_at: \Carbon\Carbon::today() }}"
+       data-after="{{ $activities->count()? $activities->first()->created_at: \Carbon\Carbon::today() }}"
+       data-before="{{ $activities->count()? $activities->last()->created_at: \Carbon\Carbon::today() }}"
        data-url="{{ route('manager.timesheet', ['project' => $project->id]) }}">
     <div class="slidee">
 @overwrite

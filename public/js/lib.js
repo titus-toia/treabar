@@ -115,17 +115,29 @@ function DefaultSly($frame, $scrollbar) {
   if($frame.hasClass('update')) {
     events.moveEnd = function(ev) {
       var pos = this.pos;
-      if(pos.cur == pos.end) { //We are at the bottom, start loading
-        $.get($frame.data('url'), {
-          before: $frame.data('created')
-        }, function(html) {
-          var created = $(html).last().data('created');
-          $frame.data('created', created);
-          $frame.find('.slidee').append(html);
-          $frame.sly('reload');
-        });
-      }
+      if(pos.cur != pos.end) return; //We are at the bottom, start loading
+
+      $.get($frame.data('url'), {
+        created: $frame.data('before')
+      }, function(html) {
+        var created = $(html).last().data('created');
+        $frame.data('before', created);
+        $frame.find('.slidee').append(html);
+        $frame.sly('reload');
+      });
     };
+
+    $frame[0].fetch = function() {
+      $.get($frame.data('url'), {
+        created: $frame.data('after'),
+        direction: 'after'
+      }, function(html) {
+        var created = $(html).first().data('created');
+        $frame.data('after', created);
+        $frame.find('.slidee').prepend(html);
+        $frame.sly('reload');
+      });
+    }
   }
 
   $frame.sly({
@@ -190,11 +202,17 @@ $(document).on('click', '#slider .form-buttons .submit', function() {
   var url = $(this).data('url');
   var $form = $(this).closest('form');
   $.post(url || $form.attr('action'), $form.serialize(), function() {
-    CloseSlider();
     if($form.data('submit') == 'refresh') {
+      CloseSlider();
       $(window).trigger('hashchange');
     } else if($form.data('submit') == 'sly') {
-      
+      if($form.data('sly')) {
+        $($form.data('sly'))[0].fetch();
+      } else {
+        $form.find('.vertical-feed-wrapper')[0].fetch();
+      }
+    } else {
+      CloseSlider();
     }
   });
 });

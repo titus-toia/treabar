@@ -10,6 +10,8 @@ use Illuminate\Support\Collection;
  * @property-read \Treabar\Models\User $user
  */
 class Comment extends Feedable {
+  protected $guarded = [];
+
   public function content() {
     return "{$this->user->name} commented on task {$this->task->name}.";
   }

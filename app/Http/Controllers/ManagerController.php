@@ -3,6 +3,7 @@
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Input;
 use Treabar\Models\Activity;
+use Treabar\Models\Comment;
 use Treabar\Models\Feedable;
 use Treabar\Models\Project;
 use Treabar\Models\Task;
@@ -61,7 +62,13 @@ class ManagerController extends Controller {
   }
 
   public function comments(Task $task) {
-    return view('partials/scrollers/task-comments')->with('comments', $task->comments);
+    $comments = $this->GetFeed($task->comments(), $onlyData);
+
+    return view('partials/scrollers/task-comments', [
+      'task' => $task,
+      'comments' => $comments,
+      'only_data' => $onlyData
+    ]);
   }
 
   public function createTask(Project $project) {
@@ -97,6 +104,17 @@ class ManagerController extends Controller {
       'parent' => $parent,
       'users' => $users
     ]);
+  }
+
+  public function comment(Task $task) {
+    $comment = Comment::create([
+      'content' => Input::get('content'),
+      'task_id' => $task->id,
+      'project_id' => $task->project_id,
+      'user_id' => \Auth::user()->id
+    ]);
+
+    return $comment;
   }
 
   public function updateTask(Task $task) {
@@ -217,11 +235,12 @@ class ManagerController extends Controller {
   }
 
   private function GetFeed($eloquent = null, &$onlyData, &$before = null) {
-    $before = Input::get('before');
-    $onlyData = $before? true: false;
+    $created = Input::get('created');
+    $direction = Input::get('direction') != 'after'? Feedable::BEFORE: Feedable::AFTER;
+    $onlyData = Input::get('created')? true: false;
 
     if($eloquent) {
-      return Feedable::feed($eloquent, $before);
+      return Feedable::feed($eloquent, $created, $direction);
     }
 
     return true;

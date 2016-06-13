@@ -2,7 +2,8 @@
 
 @section('before')
 <div class="vertical-feed-wrapper update"
-     data-created="{{ $activities->count()? $activities->last()->created_at: \Carbon\Carbon::today() }}"
+     data-after="{{ $activities->count()? $activities->first()->created_at: \Carbon\Carbon::today() }}"
+     data-before="{{ $activities->count()? $activities->last()->created_at: \Carbon\Carbon::today() }}"
      data-url="{{ route('dashboard.activity.feed') }}">
   <div class="slidee">
 @overwrite

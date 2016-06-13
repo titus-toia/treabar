@@ -5,7 +5,8 @@
 <div id="feed-container" class="vertical-feed">
   <div id="feed-wrapper"
        class="vertical-feed-wrapper update small-12 large-7 large-offset-1 columns"
-       data-created="{{ $feed->count()? $feed->last()->created_at: \Carbon\Carbon::today() }}"
+       data-after="{{ $feed->count()? $feed->first()->created_at: \Carbon\Carbon::today() }}"
+       data-before="{{ $feed->count()? $feed->last()->created_at: \Carbon\Carbon::today() }}"
        data-url="{{ route('manager.feed', ['project' => $project->id]) }}">
     <div class="slidee">
 @overwrite

@@ -2,7 +2,8 @@
 
 @section('before')
 <div class="vertical-feed-wrapper update"
-     data-created="{{ $comments->count()? $comments->last()->created_at: \Carbon\Carbon::today() }}"
+     data-after="{{ $comments->count()? $comments->first()->created_at: \Carbon\Carbon::today() }}"
+     data-before="{{ $comments->count()? $comments->last()->created_at: \Carbon\Carbon::today() }}"
      data-url="{{ route('dashboard.discussion.feed') }}">
   <div class="slidee">
 @overwrite
