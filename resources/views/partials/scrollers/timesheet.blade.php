@@ -1,6 +1,10 @@
 @extends('partials.scrollers.scroller')
 
 @section('before')
+<div id="new-activity" class="vertical-button-control" data-ajax-interact data-display="slider"
+     data-url="{{ route('manager.timesheet.create', ['project' => $project->id]) }}">
+  <span><i class="fi-plus"></i>&nbsp;&nbsp;New Activity</span>
+</div>
 <div id="timesheet-container" class="vertical-feed">
   <div id="timesheet-wrapper"
        class="vertical-feed-wrapper update small-12 large-7 large-offset-1 columns"
@@ -20,7 +24,7 @@
       <div class="content">
         <span class="name"><b>{{ $activity->user->name }}</b></span>
         <span class="date">{{ $activity->createdAt() }}</span>
-        <span class="task label info">{{ $activity->task->name }}</span>
+        <span class="task label info">{{ $activity->task? $activity->task->name: 'NO TASK' }}</span>
         <span class="interval">{{ $activity->startedAt() . ' - ' . $activity->finishedAt() }}</span>
         <div class="clearfix"></div>
         <p>{{ $activity->description }}</p>

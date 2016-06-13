@@ -29,7 +29,7 @@
     });
 
     this.$elem.on('click', '.facet .name', function() {
-      self.select($(this));
+      self.select($(this).closest('.facet'));
     });
     this.$elem.on('click', '.handle-prev i', function() {
       var parent_id = $(this).closest('.facet').data('parent-id'),
@@ -63,6 +63,7 @@
   Faceter.prototype.select = function($item) {
     var name = $item.text();
     this.$elem.find('input[type=hidden]').val($item.data('id'));
+    console.warn($item[0], $item.data('id'));
     this.$elem.find('.head .display').text(name);
     this.close();
   }
@@ -202,8 +203,9 @@ $(document).on('click', '#slider .form-buttons .submit', function() {
   var url = $(this).data('url');
   var $form = $(this).closest('form');
   $.post(url || $form.attr('action'), $form.serialize(), function() {
+    if(!$form.data('dont-close')) CloseSlider();
+
     if($form.data('submit') == 'refresh') {
-      CloseSlider();
       $(window).trigger('hashchange');
     } else if($form.data('submit') == 'sly') {
       if($form.data('sly')) {
@@ -211,8 +213,6 @@ $(document).on('click', '#slider .form-buttons .submit', function() {
       } else {
         $form.find('.vertical-feed-wrapper')[0].fetch();
       }
-    } else {
-      CloseSlider();
     }
   });
 });

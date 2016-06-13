@@ -80,7 +80,8 @@
 <h3>{{ isset($activity)? 'EDIT ACTIVITY': 'NEW ACTIVITY' }}</h3>
 <form id="activity-form" method="post" action="{{ !isset($activity)?
     route('manager.timesheet.store', ['project' => $project->id]):
-    route('manager.timesheet.update', ['project' => $project->id, 'activity' => $activity->id]) }}">
+    route('manager.timesheet.update', ['project' => $project->id, 'activity' => $activity->id]) }}"
+  data-submit="sly" data-sly="#timesheet-wrapper">
   {{ csrf_field() }}
   <input type="hidden" name="_method" value="{{ isset($activity)? 'PUT': 'POST'}}" />
 
@@ -111,7 +112,7 @@
       <label>
         Task
         <div class="head">
-          <span class="display">{{ isset($activity)? $activity->task->name: 'Pick a Task'  }}</span>
+          <span class="display">{{ (isset($activity) && isset($activity->task))? $activity->task->name: 'Pick a Task' }}</span>
         </div>
       </label>
       <div class="facets-control"></div>

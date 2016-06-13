@@ -157,7 +157,6 @@ class ManagerController extends Controller {
   public function timesheet(Project $project) {
     $activities = $this->GetFeed($project->activities()->where('type',
       Activity::TYPE_ACTIVITY), $onlyData);
-
     return view('manage/timesheet', [
       'project' => $project,
       'activities' => $activities,
