@@ -48,14 +48,17 @@ $factory->define(Treabar\Models\Project::class, function (Faker\Generator $faker
   return [
     'name' => $faker->sentence(3),
     'slug' => $faker->slug(3),
-    'color' => rand(1, 5)
+    'color' => rand(1, 5),
+    'from' => $faker->dateTimeBetween('last month', 'today'),
+    'to' => $faker->dateTimeBetween('+1 months', '+2 months')
   ];
 });
 
 $factory->define(Treabar\Models\Task::class, function (Faker\Generator $faker) {
   return [
     'name' => $faker->sentence(2),
-    'description' => $faker->paragraph()
+    'description' => $faker->paragraph(),
+    'duration' => $faker->numberBetween(50, 150)
   ];
 });
 

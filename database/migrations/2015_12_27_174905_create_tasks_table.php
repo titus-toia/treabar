@@ -26,6 +26,8 @@ class CreateTasksTable extends Migration {
       $table->text('description');
       $table->string('duration');
       $table->boolean('finished')->default(false);
+      $table->date('from')->nullable();
+      $table->date('to')->nullable();
       $table->string('user_id')->nullable();
       $table->integer('parent_id')->nullable()->index();
       $table->integer('project_id')->unsigned();

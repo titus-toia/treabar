@@ -4,32 +4,13 @@ $(window).on('hashchange', function() {
   if(page == 'manager') {
     LoadManagerPage(hash.substr(1));
   }
-});
-
-$('#manager-tabs').find('> div').click(function() {
-  $(this).find('a')[0].click();
-});
-$('#manager-tabs').find('> div a').click(function(e) {
-  e.stopPropagation();
+  if(page == 'dashboard') {
+    LoadDashboard();
+  }
 });
 
 $(function() {
   $(window).trigger('hashchange');
-
-  var tabScroll = function($tab) {
-    var $content = $($tab.find('a').attr('href'));
-    var $frame = $content.find('.vertical-feed-wrapper');
-    var $scrollbar = $frame.parent().find('.scrollbar');
-
-    DefaultSly($frame, $scrollbar);
-  };
-
-  if(page == 'dashboard') {
-    $('.tabs').on('toggled', function(e, tab) {
-      tabScroll($(tab));
-    });
-    tabScroll($('.tabs .tab-title.active'));
-  }
 });
 
 var onLoad = {
@@ -45,6 +26,44 @@ $body.on('click', '#page-state-button', function() {
     LoadManagerPage('projects');
   }
 });
+
+function LoadDashboard() {
+  var tabScroll = function($tab) {
+    var $content = $($tab.find('a').attr('href'));
+    var $frame = $content.find('.vertical-feed-wrapper');
+    var $scrollbar = $frame.parent().find('.scrollbar');
+
+    DefaultSly($frame, $scrollbar);
+  };
+
+  $('.tabs').on('toggled', function(e, tab) {
+    tabScroll($(tab));
+  });
+  tabScroll($('.tabs .tab-title.active'));
+
+  $('.tasks-list-wrapper').each(function() {
+    var $frame = $(this);
+    var $scrollbar = $frame.parent().find('.scrollbar');
+
+    $frame.sly({
+      horizontal: 1,
+      itemNav: 'centered',
+      smart: 1,
+      activateOn: 'click',
+      mouseDragging: 1,
+      touchDragging: 1,
+      releaseSwing: 1,
+      startAt: 0,
+      scrollBy: 1,
+      speed: 300,
+      elasticBounds: true,
+      easing: 'linear',
+      dragHandle: 1,
+      dynamicHandle: 1,
+      clickBar: 1
+    });
+  });
+}
 
 /* Project page */
 function LoadProjectsPage() {
@@ -110,10 +129,17 @@ function LoadProjectsPage() {
 function LoadManagerPage(page) {
   page = page || 'projects';
 
-  $('#manager-tabs').find('div').removeClass('selected');
-  $('#manager-tabs').find('a').each(function () {
-    if ($(this).attr('href') === '#' + page) $(this).parent().addClass('selected');
-  });
+  $('#manager-tabs')
+    .find('> div').click(function() {
+      $(this).find('a')[0].click();
+    }).end()
+    .find('> div a').click(function(e) {
+      e.stopPropagation();
+    }).end()
+    .find('div').removeClass('selected').end()
+    .find('a').each(function () {
+      if ($(this).attr('href') === '#' + page) $(this).parent().addClass('selected');
+    }).end();
 
   $('#manage').addClass('loading');
   $('#manager-page').hide();

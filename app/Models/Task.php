@@ -139,4 +139,12 @@ class Task extends Node {
   public function logged() {
     return floor($this->activities->sum('duration') / 3600);
   }
+
+  public function durationReadable() {
+    return $this->duration . 'h';
+  }
+
+  public function completion() {
+    return $this->logged() / $this->duration * 100;
+  }
 }

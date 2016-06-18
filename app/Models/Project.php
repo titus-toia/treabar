@@ -44,5 +44,4 @@ class Project extends Model
   public function logged($mins = false) {
     return floor($this->activities->sum('duration') / 3600);
   }
-
 }

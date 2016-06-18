@@ -17,7 +17,7 @@
 
   <div class="content">
     <span class="logged">Logged: {{ $task->logged() }} hrs</span>
-    <span class="estimated">Estimated: {{ $task->duration }}</span>
+    <span class="estimated">@if($task->duration)Estimated: {{ $task->durationReadable() }}@endif</span>
     <div class="clearfix"></div>
     <div class="description">{{ $task->description }}</div>
     @if($task->finished && $task->depth == 0)

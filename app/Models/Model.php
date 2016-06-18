@@ -8,6 +8,8 @@ namespace Treabar\Models;
  */
 class Model extends \Illuminate\Database\Eloquent\Model
 {
+  protected $dates = ['created_at', 'updated_at', 'deleted_at', 'from', 'to'];
+
   public function createdAt() {
     return $this->created_at->format('Y-m-d');
   }

@@ -53,7 +53,7 @@
     </div>
     <div class="large-12 columns">
       <label>Estimate
-        <input type="text" name="duration" value="{{ isset($task)? $task->duration: '' }}">
+        <input type="text" name="duration" value="{{ $task->duration }}">
       </label>
     </div>
   </div>

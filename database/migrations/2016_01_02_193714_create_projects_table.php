@@ -15,6 +15,8 @@ class CreateProjectsTable extends Migration {
       $table->string('name');
       $table->string('slug')->index();
       $table->integer('color');
+      $table->date('from')->nullable();
+      $table->date('to')->nullable();
       $table->integer('client_id')->unsigned()->nullable();
       $table->integer('company_id')->unsigned();
       $table->timestamps();
