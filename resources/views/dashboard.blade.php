@@ -45,7 +45,7 @@
       margin-right: 10px;
       display: inline-block;
     }
-    .dashboard-project .task {
+    .dashboard-project .tasks-list .task {
       position: relative;
       height: 65px;
       width: 65px;
@@ -63,33 +63,47 @@
       -ms-user-select: none
     }
 
-    .dashboard-project .task .selected {
+    .dashboard-project .tasks-list .task.active {
       border-color: #ffbf00;
     }
-    .dashboard-project .task span {
+    .dashboard-project .tasks-list .task .name {
+      max-height: 40%;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    .dashboard-project .tasks-list .task .duration {
+
+    }
+    .dashboard-project .tasks-list .task span {
       display: block;
     }
-    .dashboard-project .task .completion {
+    .dashboard-project .tasks-list .task .completion {
       position: absolute;
       left: -2px;
-      bottom: 0;
+      bottom: -2px;
       width: calc(100% + 4px);
       background-color: #3498db;
     }
-    .dashboard-project .scrollbar {
-      width: 100%;
-      height: 3px;
+    .dashboard-project .tasks-list .task .completion > span {
+      position: absolute;
     }
+    .dashboard-project .overview .task {
 
-    .dashboard-project .scrollbar .handle {
-      width: 100px;
-      height: 100%;
-      background: #aaa;
+    }
+    .dashboard-project .overview .task:before {
+      position: absolute;
+      width: 15%;
+      content: '';
+      top: 0;
+      left: 0;
+      border-top: 1px solid #bbb;
     }
   </style>
   <div id="dashboard" class="row wrapper">
     <div class="large-8 columns main projects">
-      @each('partials.dashboard-task', $projects, 'project', 'partials.dashboard-empty')
+      <div class="frame">
+        @each('partials.dashboard-project', $projects, 'project', 'partials.dashboard-empty')
+      </div>
     </div>
     <aside class="large-4 columns notifications">
       <ul class="tabs" data-tab>

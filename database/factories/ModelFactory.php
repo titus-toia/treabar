@@ -68,12 +68,14 @@ $factory->define(Treabar\Models\Activity::class, function (Faker\Generator $fake
     'type' => $faker->randomElement(
       array_merge(array_fill(0, 5, Activity::TYPE_ACTIVITY), [Activity::TYPE_COMPLETION])),
     'started_at' => \Carbon\Carbon::now()->setTime('10', '30'),
+    'created_at' => $faker->dateTimeBetween('-2 days', 'now'),
     'duration' => rand(1, 18) * 300 //multiples of 5 minutes
   ];
 });
 
 $factory->define(Treabar\Models\Comment::class, function (Faker\Generator $faker) {
   return [
-    'content' => $faker->text()
+    'content' => $faker->text(),
+    'created_at' => $faker->dateTimeBetween('-2 days', 'now')
   ];
 });

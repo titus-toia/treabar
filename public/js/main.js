@@ -41,10 +41,12 @@ function LoadDashboard() {
   });
   tabScroll($('.tabs .tab-title.active'));
 
+  //Dashboard projects
   $('.tasks-list-wrapper').each(function() {
     var $frame = $(this);
     var $scrollbar = $frame.parent().find('.scrollbar');
 
+    var first = true;
     $frame.sly({
       horizontal: 1,
       itemNav: 'centered',
@@ -62,6 +64,27 @@ function LoadDashboard() {
       dynamicHandle: 1,
       clickBar: 1
     });
+  });
+
+  //Cannot rely on sly.js event here.
+  $('.dashboard-project').on('click', 'li .task', function() {
+    var $task = $(this),
+      $frame = $task.closest('.frame'),
+      $overview = $frame.parent().siblings('.overview');
+
+    $task.siblings('.active').removeClass('active');
+    if(!$task.hasClass('active')) {
+      $frame.find('.task').removeClass('active');
+      $task.addClass('active');
+
+      $overview.slideUp(100);
+      $overview.find('.task').hide();
+      $overview.find('.task[data-id=' + $task.data('id') + ']').show();
+      $overview.slideDown(300);
+    } else {
+      $task.removeClass('active');
+      $overview.slideUp(100);
+    }
   });
 }
 
