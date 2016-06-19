@@ -70,12 +70,20 @@ function LoadDashboard() {
   $('.dashboard-project').on('click', 'li .task', function() {
     var $task = $(this),
       $frame = $task.closest('.frame'),
+      $project = $frame.closest('.dashboard-project'),
       $overview = $frame.parent().siblings('.overview');
 
     $task.siblings('.active').removeClass('active');
     if(!$task.hasClass('active')) {
       $frame.find('.task').removeClass('active');
       $task.addClass('active');
+
+      state.change({
+        id: $project.data('id'),
+        color: $project.find('.banner').data('color'),
+        project_name: $project.find('.header .name').text(),
+        task_id: $task.data('id')
+      });
 
       $overview.slideUp(100);
       $overview.find('.task').hide();

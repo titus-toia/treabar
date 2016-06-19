@@ -3,7 +3,7 @@
     {{ $task->name }}
     <small>Estimated/Completion: <span>{{$task->durationReadable()}} / {{ round($task->completion(), 1) }}%,
       </span> {{round($task->loggedTotal())?: 0}}h logged.
-      <a href="{{ url('manage#tasks') }}">Go to task</a>
+      <a href="{{ url('manage#tasks') }}" target="_blank">Go to task</a>
     </small>
 
   </h5>
