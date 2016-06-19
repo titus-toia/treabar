@@ -140,11 +140,55 @@ class Task extends Node {
     return floor($this->activities->sum('duration') / 3600);
   }
 
+
+  public function loggedTotal($date = null) {
+    $activities = $this->activities();
+    if($date) {
+      $activities = $activities->where('created_at', '>=', new \DateTime($date))->get();
+    } else {
+      $activities = $activities->get();
+    }
+    $children = $this->children;
+    foreach($children as $child) {
+      if($date) {
+        $activities_child = $child->activities()->where('created_at', '>=', new \DateTime($date))->get();
+      } else {
+        $activities_child = $child->activities()->get();
+      }
+      $activities = $activities->merge($activities_child);
+    }
+    return $activities->sum('duration') / 3600;
+  }
+
   public function durationReadable() {
     return $this->duration . 'h';
   }
 
   public function completion() {
-    return $this->logged() / $this->duration * 100;
+    return $this->loggedTotal() / $this->duration * 100;
+  }
+
+  public function getLeafCount() {
+    return $this->leaves()->count();
+  }
+
+  public function getLeafOvertime() {
+    $leaves = $this->leaves()->get();
+    $overtime = 0;
+    foreach($leaves as $leaf) {
+      if($leaf->duration && $leaf->logged() > $leaf->duration) {
+        $overtime+= $leaf->logged() - $leaf->duration;
+      }
+    }
+  }
+
+  public function getTrunkOvertime() {
+    $trunks = $this->trunks()->get();
+    $overtime = 0;
+    foreach($trunks as $trunk) {
+      if($trunk->duration && $trunk->loggedTotal() > $trunk->duration) {
+        $overtime+= $trunk->loggedTotal() - $trunk->duration;
+      }
+    }
   }
 }

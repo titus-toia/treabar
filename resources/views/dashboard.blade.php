@@ -75,17 +75,22 @@
 
     }
     .dashboard-project .tasks-list .task span {
+      position: relative;
       display: block;
+      z-index: 5;
     }
     .dashboard-project .tasks-list .task .completion {
       position: absolute;
-      left: -2px;
-      bottom: -2px;
-      width: calc(100% + 4px);
+      left: 0;
+      bottom: 0;
+      width: 100%;
       background-color: #3498db;
     }
     .dashboard-project .tasks-list .task .completion > span {
       position: absolute;
+      left: 40%;
+      bottom: 15%;
+      color: white;
     }
     .dashboard-project .overview .task {
 
@@ -97,6 +102,20 @@
       top: 0;
       left: 0;
       border-top: 1px solid #bbb;
+    }
+    .dashboard-project .overview table {
+      border: 0;
+    }
+    .dashboard-project .overview tr {
+      background-color: white;
+    }
+    .dashboard-project .overview td {
+      padding-left: 0;
+    }
+    .dashboard-project img {
+      height: 24px;
+      width: 24px;
+      margin-right: 5px;
     }
   </style>
   <div id="dashboard" class="row wrapper">

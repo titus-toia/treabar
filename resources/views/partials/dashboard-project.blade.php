@@ -1,5 +1,5 @@
 <?php $tasks = $project->tasks(true)->get();  ?>
-<div class="dashboard-project row collapse">
+<div class="dashboard-project row collapse" data-id="{{ $project->id }}">
   <div class="header columns large-3">
     <div class="left banner color-{{ $project->color }}" data-color="color-{{ $project->color }}"></div>
     <div class="left info">

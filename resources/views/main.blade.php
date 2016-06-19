@@ -28,17 +28,6 @@
       <li class="invoices page {{ $page =='invoices'? 'active': '' }} "><a href="{{ url('invoice')  }}">Invoice</a></li>
       <li id="page-state-button"><a href="#">Page state</a></li>
     </ul>
-    <!--
-    <ul class="left custom-buttons manager-projects">
-      <li class="divider"></li>
-      <li id="projects-new">
-        <a href="#" data-ajax-interact data-display="slider"
-           data-url="{{ route('manager.projects.create') }}">
-          <i class="fi-plus"></i>&nbsp;&nbsp;New Project
-        </a>
-      </li>
-    </ul>
-    -->
     <ul class="right">
       <li class="fullname"><span>{{ $logged_user->name }}</span></li>
       <li class="has-dropdown profile">
