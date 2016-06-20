@@ -98,14 +98,16 @@ function LoadDashboard() {
   //Task/notif filter
   var $filter = $('.filter');
   var $bars = $filter.find('.project-bar');
+  var $picker = $('.project-picker');
   $filter.click(function() {
-    $('.project-picker').slideToggle(175);
+    $picker.slideToggle(175);
     return false;
   });
 
   $('.project-picker .project-label').click(function() {
     var $this = $(this);
     var project_id = $this.data('id');
+    $picker.slideUp(175);
 
     $bars.addClass('hide');
     if(!$this.hasClass('active')) {
@@ -122,14 +124,18 @@ function LoadDashboard() {
 }
 
 function FilterNotifications(project_id) {
-  $('#notifications').find('[data-project-id]').show();
+  var $notifications = $('#notifications');
+  $notifications.find('[data-project-id]').show();
   $('style.notifications').remove();
-  if(!project_id) return;
+  if (project_id) {
+    var selector = '#notifications div[data-project-id][data-project-id!=' + project_id + ']';
+    $(selector).slideUp(100);
+    $('body').append('<style>' + selector + '{ display: none; }</style>');
+  }
 
-  var selector = '#notifications div[data-project-id][data-project-id!=' + project_id + ']';
-
-  $(selector).slideUp(100);
-  $('body').append('<style class="notifications">' + selector + '{ display: none; }</style>');
+  setTimeout(function() {
+    $notifications.find('.vertical-feed-wrapper').sly('reload');
+  }, 200);
 }
 
 /* Project page */
