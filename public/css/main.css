@@ -179,10 +179,123 @@ nav.top-bar .profile a > i {
 }
 
 /* Dashboard */
-#dashboard .main {
-  /*border-right: 1px solid gray;*/
-  /*overflow-y: scroll;*/
+#dashboard .projects {
+  overflow-y: scroll;
 }
+.dashboard-project {
+  padding-bottom: 10px !important;
+  border-bottom: 2px solid #bbb;
+}
+.dashboard-project .header {
+  padding-top: 15px;
+}
+.dashboard-project .header .banner {
+  height: 85px;
+  width: 7px;
+}
+.dashboard-project .header .info {
+  width: calc(100% - 7px);
+  padding-left: 5px;
+}
+.dashboard-project .tasks {
+  padding-top: 15px;
+}
+.dashboard-project .header .info .name {
+  font-weight: lighter;
+  font-size: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.dashboard-project .header span {
+  display: block;
+  font-size: 13px;
+}
+.dashboard-project .tasks-list-wrapper {
+  list-style: none;
+  width: 100%;
+  margin: 0 0 0 15px;
+}
+.dashboard-project ul.tasks-list {
+  margin: 0;
+}
+.dashboard-project ul.tasks-list li {
+  float: left;
+  margin-right: 10px;
+  display: inline-block;
+}
+.dashboard-project .tasks-list .task {
+  position: relative;
+  height: 65px;
+  width: 65px;
+  cursor: pointer;
+  font-size: 9px;
+  border: 2px solid #bbb;
+  overflow: visible;
+  text-align: center;
+  line-height: 11px;
+  padding: 1px 1px;
+
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none
+}
+
+.dashboard-project .tasks-list .task.active {
+  border-color: #ffbf00;
+}
+.dashboard-project .tasks-list .task .name {
+  max-height: 40%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.dashboard-project .tasks-list .task .duration {
+
+}
+.dashboard-project .tasks-list .task span {
+  position: relative;
+  display: block;
+  z-index: 5;
+}
+.dashboard-project .tasks-list .task .completion {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #3498db;
+}
+.dashboard-project .tasks-list .task .completion > span {
+  position: absolute;
+  left: 40%;
+  bottom: 15%;
+  color: white;
+}
+.dashboard-project .overview .task {
+
+}
+.dashboard-project .overview .task:before {
+  position: absolute;
+  width: 15%;
+  content: '';
+  top: 0;
+  left: 0;
+  border-top: 1px solid #bbb;
+}
+.dashboard-project .overview table {
+  border: 0;
+}
+.dashboard-project .overview tr {
+  background-color: white;
+}
+.dashboard-project .overview td {
+  padding-left: 0;
+}
+.dashboard-project img {
+  height: 24px;
+  width: 24px;
+  margin-right: 5px;
+}
+
 #dashboard .notifications {
   padding-left: 0px;
   padding-right: 0px;
@@ -191,7 +304,7 @@ nav.top-bar .profile a > i {
   font-family: "Lato", "Helvetica", Arial, sans-serif;
 }
 #dashboard .notifications .tab-title {
-  width: 50%;
+  width: 40%;
   text-align: center;
 }
 #dashboard .notifications .tab-title a {
@@ -215,6 +328,40 @@ nav.top-bar .profile a > i {
 #dashboard .notifications .tab-title.active .tab-pedestal {
   height: 8px;
 }
+#dashboard .notifications .controls {
+  width: 20%;
+  text-align: center;
+  font-size: 11px;
+  cursor: pointer;
+}
+#dashboard .notifications .controls a {
+  position: relative;
+  height: 48px;
+  padding: 16px 4px;
+}
+#dashboard .notifications .controls a i {
+  color: gray;
+}
+#dashboard .notifications .controls a span {
+  position: relative;
+}
+#dashboard .notifications .controls a.filtered span {
+  top: -7px;
+}
+#dashboard .notifications .controls .project-bar {
+  position: relative;
+  height: 17px;
+  top: 3px;
+  font-size: 9px;
+  line-height: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#dashboard .notifications .controls .project-bar .bar {
+  height: 3px;
+  width: 100%;
+}
 
 .project-label {
   font-size: 11px;
@@ -226,7 +373,13 @@ nav.top-bar .profile a > i {
 }
 
 .project-picker {
+  display: block;
+  width: calc(100% - 16px);
   padding-top: 5px;
+  position: absolute;
+  background-color: white;
+  text-align: center;
+  z-index: 5;
 }
 
 #dashboard .notifications .tabs-content {

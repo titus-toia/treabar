@@ -34,11 +34,3 @@
     </div>
   @endforeach
 </div>
-<!--
-<div id="new-project">
-    <div data-ajax-interact data-display="slider"
-       data-url="{{ route('manager.projects.create') }}">
-      <i class="fi-plus"></i>&nbsp;&nbsp;New Project
-    </a>
-  </div>
-  -->

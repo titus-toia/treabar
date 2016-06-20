@@ -94,6 +94,42 @@ function LoadDashboard() {
       $overview.slideUp(100);
     }
   });
+
+  //Task/notif filter
+  var $filter = $('.filter');
+  var $bars = $filter.find('.project-bar');
+  $filter.click(function() {
+    $('.project-picker').slideToggle(175);
+    return false;
+  });
+
+  $('.project-picker .project-label').click(function() {
+    var $this = $(this);
+    var project_id = $this.data('id');
+
+    $bars.addClass('hide');
+    if(!$this.hasClass('active')) {
+      $this.addClass('active');
+      $bars.filter('[data-id=' + project_id + ']').removeClass('hide');
+      $filter.addClass('filtered');
+      FilterNotifications(project_id);
+    } else {
+      $this.removeClass('active');
+      $filter.removeClass('filtered');
+      FilterNotifications();
+    }
+  });
+}
+
+function FilterNotifications(project_id) {
+  $('#notifications').find('[data-project-id]').show();
+  $('style.notifications').remove();
+  if(!project_id) return;
+
+  var selector = '#notifications div[data-project-id][data-project-id!=' + project_id + ']';
+
+  $(selector).slideUp(100);
+  $('body').append('<style class="notifications">' + selector + '{ display: none; }</style>');
 }
 
 /* Project page */

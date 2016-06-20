@@ -92,5 +92,6 @@
 </script>
 <script src="{{ asset('js/lib.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
+
 </body>
 </html>

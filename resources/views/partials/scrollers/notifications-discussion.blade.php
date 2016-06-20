@@ -10,7 +10,8 @@
 
 @section('data')
   @foreach($comments as $comment)
-  <div class="comment clearfix" data-id="{{ $comment->id }}" data-created="{{ $comment->created_at }}">
+  <div class="comment clearfix"
+       data-id="{{ $comment->id }}" data-created="{{ $comment->created_at }}" data-project-id="{{ $comment->project_id }}">
     <div class="icon">
       <img src="{{ $comment->user->icon() }}" />
     </div>

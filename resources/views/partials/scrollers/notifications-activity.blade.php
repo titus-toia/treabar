@@ -10,7 +10,8 @@
 
 @section('data')
   @foreach($activities as $item)
-    <div class="feed clearfix" data-id="{{ $item->id }}" data-created="{{ $item->created_at }}">
+    <div class="feed clearfix"
+         data-id="{{ $item->id }}" data-created="{{ $item->created_at }}" data-project-id="{{ $item->project_id }}">
       <div class="icon">
         <i class="fi-{{ $item->icon() }}"></i>
       </div>
