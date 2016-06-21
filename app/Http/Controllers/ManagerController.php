@@ -74,9 +74,13 @@ class ManagerController extends Controller {
   public function createTask(Project $project) {
     $parent = Task::find(Input::get('parent_id'));
     $users = $project->users;
-    return view('manage.task-form')
-      ->with('parent', $parent)
-      ->with('users', $users);
+    $tasks = $project->tasks(true)->get();
+
+    return view('manage.task-form', [
+      'tasks' => $tasks,
+      'parent' => $parent,
+      'users' => $users
+    ]);
   }
 
   public function storeTask(Project $project) {
@@ -99,7 +103,11 @@ class ManagerController extends Controller {
   public function editTask(Project $project, Task $task) {
     $parent = $task->parent;
     $users = $project->users;
+    $tasks = $project->tasks(true)->get()->except($task->id);
+    $task->loggedTotal();
+
     return view('manage.task-form', [
+      'tasks' => $tasks,
       'task' => $task,
       'parent' => $parent,
       'users' => $users

@@ -26,6 +26,38 @@
     </div>
     <div class="large-12 columns">
       <div class="row collapse">
+        <div class="columns large-6">
+          <label>
+            From
+            <input type="text" name="from" />
+          </label>
+        </div>
+        <div class="columns large-6">
+          <label>
+            To
+            <input type="text" name="to" />
+          </label>
+        </div>
+      </div>
+    </div>
+    @if(!$parent)
+    <div class="large-6 columns end">
+      <label>Master Task
+        <select name="master_id">
+          <option>n/a</option>
+          @foreach($tasks as $master)
+            <option value="{{ $master->id }}" selected="{{ $master->id == $task->master_id? 'selected': '' }}">
+              {{ $master->name }}
+            </option>
+          @endforeach
+        </select>
+      </label>
+    </div>
+    @endif
+    <div class="large-6 columns end">
+      <label>Estimate (hours)
+        <input type="text" name="duration" value="{{ $task->duration or '' }}">
+      </label>
     </div>
     <div class="large-12 columns">
       <input type="hidden" name="user_id" value="{{ isset($task)? $task->user_id: '' }}" />
@@ -54,11 +86,6 @@
         @endforeach
       </ul>
     </div>
-    <div class="large-12 columns">
-      <label>Estimate
-        <input type="text" name="duration" value="{{ $task->duration or '' }}">
-      </label>
-    </div>
   </div>
 
   <div class="form-buttons">
@@ -70,7 +97,11 @@
   </div>
 </form>
 <script>
+  var $form = $('#task-form');
   state.change({
-    task_id: $('#task-form').find('.holder').val()
+    task_id: $form.find('.holder').val()
+  });
+  $form.find('[name=from], [name=to]').fdatepicker({
+    format: 'dd-mm-yyyy'
   });
 </script>

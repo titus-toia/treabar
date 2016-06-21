@@ -148,7 +148,7 @@ class Task extends Node {
     } else {
       $activities = $activities->get();
     }
-    $children = $this->children;
+    $children = $this->descendants()->get();
     foreach($children as $child) {
       if($date) {
         $activities_child = $child->activities()->where('created_at', '>=', new \DateTime($date))->get();

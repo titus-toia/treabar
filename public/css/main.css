@@ -380,6 +380,7 @@ nav.top-bar .profile a > i {
   background-color: white;
   text-align: center;
   z-index: 5;
+  padding-bottom: 5px;
 }
 
 #dashboard .notifications .tabs-content {
@@ -866,7 +867,7 @@ div.manager-project div.banner {
   color: rgb(77, 77, 77);
 }
 #task-form textarea {
-  height: 200px;
+  height: 100px;
 }
 #task-form input[name='duration'] {
 }
