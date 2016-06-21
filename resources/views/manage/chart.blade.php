@@ -22,7 +22,7 @@
     background: #555;
   }
 
-  .division {
+  .gantt .division {
     height: 100%;
     width: 30px;
     display: inline-block;
@@ -31,7 +31,7 @@
     overflow: visible;
     text-align: center;
   }
-  .division .date {
+  .gantt .division .date {
     transform: rotate(-15deg);
     -ms-transform: rotate(-15deg);
     -webkit-transform: rotate(-15deg);
@@ -53,6 +53,8 @@
   .division:nth-child(5n) .date, .division:first-child .date, .division:last-child .date {
     display: inline-block;
   }
+
+
 </style>
 <?php $i=0; ?>
 
@@ -72,7 +74,10 @@
   var $gantt = $('.gantt');
   $gantt.data('tasks', JSON.parse('{!! json_encode($tasks) !!}'));
   var tasks = $gantt.data('tasks');
+  var $divisions = $gantt.find('.division');
+
+  var $task = $('<div class="task"></div>')
   for(var i in tasks) {
-    if(!)
+     //$divisions.first()
   }
 </script>
