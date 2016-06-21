@@ -4,22 +4,9 @@ namespace Treabar\Models;
 
 use Baum\Node;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
-/**
- * Task
- *
- * @property-read \Illuminate\Database\Eloquent\Collection|\Treabar\Models\Comment[] $comments
- * @property-read \Treabar\Models\Company $company
- * @property-read \Treabar\Models\Task $parent
- * @property-read \Baum\Extensions\Eloquent\Collection|\Treabar\Models\Task[] $children
- * @method static \Illuminate\Database\Query\Builder|\Treabar\Models\Task master()
- * @method static \Illuminate\Database\Query\Builder|\Baum\Node withoutNode($node)
- * @method static \Illuminate\Database\Query\Builder|\Baum\Node withoutSelf()
- * @method static \Illuminate\Database\Query\Builder|\Baum\Node withoutRoot()
- * @method static \Illuminate\Database\Query\Builder|\Baum\Node limitDepth($limit)
- */
 class Task extends Node {
-
   /**
    * Table name.
    *
@@ -144,7 +131,6 @@ class Task extends Node {
     return floor($this->activities->sum('duration') / 3600);
   }
 
-
   public function loggedTotal($date = null) {
     $activities = $this->activities();
     if($date) {
@@ -194,5 +180,22 @@ class Task extends Node {
         $overtime+= $trunk->loggedTotal() - $trunk->duration;
       }
     }
+  }
+
+  public static function getGanttHierarchy(Collection $tasks) {
+    $map = [];
+    $tasks->each(function($task) use(&$map) {
+      $map[$task->id] = $task->toArray();
+      $map[$task->id]['slaves'] = [];
+    });
+
+    $tasks->each(function($task) use(&$map) {
+      if(!$task->master_id) return;
+      $map[$task->master_id]['slaves'][] = $map[$task->id];
+    });
+
+    return (new \Illuminate\Support\Collection($map))->filter(function($task) {
+      return $task['master_id'] == null;
+    })->toArray();
   }
 }

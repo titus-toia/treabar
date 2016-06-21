@@ -24,6 +24,7 @@
         <textarea name="description">{{ isset($task)? $task->description: '' }}</textarea>
       </label>
     </div>
+    @if(!$parent)
     <div class="large-12 columns">
       <div class="row collapse">
         <div class="columns large-6">
@@ -40,7 +41,6 @@
         </div>
       </div>
     </div>
-    @if(!$parent)
     <div class="large-6 columns end">
       <label>Master Task
         <select name="master_id">

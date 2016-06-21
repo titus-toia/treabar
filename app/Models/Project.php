@@ -27,7 +27,7 @@ class Project extends Model
 
   public function tasks($topLevel = false) {
     $relation = $this->hasMany('Treabar\Models\Task');
-    return $topLevel? $relation->master(): $relation;
+    return $topLevel? $relation->where('parent_id', null): $relation;
   }
 
   public function users() {

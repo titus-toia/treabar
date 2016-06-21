@@ -31,7 +31,22 @@
         @endfor
       </ul>
     </div>
-
+    <div class="large-12 columns">
+      <div class="row collapse">
+        <div class="columns large-6">
+          <label>
+            From
+            <input type="text" name="from" />
+          </label>
+        </div>
+        <div class="columns large-6">
+          <label>
+            To
+            <input type="text" name="to" />
+          </label>
+        </div>
+      </div>
+    </div>
     <div class="large-12 columns" style="margin-bottom: 20px;">
       <label for="user-dropdown-head">Add Users to Project</label>
       <div id="user-dropdown-head" class="user-image-div head" data-dropdown="user-dropdown"

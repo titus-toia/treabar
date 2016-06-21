@@ -17,6 +17,7 @@ var onLoad = {
   projects: LoadProjectsPage,
   tasks: LoadTasksPage,
   timesheet: LoadTimesheetPage,
+  chart: LoadChartPage,
   feed: LoadFeedPage
 };
 
@@ -216,13 +217,16 @@ function LoadManagerPage(page) {
   $('#manager-tabs')
     .find('> div').click(function() {
       $(this).find('a')[0].click();
+      if($(this).hasClass('selected')) { //Simply clicking doesn't work, we have to trigger hashchange
+        $(window).trigger('hashchange');
+      }
     }).end()
     .find('> div a').click(function(e) {
       e.stopPropagation();
     }).end()
     .find('div').removeClass('selected').end()
     .find('a').each(function () {
-      if ($(this).attr('href') === '#' + page) $(this).parent().addClass('selected');
+      if($(this).attr('href') === '#' + page) $(this).parent().addClass('selected');
     }).end();
 
   $('#manage').addClass('loading');
@@ -334,6 +338,27 @@ function LoadTimesheetPage() {
 
   DefaultSly($frame, $scrollbar);
   $scrollbar.addClass('large-offset-1'); //Sly deleted all other classes so we have to apply it manually
+}
+
+function LoadChartPage() {
+  $('.gantt .frame').sly({
+    horizontal: 1,
+    itemNav: 'basic',
+    smart: 1,
+    activateOn: 'click',
+    mouseDragging: 1,
+    touchDragging: 1,
+    releaseSwing: 1,
+    startAt: 0,
+    scrollBar: $('.gantt .scrollbar'),
+    scrollBy: 1,
+    speed: 300,
+    elasticBounds: true,
+    easing: 'linear',
+    dragHandle: 1,
+    dynamicHandle: 1,
+    clickBar: 1
+  });
 }
 
 /* Feed */
