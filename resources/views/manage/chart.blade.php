@@ -42,7 +42,7 @@
     left: -4px;
     position: absolute;
   }
-  .division:nth-child(5n):before, .division:first-child:before, .division:last-child:before {
+  .gantt .division:nth-child(5n):before, .division:first-child:before, .division:last-child:before {
     content: '';
     position: absolute;
     height: 100%;
@@ -50,10 +50,26 @@
 
     left: 50%;
   }
-  .division:nth-child(5n) .date, .division:first-child .date, .division:last-child .date {
+  .gantt .division:nth-child(5n) .date, .division:first-child .date, .division:last-child .date {
     display: inline-block;
   }
 
+  .gantt .task {
+    height: 22px;
+    padding: 1px 2px;
+    background: #7125a9;
+    color: white;
+    position: absolute;
+    font-size: 9px;
+    left: 5px;
+    cursor: pointer;
+  }
+  .gantt .task .name {
+    overflow: hidden;
+    line-height: 19px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
 </style>
 <?php $i=0; ?>
@@ -76,8 +92,13 @@
   var tasks = $gantt.data('tasks');
   var $divisions = $gantt.find('.division');
 
-  var $task = $('<div class="task"></div>')
+  var $task = $('<div class="task"><span class="name"></span></div>')
   for(var i in tasks) {
-     //$divisions.first()
+    var task = tasks[i];
+    $task.clone()
+      .css('top', '50%')
+      .find('.name').text(task.name).end()
+      .appendTo($divisions.first());
+    break;
   }
 </script>
