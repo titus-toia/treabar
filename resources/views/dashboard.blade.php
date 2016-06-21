@@ -2,9 +2,7 @@
 @section('content')
   <div id="dashboard" class="row wrapper">
     <div class="large-8 columns main projects">
-      <div class="frame">
-        @each('partials.dashboard-project', $projects, 'project', 'partials.dashboard-empty')
-      </div>
+      @each('partials.dashboard-project', $projects, 'project', 'partials.dashboard-empty')
     </div>
     <aside class="large-4 columns notifications">
       <ul class="tabs" data-tab>

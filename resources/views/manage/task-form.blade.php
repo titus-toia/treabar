@@ -25,6 +25,9 @@
       </label>
     </div>
     <div class="large-12 columns">
+      <div class="row collapse">
+    </div>
+    <div class="large-12 columns">
       <input type="hidden" name="user_id" value="{{ isset($task)? $task->user_id: '' }}" />
       <label for="user-dropdown-head">Assignee</label>
       <div id="user-dropdown-head" class="user-image-div head" data-dropdown="user-dropdown"
@@ -53,7 +56,7 @@
     </div>
     <div class="large-12 columns">
       <label>Estimate
-        <input type="text" name="duration" value="{{ $task->duration }}">
+        <input type="text" name="duration" value="{{ $task->duration or '' }}">
       </label>
     </div>
   </div>

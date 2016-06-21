@@ -100,6 +100,17 @@ function LoadDashboard() {
   var $bars = $filter.find('.project-bar');
   var $picker = $('.project-picker');
   $filter.click(function() {
+    if(!$picker.is(':visible')) { //Hide irrelevant pickers
+      $picker.find('.project-label').each(function() {
+        var $this = $(this);
+        $this.show();
+        var project_id = $this.data('id');
+        var $notifs = $('#notifications').find('div[data-project-id][data-project-id=' + project_id + ']');
+        if($notifs.length == 0) {
+          $this.hide();
+        }
+      });
+    }
     $picker.slideToggle(175);
     return false;
   });
@@ -135,7 +146,7 @@ function FilterNotifications(project_id) {
 
   setTimeout(function() {
     $notifications.find('.vertical-feed-wrapper').sly('reload');
-  }, 200);
+  }, 150);
 }
 
 /* Project page */
