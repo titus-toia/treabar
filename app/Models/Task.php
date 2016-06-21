@@ -132,8 +132,12 @@ class Task extends Node {
     return $this->belongsTo('Treabar\Models\User');
   }
 
-  public function scopeMaster(Builder $query) {
-    return $query->where('parent_id', null);
+  public function master() {
+    return $this->belongsTo('Treabar\Models\Task', 'master_id');
+  }
+
+  public function slaves() {
+    return $this->hasMany('Treabar\Models\Task', 'master_id');
   }
 
   public function logged() {
