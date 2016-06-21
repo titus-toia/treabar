@@ -216,7 +216,7 @@
         $items.each(function (i, element) {
           // Item
           var $item = $(element);
-          var rect = element.getBoundingClientRect();console.warn(rect);
+          var rect = element.getBoundingClientRect();
           var itemSize = round(o.horizontal ? rect.width || rect.right - rect.left : rect.height || rect.bottom - rect.top);
           var itemMarginStart = getPx($item, o.horizontal ? 'marginLeft' : 'marginTop');
           var itemMarginEnd = getPx($item, o.horizontal ? 'marginRight' : 'marginBottom');
