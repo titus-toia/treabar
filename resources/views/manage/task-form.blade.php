@@ -30,13 +30,13 @@
         <div class="columns large-6">
           <label>
             From
-            <input type="text" name="from" />
+            <input type="text" name="from" value="{{ isset($task) && $task->from? $task->from->format('d-m-Y'): '' }}" />
           </label>
         </div>
         <div class="columns large-6">
           <label>
             To
-            <input type="text" name="to" />
+            <input type="text" name="to" value="{{ isset($task) && $task->to? $task->to->format('d-m-Y'):  '' }}" />
           </label>
         </div>
       </div>
@@ -46,7 +46,7 @@
         <select name="master_id">
           <option>n/a</option>
           @foreach($tasks as $master)
-            <option value="{{ $master->id }}" selected="{{ $master->id == $task->master_id? 'selected': '' }}">
+            <option value="{{ $master->id }}" {{ (isset($task) && $master->id == $task->master_id)? 'selected': '' }}>
               {{ $master->name }}
             </option>
           @endforeach

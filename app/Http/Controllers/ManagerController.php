@@ -1,5 +1,6 @@
 <?php namespace Treabar\Http\Controllers;
 
+use Treabar\Lib\CriticalPath;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Input;
 use Treabar\Models\Activity;
@@ -88,8 +89,8 @@ class ManagerController extends Controller {
       'name' => Input::get('name'),
       'description' => Input::get('description'),
       'duration' => Input::get('duration'),
-      'from' => Input::get('from', null),
-      'to' => Input::get('to', null),
+      'from' => Carbon::createFromFormat('d-m-Y', Input::get('from', null)),
+      'to' => Carbon::createFromFormat('d-m-Y', Input::get('to', null)),
       'master_id' => Input::get('master_id', null),
       'user_id' => Input::get('user_id'),
       'project_id' => $project->id,
@@ -133,8 +134,8 @@ class ManagerController extends Controller {
       'name' => Input::get('name'),
       'description' => Input::get('description'),
       'duration' => Input::get('duration'),
-      'from' => Input::get('from', null),
-      'to' => Input::get('to', null),
+      'from' => Carbon::createFromFormat('d-m-Y', Input::get('from', null)),
+      'to' => Carbon::createFromFormat('d-m-Y', Input::get('to', null)),
       'master_id' => Input::get('master_id', null),
       'user_id' => Input::get('user_id')
     ]);
@@ -233,15 +234,16 @@ class ManagerController extends Controller {
   /* Chart */
   public function chart(Project $project) {
     $tasks = Task::getGanttHierarchy($project->tasks(true)->get());
+    $path = new CriticalPath($tasks);
 
     $dates = [];
     for($cursor = $project->from; $cursor->lte($project->to); $cursor = $cursor->addDay()) {
       $dates[] = $cursor->format('Y-m-d');
     }
-
+dd($path->GetChart());
     return view('manage/chart', [
       'dates' => $dates,
-      'tasks' => $tasks,
+      'tasks' => $path->GetChart(),
       'project' => $project
     ]);
   }

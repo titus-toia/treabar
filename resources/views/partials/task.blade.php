@@ -15,7 +15,7 @@
     </a>
   </div>
 
-  <div class="content">)
+  <div class="content">
     <span class="logged">Logged: {{ round($task->loggedTotal()) }}h</span>
     <span class="estimated">@if($task->duration)Estimated: {{ $task->durationReadable() }}@endif</span>
     <div class="clearfix"></div>

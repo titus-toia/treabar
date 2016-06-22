@@ -153,7 +153,7 @@ function DefaultSly($frame, $scrollbar) {
 }
 
 //Ajax link functionality
-function AjaxHandler(self) {console.log('here');
+function AjaxHandler(self) {
   var url = self.data('url'),
     method = self.data('method') || 'get',
     payload = self.data('payload') || { _method: method },

@@ -36,13 +36,13 @@
         <div class="columns large-6">
           <label>
             From
-            <input type="text" name="from" />
+            <input type="text" name="from" value="{{ $project->from? $project->from->format('d-m-Y'): '' }}" />
           </label>
         </div>
         <div class="columns large-6">
           <label>
             To
-            <input type="text" name="to" />
+            <input type="text" name="to" value="{{ $project->to? $project->to->format('d-m-Y'):  '' }}" />
           </label>
         </div>
       </div>

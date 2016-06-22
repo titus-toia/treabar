@@ -13,7 +13,7 @@ class Task extends Node {
    * @var string
    */
   protected $table = 'tasks';
-
+  protected $dates = ['created_at', 'updated_at', 'deleted_at', 'from', 'to'];
   //////////////////////////////////////////////////////////////////////////////
 
   //
@@ -191,7 +191,7 @@ class Task extends Node {
 
     $tasks->each(function($task) use(&$map) {
       if(!$task->master_id) return;
-      $map[$task->master_id]['slaves'][] = $map[$task->id];
+      $map[$task->master_id]['slaves'][] = &$map[$task->id];
     });
 
     return (new \Illuminate\Support\Collection($map))->filter(function($task) {
