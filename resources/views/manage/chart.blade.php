@@ -41,7 +41,7 @@
     overflow: visible;
     text-align: center;
   }
-  .gantt .division .date {
+  .gantt .division > .date {
     font-size: 9px;
     font-weight: bold;
     display: none;
@@ -65,20 +65,22 @@
 
     left: 50%;
   }
-  .gantt .division:nth-child(5n) .date, .division:first-child .date, .division:last-child .date {
+  .gantt .division:nth-child(5n) > .date, .division:first-child > .date, .division:last-child > .date {
     display: inline-block;
   }
 
   .gantt .task {
-    height: 22px;
-    width: 100px;
-    padding: 1px 2px;
-    background: #7125a9;
-    color: white;
+    height: 35px;
+    min-width: 100px;
+    background: white;
+    text-align: left;
+    overflow: hidden;
     position: absolute;
     font-size: 9px;
     left: 5px;
     cursor: pointer;
+    margin-bottom: 2px;
+    border: 1px solid #a477c4;
     z-index: 2;
 
     user-select: none;
@@ -86,26 +88,56 @@
     -moz-user-select: none;
     -ms-user-select: none;
   }
+
+  .gantt .container {
+    padding: 1px 3px;
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
+  .gantt .task .date {
+    color: #551C7D;
+    display: inline-block;
+    font-size: 8px;
+  }
+
   .gantt .task .name {
-    overflow: hidden;
+    display: inline-block;
     line-height: 19px;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+  .gantt .task .slack {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    padding: 1px 3px;
+    opacity: 0.4;
+    background: #aaa;
+    text-align: right;
+  }
+  .gantt .task .slack[data-slack="0"] {
+    visibility: hidden;
+  }
+
 
   #task-pattern {
-    display: none;
+    visibility: hidden;
   }
 </style>
 <?php $i=0; ?>
 
-<div class="task" id="task-pattern">
-  <span class="name"></span>
-  <span class="date"></span>
-</div>
 <div class="gantt">
   <div class="frame">
     <ul class="slidee">
+      <div class="task jsPlumbIgnoreParents" id="task-pattern">
+        <div class="container">
+          <span class="date"></span>
+          <span class="name"></span>
+          <div class="slack"></div>
+        </div>
+      </div>
       @foreach($dates as $date)
       <li class="division" data-date="{{ $date }}">
         <span class="date">{{ $date }}</span>
@@ -120,26 +152,5 @@
   </div>
 </div>
 <script>
-  var $gantt = $('.gantt');
-  $gantt.data('tasks', JSON.parse('{!! json_encode($tasks) !!}'));
-  var tasks = $gantt.data('tasks');
-  var $divisions = $gantt.find('.division');
-
-  var $pattern = $('#task-pattern').clone().removeAttr('id');
-  for(var i in tasks) {
-    var task = tasks[i];
-
-    var $task = $pattern.clone();
-    if(task.from && task.to) {
-      $task.find('.date').text(task.from + ' - ' + task.to);
-    } else {
-      $task.find('.date').text('No date specified.')
-    }
-
-    $task.clone()
-      .css('top', '50%')
-      .find('.name').text(task.name).end()
-      .appendTo($divisions.first());
-    break;
-  }
+  $('.gantt').data('tasks', JSON.parse('{!! json_encode($tasks) !!}'));
 </script>

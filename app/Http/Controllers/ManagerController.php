@@ -240,7 +240,7 @@ class ManagerController extends Controller {
     for($cursor = $project->from; $cursor->lte($project->to); $cursor = $cursor->addDay()) {
       $dates[] = $cursor->format('Y-m-d');
     }
-dd($path->GetChart());
+//dd($path->GetChart());
     return view('manage/chart', [
       'dates' => $dates,
       'tasks' => $path->GetChart(),

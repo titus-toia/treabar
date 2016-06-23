@@ -77,20 +77,6 @@
     }
   });
   $(document).foundation();
-
-  jsPlumb.ready(function() {
-    jsPlumb.importDefaults({
-      PaintStyle:{
-        strokeStyle: '#3794dd',
-        fillStyle: '#3794dd',
-        lineWidth: 4
-      },
-      Connector: ['Flowchart', { stub: 5 }],
-      Endpoint: 'Blank',
-      Anchor: [[1, 0.5, 1, 0, 2, 0], [0, 0.5, -1, 0, 2, 0]]
-    });
-  });
-
 </script>
 <script src="{{ asset('js/lib.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>

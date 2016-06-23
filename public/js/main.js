@@ -253,12 +253,24 @@ function LoadManagerPage(page) {
     $('.custom-buttons').hide().css('visibility', 'hidden');
     $('.custom-buttons' + '.' + window.page + '-' + page).show().css('visibility', 'visible');
 
+    jsPlumb.detachEveryConnection();
+    jsPlumb.deleteEveryEndpoint();
     onLoad[page] && onLoad[page]();
   });
 }
 
 /* Tasks page */
 function LoadTasksPage() {
+  jsPlumb.importDefaults({
+    PaintStyle:{
+      strokeStyle: '#3794dd',
+      fillStyle: '#3794dd',
+      lineWidth: 4
+    },
+    Connector: ['Flowchart', { stub: 5 }],
+    Endpoint: 'Blank',
+    Anchor: [[1, 0.5, 1, 0, 2, 0], [0, 0.5, -1, 0, 2, 0]]
+  });
   jsPlumb.setContainer($('#manager-page'));
 
   //Show relevant task
@@ -346,7 +358,7 @@ function LoadChartPage() {
     itemNav: 'basic',
     smart: 1,
     activateOn: 'click',
-    mouseDragging: 0,
+    mouseDragging: 1,
     touchDragging: 0,
     releaseSwing: 1,
     startAt: 0,
@@ -359,6 +371,64 @@ function LoadChartPage() {
     dynamicHandle: 1,
     clickBar: 1
   });
+
+  jsPlumb.importDefaults({
+    PaintStyle:{
+      strokeStyle: '#7125a9',
+      fillStyle: '#7125a9',
+      lineWidth: 2
+    },
+    Connector: ['Flowchart', { stub: 5 }],
+    Endpoint: 'Blank',
+    MaxConnections: -1,
+    Anchor: [[1, 0.5, 1, 0, 2, 0], [0, 0.5, -1, 0, 2, 0]]
+  });
+  jsPlumb.setContainer($('.gantt .slidee'));
+
+  var PlaceTask = function(task, $task, $divisions, height, width) {
+    $task = $task.clone().removeAttr('id');
+    var $division;
+
+    if(task.from && task.to) {
+      $task.find('.date').text(task.from + ' - ' + task.to);
+      $division = $divisions.filter('[data-date=' + task.from + ']');
+    } else {
+      $task.find('.date').text('No date specified.');
+      $division = $divisions.first();
+    }
+
+    $task.css('top', height * task.level + 35)
+      .css('left', $division.index() * 30)
+      .css('width', task.span * width - 50)
+      .find('.name').text(task.name).end()
+      .appendTo('.gantt .slidee');
+    $task.find('.slack')
+      .css('width', width * task.slack).attr('data-slack', task.slack)
+      .text('Slack: ' + task.slack + ' days');
+
+    for(var i in task.slaves) {
+      $child = PlaceTask(task.slaves[i], $task, $divisions, height, width);
+      jsPlumb.connect({
+        source: $task,
+        target: $child
+      });
+    }
+
+    return $task;
+  };
+
+  var $gantt = $('.gantt');
+  var tasks = $gantt.data('tasks');
+  var $divisions = $gantt.find('.division');
+
+  var $pattern = $('#task-pattern').clone().removeAttr('id');
+  var height = $('#task-pattern').outerHeight(true);
+  var width = $divisions.width();
+
+  for(var i in tasks) {
+    var task = tasks[i];
+    PlaceTask(task, $pattern, $divisions, height, width);
+  }
 }
 
 /* Feed */

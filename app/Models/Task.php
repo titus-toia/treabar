@@ -3,6 +3,7 @@
 namespace Treabar\Models;
 
 use Baum\Node;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -155,7 +156,7 @@ class Task extends Node {
   }
 
   public function completion() {
-    return $this->loggedTotal() / $this->duration * 100;
+    return $this->duration? $this->loggedTotal() / $this->duration * 100: 0;
   }
 
   public function getLeafCount() {
@@ -185,8 +186,11 @@ class Task extends Node {
   public static function getGanttHierarchy(Collection $tasks) {
     $map = [];
     $tasks->each(function($task) use(&$map) {
-      $map[$task->id] = $task->toArray();
-      $map[$task->id]['slaves'] = [];
+      $task = $task->toArray();
+      $task['slaves'] = [];
+      $task['from'] = $task['from']? Carbon::createFromFormat('Y-m-d h:i:s', $task['from'])->format('Y-m-d'): null;
+      $task['to'] = $task['to']? Carbon::createFromFormat('Y-m-d h:i:s', $task['to'])->format('Y-m-d'): null;
+      $map[$task['id']] = $task;
     });
 
     $tasks->each(function($task) use(&$map) {

@@ -6293,8 +6293,11 @@
                 }.bind(this);
 
             while (op != null) {
-                out.left += op.offsetLeft;
-                out.top += op.offsetTop;
+                //if((' ' + el.className + ' ').indexOf(' jsPlumbIgnoreParents ') == -1) {
+                if(!jsPlumb.hasClass(el, 'jsPlumbIgnoreParents')) {
+                  out.left += op.offsetLeft;
+                  out.top += op.offsetTop;
+                }
                 _maybeAdjustScroll(op);
                 op = relativeToRoot ? op.offsetParent :
                         op.offsetParent == container ? null : op.offsetParent;

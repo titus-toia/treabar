@@ -20,16 +20,37 @@ class CriticalPath {
       $i = $level;
       if($master_to === null && (!$task['from'] || !$task['to'])) continue; //If top-level task and no from/to values
 
-      $found = false;
+      //Calculate original time different
+      $diff = Carbon::createFromFormat('Y-m-d', $task['from'])->diffInDays(Carbon::createFromFormat('Y-m-d', $task['to']));
+
+      //If new 'from' is gte than 'to', adjust end date by diff
       $from = $master_to? $master_to: $task['from'];
-      $to = $task['to'];
+      if(Carbon::createFromFormat('Y-m-d', $from)->gte(Carbon::createFromFormat('Y-m-d', $task['to']))) {
+        $task['to'] = Carbon::createFromFormat('Y-m-d', $from)->addDays($diff)->format('Y-m-d');
+      }
+
+      //If task is not finished and its date has passed, extend it
+      if(!$task['finished'] && (new Carbon('today'))->gt(Carbon::createFromFormat('Y-m-d', $task['to']))) {
+        //Slack detected!
+        $slack = Carbon::createFromFormat('Y-m-d', $task['to'])->diffInDays(new Carbon('tomorrow'));
+        //dd(Carbon::createFromFormat('Y-m-d', $task['to']), new Carbon('tomorrow'), $task);
+        $task['slack'] = $slack;
+        $task['original-to'] = $task['to'];
+        $to = (new Carbon('tomorrow'))->format('Y-m-d');
+      } else {
+        $to = $task['to'];
+        $task['slack'] = 0;
+      }
 
       while(!$this->isFree($graph, $from, $to, $i)) {
         $i++;
       }
-      $this->fill($graph, $from, $to, $i);
+      $span = $this->fill($graph, $from, $to, $i);
 
+      $task['from'] = $from;
+      $task['to'] = $to;
       $task['level'] = $i;
+      $task['span'] = $span;
 
       //Do the same thing with its children
       $this->_getChart($task['slaves'], $graph, $to, $i + 1);
@@ -55,15 +76,19 @@ class CriticalPath {
     return $free;
   }
 
+  //Returns day-span of task
   private function fill(&$graph, $from, $to, $level) {
     $from = new Carbon($from);
     $to = new Carbon($to);
 
+    $span = 0;
     for($cursor = $from; $cursor->lte($to); $cursor = $cursor->addDay()) {
       $graph[$from->format('Y-m-d')] = [
         'level' => $level + 1
       ];
+      $span++;
     }
 
+    return $span;
   }
 }
