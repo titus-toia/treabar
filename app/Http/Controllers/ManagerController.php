@@ -31,6 +31,8 @@ class ManagerController extends Controller {
     $project = Project::create([
       'name' => Input::get('name'),
       'slug' => str_slug(Input::get('name')),
+      'from' => Input::get('from')? Carbon::createFromFormat('d-m-Y', Input::get('from')): null,
+      'to' => Input::get('to')? Carbon::createFromFormat('d-m-Y', Input::get('to')): null,
       'color' => Input::get('color'),
       'client_id' => Input::get('client_id'),
       'company_id' => Input::get('company_id')?: \Auth::user()->company_id
@@ -51,6 +53,8 @@ class ManagerController extends Controller {
     $project->update([
       'name' => Input::get('name'),
       'slug' => str_slug(Input::get('name')),
+      'from' => Input::get('from')? Carbon::createFromFormat('d-m-Y', Input::get('from')): null,
+      'to' => Input::get('to')? Carbon::createFromFormat('d-m-Y', Input::get('to')): null,
       'color' => Input::get('color'),
       'client_id' => Input::get('client_id')
     ]);
@@ -89,8 +93,8 @@ class ManagerController extends Controller {
       'name' => Input::get('name'),
       'description' => Input::get('description'),
       'duration' => Input::get('duration'),
-      'from' => Carbon::createFromFormat('d-m-Y', Input::get('from', null)),
-      'to' => Carbon::createFromFormat('d-m-Y', Input::get('to', null)),
+      'from' => Input::get('from')? Carbon::createFromFormat('d-m-Y', Input::get('from')): null,
+      'to' => Input::get('to')? Carbon::createFromFormat('d-m-Y', Input::get('to')): null,
       'master_id' => Input::get('master_id', null),
       'user_id' => Input::get('user_id'),
       'project_id' => $project->id,
@@ -134,8 +138,8 @@ class ManagerController extends Controller {
       'name' => Input::get('name'),
       'description' => Input::get('description'),
       'duration' => Input::get('duration'),
-      'from' => Carbon::createFromFormat('d-m-Y', Input::get('from', null)),
-      'to' => Carbon::createFromFormat('d-m-Y', Input::get('to', null)),
+      'from' => Input::get('from')? Carbon::createFromFormat('d-m-Y', Input::get('from')): null,
+      'to' => Input::get('to')? Carbon::createFromFormat('d-m-Y', Input::get('to')): null,
       'master_id' => Input::get('master_id', null),
       'user_id' => Input::get('user_id')
     ]);

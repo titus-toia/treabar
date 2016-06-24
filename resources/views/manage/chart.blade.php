@@ -112,6 +112,7 @@
     top: 0;
     right: 0;
     height: 100%;
+    max-width: 100%;
     padding: 1px 3px;
     opacity: 0.4;
     background: #aaa;

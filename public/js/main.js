@@ -28,6 +28,22 @@ $body.on('click', '#page-state-button', function() {
   }
 });
 
+var $manager_page = $('#manager-page');
+$('#manager-tabs')
+  .find('> div').click(function() {
+    $(this).find('a')[0].click();
+    if($(this).hasClass('selected')) { //Simply clicking doesn't work, we have to trigger hashchange
+      $(window).trigger('hashchange');
+    }
+  }).end()
+  .find('> div a').click(function(e) {
+    e.stopPropagation();
+  }).end()
+  .find('div').removeClass('selected').end()
+  .find('a').each(function () {
+    if($(this).attr('href') === '#' + page) $(this).parent().addClass('selected');
+  }).end();
+
 function LoadDashboard() {
   var tabScroll = function($tab) {
     var $content = $($tab.find('a').attr('href'));
@@ -214,23 +230,8 @@ function LoadProjectsPage() {
 function LoadManagerPage(page) {
   page = page || 'projects';
 
-  $('#manager-tabs')
-    .find('> div').click(function() {
-      $(this).find('a')[0].click();
-      if($(this).hasClass('selected')) { //Simply clicking doesn't work, we have to trigger hashchange
-        $(window).trigger('hashchange');
-      }
-    }).end()
-    .find('> div a').click(function(e) {
-      e.stopPropagation();
-    }).end()
-    .find('div').removeClass('selected').end()
-    .find('a').each(function () {
-      if($(this).attr('href') === '#' + page) $(this).parent().addClass('selected');
-    }).end();
-
   $('#manage').addClass('loading');
-  $('#manager-page').hide();
+  $manager_page.hide();
 
   var url;
   if(page != 'projects')
@@ -247,7 +248,7 @@ function LoadManagerPage(page) {
       $pstate.hide(200);
     }
 
-    $('#manager-page').html(data).show();
+    $manager_page.html(data).show();
     $('#manage').removeClass('loading');
 
     $('.custom-buttons').hide().css('visibility', 'hidden');
@@ -271,7 +272,7 @@ function LoadTasksPage() {
     Endpoint: 'Blank',
     Anchor: [[1, 0.5, 1, 0, 2, 0], [0, 0.5, -1, 0, 2, 0]]
   });
-  jsPlumb.setContainer($('#manager-page'));
+  jsPlumb.setContainer($manager_page);
 
   //Show relevant task
   if(state.task_id) {
