@@ -513,6 +513,10 @@ nav.top-bar .profile a > i {
   padding-top: 25px;
   padding-right: 50px;
 }
+#manager-page.collapse {
+  padding-top: 10px;
+  padding-right: 10px;
+}
 
 #new-project {
   width: 175px;

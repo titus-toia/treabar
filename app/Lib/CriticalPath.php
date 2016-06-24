@@ -1,6 +1,7 @@
 <?php
-
 namespace Treabar\Lib;
+
+set_time_limit(10);
 
 use Carbon\Carbon;
 
@@ -12,10 +13,14 @@ class CriticalPath {
   }
 
   public function GetChart() {
-    return $this->_getChart($this->tasks);
+    $chart = $this->getChartHelper($this->tasks);
+    $trail = [];
+    $this->longestPath($chart, $trail); //Side effects
+
+    return $chart;
   }
 
-  private function _getChart(&$tasks, $graph = [], $master_to = null, $level = 0) {
+  private function getChartHelper(&$tasks, $graph = [], $master_to = null, $level = 0) {
     foreach($tasks as &$task) {
       $i = $level;
       if($master_to === null && (!$task['from'] || !$task['to'])) continue; //If top-level task and no from/to values
@@ -53,11 +58,43 @@ class CriticalPath {
       $task['span'] = $span;
 
       //Do the same thing with its children
-      $this->_getChart($task['slaves'], $graph, $to, $i + 1);
+      $this->getChartHelper($task['slaves'], $graph, $to, $i + 1);
       $level += 2; //Make subsequent tasks start lower
     }
 
     return $tasks;
+  }
+
+  private function longestPath(&$tasks, &$trail = []) {
+    if(empty($tasks)) return 0;
+
+    $max = ['weight' => 0, 'trail' => []];
+    foreach($tasks as &$task) {
+      if(!$task['from'] || !$task['to']) continue;
+      $newTrail = $trail; $newTrail[] = &$task;
+
+      $diff = Carbon::createFromFormat('Y-m-d', $task['from'])->diffInDays(Carbon::createFromFormat('Y-m-d', $task['to']));
+      $weight = $diff + $this->longestPath($task['slaves'], $newTrail);
+
+      if($max['weight'] < $weight) {
+        $max['weight'] = $weight;
+        $max['trail'] = $newTrail;
+      }
+    }
+
+    if(empty($trail)) { //At top level
+      foreach($max['trail'] as &$task) {
+        $task['critical'] = true;
+      }
+    }
+
+    foreach($max['trail'] as &$task) {
+      if(!in_array($task, $trail)) {
+        $trail[] = &$task;
+      }
+    }
+
+    return $max['weight'];
   }
 
   private function isFree(&$graph, $from, $to, $level = 0) {

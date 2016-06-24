@@ -88,6 +88,12 @@
     -moz-user-select: none;
     -ms-user-select: none;
   }
+  .gantt .task.critical {
+    border-color: indianred;
+  }
+  .gantt .task.critical .date {
+    color: darkred;
+  }
 
   .gantt .container {
     padding: 1px 3px;
@@ -121,7 +127,40 @@
   .gantt .task .slack[data-slack="0"] {
     visibility: hidden;
   }
+  #chart-no-date {
+    display: none;
+    bottom: 10px;
 
+    transition: all 0.2s ease-in;
+    -ms-transition: all 0.2s ease-in;
+    -moz-transition: all 0.2s ease-in;
+    -webkit-transition: all 0.2s ease-in;
+  }
+  #chart-no-date > .container > .name:after {
+    content: " (" attr(data-count) ")";
+  }
+  #chart-no-date.expanded {
+    height: 150px;
+    width: 200px;
+
+    transition: all 0.4s ease-in;
+    -ms-transition: all 0.4s ease-in;
+    -moz-transition: all 0.4s ease-in;
+    -webkit-transition: all 0.4s ease-in;
+  }
+  #chart-no-date .task {
+    min-width: 50px;
+    height: 25px;
+    width: 50px;
+    display: inline-block;
+  }
+  #chart-no-date .tasks {
+    text-align: justify;
+    display: none;
+  }
+  #chart-no-date.expanded .tasks {
+    display: block;
+  }
 
   #task-pattern {
     visibility: hidden;
@@ -137,6 +176,13 @@
           <span class="date"></span>
           <span class="name"></span>
           <div class="slack"></div>
+        </div>
+      </div>
+      <div class="task" id="chart-no-date">
+        <div class="container">
+          <span class="name">Tasks with no date</span>
+          <div class="tasks">
+          </div>
         </div>
       </div>
       @foreach($dates as $date)

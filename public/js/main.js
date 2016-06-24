@@ -231,6 +231,7 @@ function LoadManagerPage(page) {
   page = page || 'projects';
 
   $('#manage').addClass('loading');
+  $manager_page.removeClass('collapse');
   $manager_page.hide();
 
   var url;
@@ -354,6 +355,7 @@ function LoadTimesheetPage() {
 }
 
 function LoadChartPage() {
+  $manager_page.addClass('collapse');
   $('.gantt .frame').sly({
     horizontal: 1,
     itemNav: 'basic',
@@ -382,37 +384,52 @@ function LoadChartPage() {
     Connector: ['Flowchart', { stub: 5 }],
     Endpoint: 'Blank',
     MaxConnections: -1,
-    Anchor: [[1, 0.5, 1, 0, 2, 0], [0, 0.5, -1, 0, 2, 0]]
+    Anchor: [[1, 0.5, 1, 0, 0, 0], [0, 0.5, -1, 0, 0, 0]]
   });
   jsPlumb.setContainer($('.gantt .slidee'));
 
+  var $no_date = $('#chart-no-date');
+  $no_date.click(function() {
+    $(this).toggleClass('expanded');
+  });
+
   var PlaceTask = function(task, $task, $divisions, height, width) {
     $task = $task.clone().removeAttr('id');
+    $task.attr('data-id', task.id);
     var $division;
 
     if(task.from && task.to) {
+      if(task.critical) $task.addClass('critical');
       $task.find('.date').text(task.from + ' - ' + task.to);
       $division = $divisions.filter('[data-date=' + task.from + ']');
+
+      $task.css('top', height * task.level + 35)
+        .css('left', $division.index() * 30)
+        .css('width', task.span * width - 50)
+        .find('.name').text(task.name).end()
+        .appendTo('.gantt .slidee');
+      $task.find('.slack')
+        .css('width', width * task.slack).attr('data-slack', task.slack)
+        .text('Slack: ' + task.slack + ' days');
+
+      for(var i in task.slaves) {
+        $child = PlaceTask(task.slaves[i], $task, $divisions, height, width);
+        jsPlumb.connect({
+          source: $task,
+          target: $child,
+          paintStyle: !task.critical? null: {
+            strokeStyle: "red",
+            fillStyle: "red"
+          }
+        });
+      }
     } else {
-      $task.find('.date').text('No date specified.');
-      $division = $divisions.first();
-    }
+      $task
+        .find('.name').text(task.name)
+        .remove('.slack').end()
+        .appendTo($no_date.find('.tasks'));
 
-    $task.css('top', height * task.level + 35)
-      .css('left', $division.index() * 30)
-      .css('width', task.span * width - 50)
-      .find('.name').text(task.name).end()
-      .appendTo('.gantt .slidee');
-    $task.find('.slack')
-      .css('width', width * task.slack).attr('data-slack', task.slack)
-      .text('Slack: ' + task.slack + ' days');
-
-    for(var i in task.slaves) {
-      $child = PlaceTask(task.slaves[i], $task, $divisions, height, width);
-      jsPlumb.connect({
-        source: $task,
-        target: $child
-      });
+      $no_date.show();
     }
 
     return $task;
@@ -430,6 +447,7 @@ function LoadChartPage() {
     var task = tasks[i];
     PlaceTask(task, $pattern, $divisions, height, width);
   }
+  $no_date.find('.container > .name').attr('data-count', $no_date.find('.task').length);
 }
 
 /* Feed */
