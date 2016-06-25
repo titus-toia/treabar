@@ -90,6 +90,7 @@ class DatabaseSeeder extends Seeder {
       echo "Creating invoices ..." . PHP_EOL;
       foreach(range(1, rand(15, 30)) as $i) {
         factory(Invoice::class)->create([
+          'company_id' => $company_id,
           'project_id' => $faker->randomElement($projects->lists('id')->all()),
           'invoiceno' => $i
         ]);

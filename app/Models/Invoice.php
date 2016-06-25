@@ -10,6 +10,11 @@ namespace Treabar\Models;
  */
 class Invoice extends Model
 {
+
+  public function project() {
+    return $this->belongsTo('Treabar\Models\Project');
+  }
+
   public function activities() {
     return $this->hasMany('Treabar\Models\Activity');
   }

@@ -25,6 +25,10 @@ class Project extends Model
     return $this->belongsTo('Treabar\Models\Company');
   }
 
+  public function invoices() {
+    return $this->hasMany('Treabar\Models\Invoice');
+  }
+
   public function tasks($topLevel = false) {
     $relation = $this->hasMany('Treabar\Models\Task');
     return $topLevel? $relation->where('parent_id', null): $relation;
@@ -40,6 +44,7 @@ class Project extends Model
     });
     return $tasks;
   }
+
 
   public function logged($mins = false) {
     return round($this->activities->sum('duration') / 3600);

@@ -14,6 +14,9 @@ class InvoiceController extends Controller {
   }
 
   public function index() {
-    return view('invoice')->with('invoice', []);
+    $invoices = \Auth::user()->company->invoices;
+    return view('invoice', [
+      'invoices' => $invoices
+    ]);
   }
 }

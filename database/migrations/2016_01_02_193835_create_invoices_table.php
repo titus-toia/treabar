@@ -19,6 +19,8 @@ class CreateInvoicesTable extends Migration {
       $table->string('client');
       $table->string('company');
       $table->string('items'); //Is actually json
+      $table->integer('company_id');
+      $table->integer('client_id')->nullable();
       $table->integer('project_id');
       $table->timestamps();
     });
