@@ -12,6 +12,7 @@
 */
 use Treabar\Models\User;
 use Treabar\Models\Activity;
+use Treabar\Models\Project;
 
 $factory->define(User::class, function (Faker\Generator $faker) {
   return [
@@ -44,11 +45,11 @@ $factory->define(Treabar\Models\Company::class, function (Faker\Generator $faker
   ];
 });
 
-$factory->define(Treabar\Models\Project::class, function (Faker\Generator $faker) {
+$factory->define(Project::class, function (Faker\Generator $faker) {
   return [
     'name' => $faker->sentence(3),
     'slug' => $faker->slug(3),
-    'color' => rand(1, 5),
+    'color' => rand(1, Project::COLOR_COUNT),
     'from' => $faker->dateTimeBetween('last month', 'today'),
     'to' => $faker->dateTimeBetween('+1 months', '+2 months')
   ];

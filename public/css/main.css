@@ -1,22 +1,62 @@
 /* General */
 .color-1 {
-  background-color: #ef5523 !important;
+  background: #ef5523 !important;
   color: whitesmoke;
 }
 .color-2 {
-  background-color: #00468a !important;
+  background: #00468a !important;
   color: whitesmoke;
 }
 .color-3 {
-  background-color: #1abc9c !important;
+  background: #1abc9c !important;
   color: whitesmoke;
 }
 .color-4 {
-  background-color: #00953d !important;
+  background: #00953d !important;
   color: whitesmoke;
 }
 .color-5 {
-  background-color: #fe374a !important;
+  background: #fe374a !important;
+  color: whitesmoke;
+}
+.color-6 {
+  background: rgb(114, 191, 131);
+  color: whitesmoke;
+}
+.color-7 {
+  background: rgb(114, 135, 191);
+  color: whitesmoke;
+}
+.color-8 {
+  background: rgb(191, 148, 114);
+  color: whitesmoke;
+}
+.color-9 {
+  background: rgb(89, 138, 50);
+  color: whitesmoke;
+}
+.color-10 {
+  background: rgb(123, 88, 162);
+  color: whitesmoke;
+}
+.color-11 {
+  background: rgb(114, 122, 191);
+  color: whitesmoke;
+}
+.color-12 {
+  background: rgb(98, 182, 184);
+  color: whitesmoke;
+}
+.color-13 {
+  background: rgb(212, 189, 47);
+  color: whitesmoke;
+}
+.color-14 {
+  background: rgb(191, 114, 164);
+  color: whitesmoke;
+}
+.color-15 {
+  background: rgb(177, 191, 114);
   color: whitesmoke;
 }
 

@@ -14,6 +14,6 @@ class InvoiceController extends Controller {
   }
 
   public function index() {
-    return view('manage')->with('invoice', []);
+    return view('invoice')->with('invoice', []);
   }
 }
