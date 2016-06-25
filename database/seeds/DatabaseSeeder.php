@@ -10,6 +10,7 @@ use Treabar\Models\Project;
 use Treabar\Models\Task;
 use Treabar\Models\Activity;
 use Treabar\Models\Comment;
+use Treabar\Models\Invoice;
 
 
 class DatabaseSeeder extends Seeder {
@@ -21,14 +22,21 @@ class DatabaseSeeder extends Seeder {
 
     factory(User::class, User::ROLE_ROOT)->create();
 
-    factory(Company::class, rand(2, 3))->create();
+    echo "Creating Companies..." . PHP_EOL;
+    $no_companies = rand(2, 3);
+    factory(Company::class, $no_companies)->create();
+    echo "Created $no_companies companies." . PHP_EOL;
 
     foreach(Company::all() as $company) {
       $company_id = $company->id;
+      echo "Processing company $company_id..." . PHP_EOL;
+
+      echo "Creating users ..." . PHP_EOL;
       factory(User::class, User::ROLE_MANAGER)->create(['company_id' => $company_id]); //Create the general admin
       $devs = factory(User::class, User::ROLE_DEV, rand(5, 7))->create(['company_id' => $company_id]);
       $clients = factory(User::class, User::ROLE_CLIENT, rand(1, 3))->create(['company_id' => $company_id]);
 
+      echo "Creating projects ..." . PHP_EOL;
       foreach(range(1, rand(5, 9)) as $i) {
         factory(Project::class)->create([
           'company_id' => $company_id,
@@ -37,6 +45,7 @@ class DatabaseSeeder extends Seeder {
       }
 
       $projects = $company->projects();
+      echo "Creating tasks ..." . PHP_EOL;
       foreach(range(1, rand(15, 20)) as $i) {
         $root = factory(Task::class)->create([
           'project_id' => $faker->randomElement($projects->lists('id')->all())
@@ -54,6 +63,7 @@ class DatabaseSeeder extends Seeder {
         }
       }
 
+      echo "Creating activities and comments ..." . PHP_EOL;
       $tasks = Task::whereIn('project_id', $projects->lists('id')->all())->get();
       foreach($tasks as $task) {
         foreach(range(1, rand(2, 10)) as $i) {
@@ -76,7 +86,23 @@ class DatabaseSeeder extends Seeder {
       foreach($devs as $dev) {
         $dev->projects()->sync($faker->randomElements($projects->lists('id')->all(), rand(3, 4)));
       }
+
+      echo "Creating invoices ..." . PHP_EOL;
+      foreach(range(1, rand(15, 30)) as $i) {
+        factory(Invoice::class)->create([
+          'project_id' => $faker->randomElement($projects->lists('id')->all()),
+          'invoiceno' => $i
+        ]);
+      }
+
+      $company->update([
+        'invoiceno' => ++$i
+      ]);
+
+      echo "Company done." . PHP_EOL;
     }
+
+    echo PHP_EOL. "Everything done, thanks for waiting!" . PHP_EOL;
   }
 
   private function truncate() {
@@ -91,6 +117,10 @@ class DatabaseSeeder extends Seeder {
     }
 
     foreach(glob(public_path('img/companies/*')) as $file) {
+      if(is_file($file)) unlink($file);
+    }
+
+    foreach(glob(public_path('img/invoices/*')) as $file) {
       if(is_file($file)) unlink($file);
     }
   }

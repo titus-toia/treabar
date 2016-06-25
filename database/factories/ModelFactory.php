@@ -14,19 +14,21 @@ use Treabar\Models\User;
 use Treabar\Models\Activity;
 use Treabar\Models\Project;
 
-$factory->define(User::class, function (Faker\Generator $faker) {
+$random_img = function($origin, $target) {
+  $imgs = array_diff(scandir(public_path($origin)), ['..', '.']);
+  $img = $imgs[array_rand($imgs)];
+  $name = uniqid()  . $img;
+  copy(public_path($origin . '/') . $img, public_path($target) . $name);
+  return $name;
+};
+
+$factory->define(User::class, function (Faker\Generator $faker) use($random_img) {
   return [
     'name' => $faker->name,
     'email' => $faker->email,
     'password' => bcrypt(str_random(10)),
     'remember_token' => str_random(10),
-    'icon' => call_user_func(function() {
-      $imgs = array_diff(scandir(public_path('img/dev')), ['..', '.']);
-      $img = $imgs[array_rand($imgs)];
-      $name = uniqid()  . $img;
-      copy(public_path('img/dev/') . $img, public_path('img/users/') . $name);
-      return $name;
-    })
+    'icon' => call_user_func($random_img, 'img/dev/users', 'img/users/')
   ];
 });
 
@@ -37,11 +39,11 @@ foreach (User::roles() as $role) {
   });
 }
 
-$factory->define(Treabar\Models\Company::class, function (Faker\Generator $faker) {
+$factory->define(Treabar\Models\Company::class, function (Faker\Generator $faker) use($random_img) {
   return [
     'name' => $faker->company,
     'slug' => $faker->slug(),
-    'icon' => $faker->image('public/img/companies', 256, 256, 'business')
+    'icon' => call_user_func($random_img, 'img/dev/companies', 'img/companies/')
   ];
 });
 
@@ -78,5 +80,21 @@ $factory->define(Treabar\Models\Comment::class, function (Faker\Generator $faker
   return [
     'content' => $faker->text(),
     'created_at' => $faker->dateTimeBetween('-2 days', 'now')
+  ];
+});
+
+$factory->define(Treabar\Models\Invoice::class, function(Faker\Generator $faker) use($random_img) {
+  return [
+    'name' => $faker->sentence(2),
+    'issued_at' => $faker->dateTimeThisMonth,
+    'icon' => call_user_func($random_img, 'img/dev/companies', 'img/invoices/'),
+    'client' => $faker->name,
+    'company' => $faker->company,
+    'items' => json_encode([[
+      'name' => $faker->words(2),
+      'hours' => $faker->numberBetween(50, 150),
+      'rate' => $faker->numberBetween(10, 50),
+      'total' => $faker->numberBetween(500, 2500)
+    ]])
   ];
 });
