@@ -1,62 +1,62 @@
 /* General */
 .color-1 {
-  background: #ef5523 !important;
+  background-color: #ef5523 !important;
   color: whitesmoke;
 }
 .color-2 {
-  background: #00468a !important;
+  background-color: #00468a !important;
   color: whitesmoke;
 }
 .color-3 {
-  background: #1abc9c !important;
+  background-color: #1abc9c !important;
   color: whitesmoke;
 }
 .color-4 {
-  background: #00953d !important;
+  background-color: #00953d !important;
   color: whitesmoke;
 }
 .color-5 {
-  background: #fe374a !important;
+  background-color: #fe374a !important;
   color: whitesmoke;
 }
 .color-6 {
-  background: rgb(114, 191, 131);
+  background-color: rgb(114, 191, 131) !important;
   color: whitesmoke;
 }
 .color-7 {
-  background: rgb(114, 135, 191);
+  background-color: rgb(114, 135, 191) !important;
   color: whitesmoke;
 }
 .color-8 {
-  background: rgb(191, 148, 114);
+  background-color: rgb(191, 148, 114) !important;
   color: whitesmoke;
 }
 .color-9 {
-  background: rgb(89, 138, 50);
+  background-color: rgb(89, 138, 50) !important;
   color: whitesmoke;
 }
 .color-10 {
-  background: rgb(123, 88, 162);
+  background-color: rgb(123, 88, 162) !important;
   color: whitesmoke;
 }
 .color-11 {
-  background: rgb(114, 122, 191);
+  background-color: rgb(114, 122, 191) !important;
   color: whitesmoke;
 }
 .color-12 {
-  background: rgb(98, 182, 184);
+  background-color: rgb(98, 182, 184) !important;
   color: whitesmoke;
 }
 .color-13 {
-  background: rgb(212, 189, 47);
+  background-color: rgb(212, 189, 47) !important;
   color: whitesmoke;
 }
 .color-14 {
-  background: rgb(191, 114, 164);
+  background-color: rgb(191, 114, 164) !important;
   color: whitesmoke;
 }
 .color-15 {
-  background: rgb(177, 191, 114);
+  background-color: rgb(177, 191, 114) !important;
   color: whitesmoke;
 }
 
@@ -698,11 +698,11 @@ div.manager-project div.banner {
 #tasks-container .tasks:not(.master) > * {
   display: none;
 }
-.tasks .task {
+#tasks-container .tasks .task {
   width: 100%;
 }
 
-.task .title {
+#tasks-container .task .title {
   position: relative;
   width: 100%;
   height: 35px;
@@ -720,10 +720,10 @@ div.manager-project div.banner {
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+ */
 }
-.task .title:hover, .task .title:hover a.edit, .task .title:hover a.comments {
+#tasks-container .task .title:hover, .task .title:hover a.edit, .task .title:hover a.comments {
   background-color: #dbeeff;
 }
-.task .title a.edit {
+#tasks-container .task .title a.edit {
   background-color: white;
   display: inline-block;
   position: absolute;
@@ -733,7 +733,7 @@ div.manager-project div.banner {
   width: 25px;
 
 }
-.task .title a.comments {
+#tasks-container .task .title a.comments {
   background-color: white;
   display: inline-block;
   position: absolute;
@@ -743,16 +743,16 @@ div.manager-project div.banner {
   width: 25px;
 
 }
-.task.active .title {
+#tasks-container .task.active .title {
   cursor: default;
   border-color: #3794dd;
   color: #3794dd;
 }
-.task.active .title a.edit, .task.active .title a.comments {
+#tasks-container .task.active .title a.edit, .task.active .title a.comments {
   visibility: visible;
 }
 
-.task .content {
+#tasks-container .task .content {
   display: none;
   font-size: 14px;
   border: 2px solid #bbb;
@@ -765,7 +765,7 @@ div.manager-project div.banner {
   -moz-user-select: none;
   -ms-user-select: none;
 }
-.task .content a.delete {
+#tasks-container .task .content a.delete {
   display: block;
   color: #888;
   font-size: 18px;
@@ -773,11 +773,11 @@ div.manager-project div.banner {
   margin-bottom: -5px;
   float: right;
 }
-.task .content a.delete:hover {
+#tasks-container .task .content a.delete:hover {
   color: #008CBA; /* Default foundation for a's */
 }
 
-.task .content a.invoice {
+#tasks-container .task .content a.invoice {
   display: block;
   color: #888;
   font-size: 18px;
@@ -785,21 +785,21 @@ div.manager-project div.banner {
   margin-bottom: -5px;
   float: left;
 }
-.task .content a.invoice:hover {
+#tasks-container .task .content a.invoice:hover {
   color: #008CBA;
 }
 
-.task .content .logged {
+#tasks-container .task .content .logged {
   float: left;
 }
-.task .content .estimated {
+#tasks-container .task .content .estimated {
   float: right;
 }
-.task .content .description {
+#tasks-container .task .content .description {
   margin-top: 5px;
   margin-bottom: 5px;
 }
-.task.new span.plus {
+#tasks-container .task.new span.plus {
   position: absolute;
   left: 5px;
   font-size: 18px;
@@ -807,26 +807,26 @@ div.manager-project div.banner {
   color: #999;
 }
 
-.tasks .callout {
+#tasks-container .tasks .callout {
   display: none;
   height: 150px;
   padding: 10px;
   border: 1px solid rgba(10, 10, 10, 0.25);
   cursor: pointer;
 }
-.tasks .callout:hover {
+#tasks-container .tasks .callout:hover {
   background-color: #eee;
 }
-.tasks.master .callout:nth-child(1):nth-last-child(2),
-.tasks.master .callout:nth-child(2):nth-last-child(1) {
+#tasks-container .tasks.master .callout:nth-child(1):nth-last-child(2),
+#tasks-container .tasks.master .callout:nth-child(2):nth-last-child(1) {
   display: block;
 }
-.tasks .callout > div {
+#tasks-container .tasks .callout > div {
   display: table;
   height: 100%;
   width: 100%;
 }
-.tasks .callout div.text {
+#tasks-container .tasks .callout div.text {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
@@ -837,8 +837,8 @@ div.manager-project div.banner {
   -ms-user-select: none;
 }
 
-.tasks.master .task.new:nth-child(1):nth-last-child(2),
-.tasks.master .task.new:nth-child(2):nth-last-child(1) {
+#tasks-container .tasks.master .task.new:nth-child(1):nth-last-child(2),
+#tasks-container .tasks.master .task.new:nth-child(2):nth-last-child(1) {
   display: none;
 }
 
@@ -1142,6 +1142,180 @@ div.manager-project div.banner {
   left: -10px;
   width: 22px;
   height: 100%;
+}
+
+/* Chart */
+.gantt {
+  overflow: visible;
+  height: 100%;
+}
+.gantt .frame {
+  background: whitesmoke;
+  height: calc(100% - 15px);
+}
+.gantt .slidee {
+  height: 100%;
+  margin: 0;
+  list-style: none;
+}
+
+.gantt .scrollbar {
+  position: relative;
+  top: 7px;
+  width: 100%;
+  height: 3px;
+}
+.gantt .scrollbar .handle {
+  cursor: pointer;
+  height: 100%;
+  background: #555;
+}
+.gantt .scrollbar .handle .mousearea {
+  position: absolute;
+  height: 15px;
+  width: 100%;
+  left: 0;
+  top: -7px;
+}
+
+.gantt .division {
+  height: 100%;
+  width: 30px;
+  display: inline-block;
+  float: left;
+  position: relative;
+  overflow: visible;
+  text-align: center;
+}
+.gantt .division > .date {
+  font-size: 9px;
+  font-weight: bold;
+  display: none;
+  left: -4px;
+  position: absolute;
+
+  transform: rotate(-15deg);
+  -ms-transform: rotate(-15deg);
+  -webkit-transform: rotate(-15deg);
+
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.gantt .division:nth-child(5n):before, .division:first-child:before, .division:last-child:before {
+  content: '';
+  position: absolute;
+  height: 100%;
+  border-left: dotted 1px #333;
+
+  left: 50%;
+}
+.gantt .division:nth-child(5n) > .date, .division:first-child > .date, .division:last-child > .date {
+  display: inline-block;
+}
+
+.gantt .task {
+  height: 35px;
+  min-width: 100px;
+  background: white;
+  text-align: left;
+  overflow: hidden;
+  position: absolute;
+  font-size: 9px;
+  left: 5px;
+  cursor: pointer;
+  margin-bottom: 2px;
+  border: 1px solid #a477c4;
+  z-index: 2;
+
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.gantt .task.critical {
+  border-color: indianred;
+}
+.gantt .task.critical .date {
+  color: darkred;
+}
+
+.gantt .container {
+  padding: 1px 3px;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+.gantt .task .date {
+  color: #551C7D;
+  display: inline-block;
+  font-size: 8px;
+}
+
+.gantt .task .name {
+  display: inline-block;
+  line-height: 19px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.gantt .task .slack {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  max-width: 100%;
+  padding: 1px 3px;
+  opacity: 0.4;
+  background: #aaa;
+  text-align: right;
+}
+.gantt .task .slack[data-slack="0"] {
+  visibility: hidden;
+}
+#chart-no-date {
+  display: none;
+  bottom: 10px;
+
+  transition: all 0.2s ease-in;
+  -ms-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+}
+#chart-no-date > .container > .name:after {
+  content: " (" attr(data-count) ")";
+}
+#chart-no-date.expanded {
+  height: 150px;
+  width: 250px;
+
+  transition: all 0.4s ease-in;
+  -ms-transition: all 0.4s ease-in;
+  -moz-transition: all 0.4s ease-in;
+  -webkit-transition: all 0.4s ease-in;
+}
+#chart-no-date .task {
+  position: static;
+  margin-right: 2px;
+  height: 25px;
+  display: inline-block;
+}
+#chart-no-date .task .date {
+  display: none;
+}
+#chart-no-date .task .slack {
+  display: none;
+}
+#chart-no-date .tasks {
+  text-align: left;
+  display: none;
+}
+#chart-no-date.expanded .tasks {
+  display: block;
+}
+
+#task-pattern {
+  visibility: hidden;
 }
 
 /* Feed */

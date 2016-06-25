@@ -13,6 +13,7 @@ class CreateCompaniesTable extends Migration {
     Schema::create('companies', function (Blueprint $table) {
       $table->increments('id');
       $table->string('name');
+      $table->integer('invoiceno')->default('0');
       $table->string('slug')->index();
       $table->string('icon');
       $table->timestamps();

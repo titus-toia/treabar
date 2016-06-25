@@ -14,6 +14,7 @@ class CreateProjectsTable extends Migration {
       $table->increments('id');
       $table->string('name');
       $table->string('slug')->index();
+      $table->integer('rate')->nullable();
       $table->integer('color');
       $table->date('from')->nullable();
       $table->date('to')->nullable();
