@@ -20,7 +20,7 @@ class Company extends Model {
   }
 
   public function invoices() {
-    return $this->hasMany('Treabar\Models\Invoice');
+    return $this->hasMany('Treabar\Models\Invoice')->with('project');
   }
 
 }

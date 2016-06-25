@@ -90,11 +90,11 @@ $factory->define(Treabar\Models\Invoice::class, function(Faker\Generator $faker)
     'icon' => call_user_func($random_img, 'img/dev/companies', 'img/invoices/'),
     'client' => $faker->name,
     'company' => $faker->company,
-    'items' => json_encode([[
-      'name' => $faker->words(2),
+    'items' => [[
+      'name' => $faker->words(2, true),
       'hours' => $faker->numberBetween(50, 150),
       'rate' => $faker->numberBetween(10, 50),
       'total' => $faker->numberBetween(500, 2500)
-    ]])
+    ]]
   ];
 });

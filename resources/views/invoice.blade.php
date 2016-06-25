@@ -3,10 +3,10 @@
   <style>
     #invoice-page {
       padding-top: 15px;
-      padding-right: 30px;
+      padding-right: 15px;
     }
     #invoice-list {
-      padding-left: 30px;
+      padding-left: 45px;
       list-style-type: none;
       margin: 0;
     }
@@ -17,7 +17,19 @@
       width: 150px;
       margin-right: 20px;
       margin-bottom: 10px;
-      background-color: bisque;
+      background-color: whitesmoke;
+      cursor: pointer;
+    }
+    #invoice-list .invoice .banner {
+      width: 10px;
+      height: 140px;
+      float: left;
+    }
+    #invoice-list .invoice .preview {
+      overflow: hidden;
+      height: 140px;
+      width: 140px;
+      white-space: nowrap;
     }
   </style>
   <div id="invoice" class="row wrapper">
@@ -25,9 +37,10 @@
       <ul id="invoice-list">
       @foreach($invoices as $invoice)
         <div class="invoice">
-          <div class="banner"></div>
+          <div class="banner color-{{ $invoice->project->color }}" data-color="color-{{ $invoice->project->color }}"></div>
           <div class="preview">
-
+            <span class="hours">{{ $invoice->total()['hours'] }}h</span>
+            <span class="total">${{ $invoice->total()['total'] }}</span>
           </div>
           <span class="name caption"></span>
         </div>

@@ -10,6 +10,9 @@ namespace Treabar\Models;
  */
 class Invoice extends Model
 {
+  protected $casts = [
+    'items' => 'object'
+  ];
 
   public function project() {
     return $this->belongsTo('Treabar\Models\Project');
@@ -23,4 +26,17 @@ class Invoice extends Model
     return $this->belongsTo('Treabar\Models\Company');
   }
 
+  public function total() {
+    $hours = 0;
+    $total = 0;
+    foreach($this->items as $item) {
+      $hours += $item->hours;
+      $total += $item->total;
+    }
+
+    return [
+      'hours' => $hours,
+      'total' => $total
+    ];
+  }
 }
