@@ -72,18 +72,19 @@
       padding-top: 4px;
       padding-right: 4px;
     }
-    #invoice-controls .project-picker[style*="display: block"] ~ .filter {
-      border-right-width: 0;
-    }
     #invoice-controls .project-picker {
-      width: 300px;
+      width: 350px;
       left: 51px;
+      top: 1px;
       position: absolute;
-      padding-top: 5px;
-      padding-bottom: 5px;
+      padding: 5px 10px;
       background-color: white;
       text-align: center;
       z-index: 5;
+
+      -webkit-box-shadow: 6px 6px 2px 1px rgba(0,0,0,0.75);
+      -moz-box-shadow: 6px 6px 2px 1px rgba(0,0,0,0.75);
+      box-shadow: 6px 6px 2px 1px rgba(0,0,0,0.75);
     }
   </style>
   <div id="invoice" class="row wrapper">
