@@ -6,8 +6,8 @@ $(window).on('hashchange', function() {
   }
   if(page == 'dashboard') {
     LoadDashboard();
-  } else if(page == 'invoice') {
-    LoadInvoice();
+  } else if(page == 'invoices') {
+    LoadInvoices();
   }
 });
 
@@ -466,6 +466,24 @@ function LoadFeedPage() {
   $scrollbar.addClass('large-offset-1'); //Sly deleted all other classes so we have to apply it manually
 }
 
-function LoadInvoice() {
+function LoadInvoices() {
+  console.warn('here');
+  var $filter = $('.filter');
+  var $picker = $('.project-picker');
 
+  $filter.click(function() {
+    if(!$picker.is(':visible')) { //Hide irrelevant pickers
+      /*$picker.find('.project-label').each(function() {
+        var $this = $(this);
+        $this.show();
+        var project_id = $this.data('id');
+        var $notifs = $('#notifications').find('div[data-project-id][data-project-id=' + project_id + ']');
+        if($notifs.length == 0) {
+          $this.hide();
+        }
+      });*/
+    }
+    $picker.slideToggle(175);
+    return false;
+  });
 }

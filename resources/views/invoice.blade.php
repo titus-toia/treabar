@@ -67,16 +67,17 @@
 
     #invoice-controls .filter {
       width: 89px;
-      top: 47px;
+      top: 46px;
       left: 25px;
       padding-top: 4px;
       padding-right: 4px;
     }
+    #invoice-controls .project-picker[style*="display: block"] ~ .filter {
+      border-right-width: 0;
+    }
     #invoice-controls .project-picker {
-      display: block;
-      height: 100%;
-      width: 150px;
-      right: 0;
+      width: 300px;
+      left: 51px;
       position: absolute;
       padding-top: 5px;
       padding-bottom: 5px;
