@@ -2,11 +2,12 @@
 @section('content')
   <style>
     #invoice-page {
+      padding-left: 0;
       padding-top: 15px;
       padding-right: 15px;
     }
     #invoice-list {
-      padding-left: 45px;
+      padding-left: 55px;
       list-style-type: none;
       margin: 0;
     }
@@ -22,10 +23,18 @@
       background-color: whitesmoke;
       cursor: pointer;
     }
+    #invoice-list .invoice:hover {
+      background-color: #e8e8e8;
+    }
     #invoice-list .invoice .banner {
       width: 10px;
       height: calc(100% - 15px);
       float: left;
+    }
+    #invoice-list .caption {
+      text-align: center;
+      display: block;
+      font-size: 10px;
     }
     #invoice-list .invoice .preview {
       padding: 3px;
@@ -50,9 +59,44 @@
     #invoice-list .invoice dd {
       margin-bottom: 6px;
     }
+
+    #invoice-controls {
+      position: relative;
+      float: left;
+    }
+
+    #invoice-controls .filter {
+      width: 89px;
+      top: 47px;
+      left: 25px;
+      padding-top: 4px;
+      padding-right: 4px;
+    }
+    #invoice-controls .project-picker {
+      display: block;
+      height: 100%;
+      width: 150px;
+      right: 0;
+      position: absolute;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      background-color: white;
+      text-align: center;
+      z-index: 5;
+    }
   </style>
   <div id="invoice" class="row wrapper">
     <div id="invoice-page" class="columns large-12">
+      <div id="invoice-controls">
+        <div class="vertical-button-control filter">
+          <span><i class="fi-filter"></i>&nbsp;&nbsp;Filter</span>
+        </div>
+        <div class="project-picker hide">
+          @foreach($projects as $project)
+            <span class="project-label color-{{ $project->color }}" data-id="{{ $project->id }}">{{ $project->name }}</span>
+          @endforeach
+        </div>
+      </div>
       <ul id="invoice-list">
       @foreach($invoices as $invoice)
         <div class="invoice">
@@ -68,7 +112,7 @@
               <dd class="total">${{ $invoice->total()['total'] }}</dd>
             </dl>
           </div>
-          <span class="name caption"></span>
+          <span class="name caption">{{ $invoice->name }}</span>
         </div>
       @endforeach
       </ul>

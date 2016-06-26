@@ -6,6 +6,8 @@ $(window).on('hashchange', function() {
   }
   if(page == 'dashboard') {
     LoadDashboard();
+  } else if(page == 'invoice') {
+    LoadInvoice();
   }
 });
 
@@ -29,20 +31,6 @@ $body.on('click', '#page-state-button', function() {
 });
 
 var $manager_page = $('#manager-page');
-$('#manager-tabs')
-  .find('> div').click(function() {
-    $(this).find('a')[0].click();
-    if($(this).hasClass('selected')) { //Simply clicking doesn't work, we have to trigger hashchange
-      $(window).trigger('hashchange');
-    }
-  }).end()
-  .find('> div a').click(function(e) {
-    e.stopPropagation();
-  }).end()
-  .find('div').removeClass('selected').end()
-  .find('a').each(function () {
-    if($(this).attr('href') === '#' + page) $(this).parent().addClass('selected');
-  }).end();
 
 function LoadDashboard() {
   var tabScroll = function($tab) {
@@ -226,9 +214,25 @@ function LoadProjectsPage() {
   });
 }
 
+$('#manager-tabs')
+  .find('> div').click(function(e) {
+    $(this).find('a')[0].click();
+  }).end()
+  .find('> div a').click(function(e) {
+    if($(this).closest('div').hasClass('selected')) { //Simply clicking doesn't work, we have to trigger hashchange
+      $(window).trigger('hashchange');
+    }
+    e.stopPropagation();
+  });
+
 /* Manager navigation */
 function LoadManagerPage(page) {
   page = page || 'projects';
+
+  $('#manager-tabs').find('div').removeClass('selected').end()
+  .find('a').each(function () {
+    if($(this).attr('href') === '#' + page) $(this).parent().addClass('selected');
+  }).end();
 
   $('#manage').addClass('loading');
   $manager_page.removeClass('collapse');
@@ -259,6 +263,7 @@ function LoadManagerPage(page) {
     jsPlumb.deleteEveryEndpoint();
     onLoad[page] && onLoad[page]();
   });
+
 }
 
 /* Tasks page */
@@ -293,6 +298,11 @@ function LoadTasksPage() {
       SelectTask(chain[i]);
     }
   }
+
+  $body.on('click', '.task:not(.new) .title', function() {
+    var id = $(this).closest('.task').data('id');
+    SelectTask(id);
+  });
 }
 
 function ShowChildren(parent_id) {
@@ -340,10 +350,7 @@ function SelectTask(id) {
   ShowChildren(id);
 }
 
-$body.on('click', '.task:not(.new) .title', function() {
-  var id = $(this).closest('.task').data('id');
-  SelectTask(id);
-});
+
 
 /* Timesheet */
 function LoadTimesheetPage() {
@@ -457,4 +464,8 @@ function LoadFeedPage() {
 
   DefaultSly($frame, $scrollbar);
   $scrollbar.addClass('large-offset-1'); //Sly deleted all other classes so we have to apply it manually
+}
+
+function LoadInvoice() {
+
 }

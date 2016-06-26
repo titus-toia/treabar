@@ -15,7 +15,9 @@ class InvoiceController extends Controller {
 
   public function index() {
     $invoices = \Auth::user()->company->invoices;
+    $projects = \Auth::user()->getProjects();
     return view('invoice', [
+      'projects' => $projects,
       'invoices' => $invoices
     ]);
   }

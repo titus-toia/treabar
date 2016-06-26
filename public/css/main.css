@@ -413,7 +413,7 @@ nav.top-bar .profile a > i {
   margin-bottom: 2px;
 }
 
-.project-picker {
+#dashboard .project-picker {
   display: block;
   width: calc(100% - 16px);
   padding-top: 5px;
