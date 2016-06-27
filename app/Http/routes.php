@@ -56,6 +56,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::put('{invoice}', 'InvoiceController@update')->name('invoice.update');
     Route::delete('{invoice}', 'InvoiceController@destroy')->name('invoice.delete');
   });
+
+  Route::group(['prefix' => 'settings'], function() {
+    Route::get('/', 'SettingsController@userSettings')->name('settings.user');
+    Route::get('company', 'SettingsController@companySettings')->name('settings.company');
+  });
 });
 
 Route::get('test', function() {

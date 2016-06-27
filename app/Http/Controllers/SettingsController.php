@@ -10,11 +10,32 @@ use Treabar\Models\Feedable;
 
 class SettingsController extends Controller
 {
-  public function UserSettings() {
+  public function __construct() {
+    view()->share('page', 'settings');
+  }
+
+  public function userSettings() {
 
   }
 
-  public function CompanySettings() {
+  public function companySettings() {
+    $company = \Auth::user()->company;
+
+    return view()->make('settings.company', [
+      'company' => $company,
+      'devs' => $company->devs,
+      'managers' => $company->managers,
+      'clients' => $company->clients
+    ]);
 
   }
+
+  public function updateCompany() {
+
+  }
+  public function updateUser() {
+
+  }
+
+
 }

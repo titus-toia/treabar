@@ -32,7 +32,6 @@ class Project extends Model
   public function client() {
     return $this->belongsTo('Treabar\Models\User', 'client_id');
   }
-
   public function tasks($topLevel = false) {
     $relation = $this->hasMany('Treabar\Models\Task');
     return $topLevel? $relation->where('parent_id', null): $relation;

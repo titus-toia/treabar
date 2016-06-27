@@ -19,6 +19,18 @@ class Company extends Model {
     return $this->hasMany('Treabar\Models\User');
   }
 
+  public function clients() {
+    return $this->users()->where('role', User::ROLE_CLIENT);
+  }
+
+  public function devs() {
+    return $this->users()->where('role', User::ROLE_DEV);
+  }
+
+  public function managers() {
+    return $this->users()->where('role', User::ROLE_MANAGER);
+  }
+
   public function invoices() {
     return $this->hasMany('Treabar\Models\Invoice')->with('project');
   }
