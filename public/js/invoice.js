@@ -109,7 +109,8 @@ function updateNumber(e) {
 /* Update Invoice
 /* ========================================================================== */
 
-function updateInvoice() {
+function updateInvoice(doAjax) {
+  if(doAjax === undefined) doAjax = true;
 	var total = 0;
 	var cells, price, total, a, i;
 
@@ -140,25 +141,36 @@ function updateInvoice() {
 	cells[0].innerHTML = total;
 
 	// set balance and meta balance
-	cells[2].innerHTML = document.querySelector('table.meta tr:last-child td:last-child span:last-child').innerHTML = parsePrice(total - parseFloatHTML(cells[1]));
-
-	// update prefix formatting
-	// ========================
-
-	var prefix = document.querySelector('#prefix').innerHTML;
-	for (a = document.querySelectorAll('[data-prefix]'), i = 0; a[i]; ++i) a[i].innerHTML = prefix;
+	//cells[2].innerHTML = document.querySelector('table.meta tr:last-child td:last-child span:last-child').innerHTML = parsePrice(total - parseFloatHTML(cells[1]));
 
 	// update price formatting
 	// =======================
 
 	for (a = document.querySelectorAll('span[data-prefix] + span'), i = 0; a[i]; ++i) if (document.activeElement != a[i]) a[i].innerHTML = parsePrice(parseFloatHTML(a[i]));
+
+  if(doAjax) {
+    var data = {};
+    $('[data-attribute]').each(function() {
+      data[$(this).data('attribute')] = $(this).text();
+    });
+    data.items = [];
+    $('.inventory').find('tr').each(function() {
+      var item = {};
+      var $row = $(this);
+      $row.find('[data-field]').each(function() {
+        item[$(this).data('field')] = $(this).text();
+      });
+    });
+
+    var ajax = $.post('')
+  }
 }
 
 /* On Content Load
 /* ========================================================================== */
 
 function onContentLoad() {
-	updateInvoice();
+	updateInvoice(false);
 
 	var
 	input = document.querySelector('input'),
@@ -171,14 +183,14 @@ function onContentLoad() {
 
 		if (e.target.matchesSelector('.add')) {
 			document.querySelector('table.inventory tbody').appendChild(generateTableRow());
+      updateInvoice(false);
 		}
 		else if (e.target.className == 'cut') {
 			row = e.target.ancestorQuerySelector('tr');
 
 			row.parentNode.removeChild(row);
+      updateInvoice(false);
 		}
-
-		updateInvoice();
 	}
 
 	function onEnterCancel(e) {
@@ -221,17 +233,19 @@ function onContentLoad() {
 		document.addEventListener('keydown', updateInvoice);
 		document.addEventListener('keyup', updateInvoice);
 
-		input.addEventListener('focus', onEnterCancel);
-		input.addEventListener('mouseover', onEnterCancel);
-		input.addEventListener('dragover', onEnterCancel);
-		input.addEventListener('dragenter', onEnterCancel);
+    if(input) { //Not allowing image uploads for now
+      input.addEventListener('focus', onEnterCancel);
+      input.addEventListener('mouseover', onEnterCancel);
+      input.addEventListener('dragover', onEnterCancel);
+      input.addEventListener('dragenter', onEnterCancel);
 
-		input.addEventListener('blur', onLeaveCancel);
-		input.addEventListener('dragleave', onLeaveCancel);
-		input.addEventListener('mouseout', onLeaveCancel);
+      input.addEventListener('blur', onLeaveCancel);
+      input.addEventListener('dragleave', onLeaveCancel);
+      input.addEventListener('mouseout', onLeaveCancel);
 
-		input.addEventListener('drop', onFileInput);
-		input.addEventListener('change', onFileInput);
+      input.addEventListener('drop', onFileInput);
+      input.addEventListener('change', onFileInput);
+    }
 	}
 }
 

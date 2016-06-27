@@ -92,8 +92,9 @@ $factory->define(Treabar\Models\Invoice::class, function(Faker\Generator $faker)
     'company' => $faker->company,
     'items' => [[
       'name' => $faker->words(2, true),
-      'hours' => $faker->numberBetween(50, 150),
+      'description' => $faker->text(50),
       'rate' => $faker->numberBetween(10, 50),
+      'hours' => $faker->numberBetween(50, 150),
       'total' => $faker->numberBetween(500, 2500)
     ]]
   ];
