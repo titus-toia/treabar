@@ -88,8 +88,8 @@ $factory->define(Treabar\Models\Invoice::class, function(Faker\Generator $faker)
     'name' => $faker->sentence(2),
     'issued_at' => $faker->dateTimeThisMonth,
     'icon' => call_user_func($random_img, 'img/dev/companies', 'img/invoices/'),
-    'client' => $faker->name,
-    'company' => $faker->company,
+    'client_name' => $faker->name,
+    'company_name' => $faker->company,
     'items' => [[
       'name' => $faker->words(2, true),
       'description' => $faker->text(50),

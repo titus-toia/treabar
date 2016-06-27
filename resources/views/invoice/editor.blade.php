@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-		<title data-attribute="name">{{ $invoice->name or 'Invoice' }}</title>
+		<title>{{ $invoice->name or 'Invoice' }}</title>
     <link rel="license" href="http://www.opensource.org/licenses/mit-license/">
 		<link rel="stylesheet" href="{{ asset('css/invoice.css') }}">
     <script src="{{ asset('foundation/js/vendor/jquery.js') }}"></script>
@@ -24,16 +24,16 @@
 	</head>
 	<body>
 		<header>
-			<h1><span contenteditable>Invoice</span></h1>
-			<address contenteditable data-attribute="client">
-				{{ $invoice->client or 'Client Name' }}
+			<h1><span contenteditable data-attribute="name">{{ $invoice->name or 'Invoice' }}</span></h1>
+			<address contenteditable data-attribute="client_name">
+				{{ $invoice->client_name or 'Client Name' }}
 			</address>
-			<span><img alt="" src=""></span>
+			<span><img alt="" src="{{ asset('img/companies/' . $invoice->company->icon) }}"></span>
 		</header>
 		<article>
 			<h1>Recipient</h1>
-			<address contenteditable data-attribute="company">
-				{{ $invoice->company or 'Issuing Company' }}
+			<address contenteditable data-attribute="company_name">
+				{{ $invoice->company_name or 'Issuing Company' }}
 			</address>
 			<table class="meta">
 				<tr>
