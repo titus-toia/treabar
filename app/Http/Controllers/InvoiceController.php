@@ -21,4 +21,16 @@ class InvoiceController extends Controller {
       'invoices' => $invoices
     ]);
   }
+
+  public function create() {
+    echo 'create';
+  }
+
+  public function edit() {
+    echo 'edit';
+  }
+
+  public function destroy() {
+    echo 'destroy';
+  }
 }

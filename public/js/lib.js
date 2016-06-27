@@ -167,27 +167,33 @@ function AjaxHandler(self) {
     //$(display).html('').addClass('loading');
   }
 
-  $.ajax(url, {
-    data: payload,
-    type: method,
-    success: function (response) {
-      if(display == 'slider') {
-        $slider.html(response);
-        $slider.removeClass('loading');
-      } else {
-        console.log(response);
-      }
-      $(document).foundation('dropdown', 'reflow');
-    },
-    error: function(response) {
+  if(display != 'blank') {
+    $.ajax(url, {
+      data: payload,
+      type: method,
+      success: function (response) {
+        if (display == 'slider') {
+          $slider.html(response);
+          $slider.removeClass('loading');
+        } else {
+          //console.log(response);
+        }
+        $(document).foundation('dropdown', 'reflow');
+      },
+      error: function (response) {
 
-    }
-  });
+      }
+    });
+  } else {
+    window.open(url, '_blank');
+    window.focus();
+  }
 }
 
 $(document).on('click', '[data-ajax-interact]', function() {
   var self = $(this),
     confirm_msg = self.data('confirm');
+
   if(confirm_msg) {
     if(confirm(confirm_msg)) {
       AjaxHandler(self);

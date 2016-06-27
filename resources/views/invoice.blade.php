@@ -21,7 +21,6 @@
       border: 2px solid whitesmoke;
       border-left-width: 0;
       background-color: whitesmoke;
-      cursor: pointer;
     }
     #invoice-list .invoice:hover {
       background-color: #e8e8e8;
@@ -37,6 +36,7 @@
       font-size: 10px;
     }
     #invoice-list .invoice .preview {
+      position: relative;
       padding: 3px;
       overflow: hidden;
       height: calc(100% - 15px);
@@ -44,15 +44,36 @@
       white-space: nowrap;
     }
     #invoice-list .invoice .date {
-      float: right;
-      display: inline-block;
+      position: absolute;
+      top: 1px;
+      right: 3px;
       font-size: 10px;
       text-align: right;
+    }
+    #invoice-list .invoice:hover .actions {
+      display: block;
+    }
+    #invoice-list .invoice .actions {
+      position: absolute;
+      top: 40%;
+      right: 3px;
+      font-size: 15px;
+      text-align: right;
+      display: none;
+    }
+    #invoice-list .invoice .actions a {
+      position: relative;
+      color: #888;
+    }
+    #invoice-list .invoice .actions a:hover {
+      color: #008cba;
+    }
+    #invoice-list .invoice .actions a.delete {
+      right: 5px;
     }
     #invoice-list .invoice dl {
       font-size: 11px;
     }
-
     #invoice-list .invoice dt {
       margin-bottom: 3px;
     }
@@ -113,6 +134,17 @@
               <dt>Amount billed</dt>
               <dd class="total">${{ $invoice->total()['total'] }}</dd>
             </dl>
+            <div class="actions">
+              <a class="edit" href="#" data-ajax-interact data-display="blank"
+                 data-url="{{ route('invoice.edit', ['project' => $project->id, 'invoice' => $invoice->id]) }}" >
+                <i class="fi-page-edit"></i>
+              </a><br>
+              <a class="delete" href="#" data-ajax-interact data-method="delete"
+                 data-url="{{ route('invoice.delete', ['project' => $project->id, 'invoice' => $invoice->id]) }}"
+                 data-confirm="Are you sure you want to delete this invoice?">
+                <i class="fi-trash"></i>
+              </a>
+            </div>
           </div>
           <span class="name caption">{{ $invoice->name }}</span>
         </div>

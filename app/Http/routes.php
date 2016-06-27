@@ -49,6 +49,11 @@ Route::group(['middleware' => ['web']], function () {
 
   Route::group(['prefix' => 'invoice'], function () {
     Route::get('/', 'InvoiceController@index')->name('invoices');
+    Route::get('{project}/create', 'InvoiceController@create')->name('invoice.create');
+    Route::post('{project}', 'InvoiceController@store')->name('invoice.store');
+    Route::get('{project}/{invoice}', 'InvoiceController@edit')->name('invoice.edit');
+    Route::put('{project}/{invoice}', 'InvoiceController@update')->name('invoice.update');
+    Route::delete('{project}/{invoice}', 'InvoiceController@destroy')->name('invoice.delete');
   });
 });
 
