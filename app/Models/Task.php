@@ -128,6 +128,15 @@ class Task extends Node {
     return $this->hasMany('Treabar\Models\Task', 'master_id');
   }
 
+  protected static function boot() {
+    parent::boot();
+
+    static::deleting(function($task) {
+      $task->comments()->delete();
+      $task->activities()->delete();
+    });
+  }
+
   public function logged() {
     return floor($this->activities->sum('duration') / 3600);
   }

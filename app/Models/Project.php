@@ -42,6 +42,15 @@ class Project extends Model
     return $this->belongsToMany('Treabar\Models\User', 'project_users');
   }
 
+  protected static function boot() {
+    parent::boot();
+
+    static::deleting(function($project) {
+      $project->tasks()->delete();
+      $project->invoices()->delete();
+    });
+  }
+
   public function getTaskHierarchies() {
     $tasks = $this->tasks(true)->get()->map(function($task) {
       return $task->getDescendantsAndSelf()->toHierarchy()->first();
