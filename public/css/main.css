@@ -414,7 +414,6 @@ nav.top-bar .profile a > i {
 }
 
 #dashboard .project-picker {
-  display: block;
   width: calc(100% - 16px);
   padding-top: 5px;
   position: absolute;

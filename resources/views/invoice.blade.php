@@ -73,7 +73,7 @@
       padding-right: 4px;
     }
     #invoice-controls .project-picker {
-      width: 350px;
+      width: 400px;
       left: 51px;
       top: 1px;
       position: absolute;
@@ -101,7 +101,7 @@
       </div>
       <ul id="invoice-list">
       @foreach($invoices as $invoice)
-        <div class="invoice">
+        <div class="invoice" data-project-id="{{ $invoice->project_id }}">
           <div class="banner color-{{ $invoice->project->color }}" data-color="color-{{ $invoice->project->color }}"></div>
           <div class="preview">
             <span class="date">{{ $invoice->issued_at  }}</span>

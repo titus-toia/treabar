@@ -116,6 +116,7 @@ function LoadDashboard() {
         }
       });
     }
+
     $picker.slideToggle(175);
     return false;
   });
@@ -467,23 +468,57 @@ function LoadFeedPage() {
 }
 
 function LoadInvoices() {
-  console.warn('here');
+  var $invoices = $('#invoice-list');
   var $filter = $('.filter');
   var $picker = $('.project-picker');
 
   $filter.click(function() {
     if(!$picker.is(':visible')) { //Hide irrelevant pickers
-      /*$picker.find('.project-label').each(function() {
+      $picker.find('.project-label').each(function() {
         var $this = $(this);
         $this.show();
         var project_id = $this.data('id');
-        var $notifs = $('#notifications').find('div[data-project-id][data-project-id=' + project_id + ']');
+        var $notifs = $invoices.find('.invoice[data-project-id=' + project_id + ']');
         if($notifs.length == 0) {
           $this.hide();
         }
-      });*/
+      });
     }
     $picker.slideToggle(175);
     return false;
   });
+
+
+  $('.project-picker .project-label').click(function() {
+    var $this = $(this);
+    var project_id = $this.data('id');
+    $picker.slideUp(175);
+
+    //$bars.addClass('hide');
+    if(!$this.hasClass('active')) {
+      $this.addClass('active');
+      $filter.addClass('filtered');
+      FilterInvoices(project_id);
+    } else {
+      $this.removeClass('active');
+      $filter.removeClass('filtered');
+      FilterInvoices();
+    }
+  });
+}
+
+function FilterInvoices(project_id) {
+  var $invoices = $('#invoice-list');
+  $('style.notifications').remove();
+
+  var selector = 'div[data-project-id][data-project-id!=' + project_id + ']';
+
+  if (project_id ) {
+    $invoices.find(selector).hide();
+    $invoices.find(':not(' + selector +')').show();
+  } else {
+    $invoices.find('[data-project-id]').show();
+  }
+
+  $('body').append('<style>' + selector + '{ display: none; }</style>');
 }
