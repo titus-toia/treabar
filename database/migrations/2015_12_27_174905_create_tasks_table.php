@@ -29,6 +29,7 @@ class CreateTasksTable extends Migration {
       $table->date('from')->nullable();
       $table->date('to')->nullable();
       $table->integer('master_id')->nullable();
+      $table->integer('invoice_id')->nullable();
       $table->string('user_id')->nullable();
       $table->integer('parent_id')->nullable()->index();
       $table->integer('project_id')->unsigned();

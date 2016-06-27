@@ -13,7 +13,7 @@ class Invoice extends Model
   protected $casts = [
     'items' => 'object'
   ];
-  protected $guarded = ['company_id', 'project_id'];
+  protected $guarded = [];
 
   public function project() {
     return $this->belongsTo('Treabar\Models\Project');

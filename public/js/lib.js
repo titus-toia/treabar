@@ -168,7 +168,7 @@ function AjaxHandler(self) {
   }
 
   if(display != 'blank') {
-    $.post(url, {
+    $.ajax(url, {
       data: payload,
       type: method,
       success: function (response) {

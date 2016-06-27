@@ -154,6 +154,14 @@ class ManagerController extends Controller {
     return $task;
   }
 
+  public function invoiceTask(Project $project, Task $task) {
+    if($task->invoice_id) {
+        return redirect()->route('invoice.edit', $task->invoice_id);
+    } else {
+        return redirect()->route('invoice.create', $task->id);
+    }
+  }
+
   public function completeTask(Task $task) {
     $task->update(['finished' => true]);
 

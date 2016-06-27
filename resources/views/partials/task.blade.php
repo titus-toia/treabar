@@ -21,7 +21,10 @@
     <div class="clearfix"></div>
     <div class="description">{{ $task->description }}</div>
     @if($task->finished && $task->depth == 0)
-      <a class="invoice" href="#"><i class="fi-price-tag" data-invoice="{{ $task->invoice_id?: 'new' }}"></i></a>
+    <a class="invoice" href="#" data-ajax-interact data-display="blank"
+        data-url="{{ route('manager.tasks.invoice', ['project' => $project->id, 'task' => $task->id]) }}">
+      <i class="fi-price-tag" data-invoice="{{ $task->invoice_id?: 'new' }}"></i>
+    </a>
     @endif
 
     <a class="delete" href="#" data-ajax-interact data-method="delete"

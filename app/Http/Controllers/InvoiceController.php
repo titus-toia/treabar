@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Treabar\Http\Requests;
 use Treabar\Models\Invoice;
+use Treabar\Models\Task;
 
 class InvoiceController extends Controller {
   public function __construct() {
@@ -21,8 +22,34 @@ class InvoiceController extends Controller {
       'invoices' => $invoices
     ]);
   }
-  public function store() {
-    echo 'creating';
+
+  public function create(Task $task) {
+    if($task->invoice_id) {
+      return redirect()->route('invoice.edit', $task->invoice_id);
+    }
+    $client = $task->project->client? $task->project->client->name: '';
+    $invoice = new Invoice([
+      'name' => ($client?: 'Invoice') . ' ' . date('Y-m-d'),
+      'issued_at' => date('Y-m-d'),
+      'invoiceno' => 1,
+      'client_name' => $client?: '',
+      'company_name' => $task->project->company->name,
+      'items' => [[
+        'name' => $task->name,
+        'description' => $task->description,
+        'rate' => 10,
+        'hours' => round($task->loggedTotal()),
+        'total' => 0
+      ]],
+      'company_id' => $task->project->company_id,
+      'client_id' => $task->project->client_id,
+      'project_id' => $task->project_id
+    ]);
+    $invoice->save();
+    $task->invoice_id = $invoice->id;
+    $task->save();
+
+    return view('invoice.editor', ['invoice' => $invoice]);
   }
 
   public function edit(Invoice $invoice) {
@@ -34,6 +61,6 @@ class InvoiceController extends Controller {
   }
 
   public function destroy(Invoice $invoice) {
-    echo 'destroy';
+    $invoice->delete();
   }
 }

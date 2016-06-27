@@ -27,6 +27,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('{project}/tasks', 'ManagerController@tasks')->name('manager.tasks');
     Route::get('{project}/tasks/create', 'ManagerController@createTask')->name('manager.tasks.create');
     Route::get('{project}/tasks/{task}/edit', 'ManagerController@editTask')->name('manager.tasks.edit');
+    Route::get('{project}/tasks/{task}/invoice', 'ManagerController@invoiceTask')->name('manager.tasks.invoice');
     Route::get('tasks/{task}/comments', 'ManagerController@comments')->name('manager.tasks.comments');
     Route::post('{project}/tasks', 'ManagerController@storeTask')->name('manager.tasks.store');
     Route::post('tasks/{task}/comment', 'ManagerController@comment')->name('manager.tasks.comment');
@@ -49,7 +50,7 @@ Route::group(['middleware' => ['web']], function () {
 
   Route::group(['prefix' => 'invoice'], function () {
     Route::get('/', 'InvoiceController@index')->name('invoices');
-    Route::get('create', 'InvoiceController@create')->name('invoice.create');
+    Route::get('create/{task}', 'InvoiceController@create')->name('invoice.create');
     Route::post('/', 'InvoiceController@store')->name('invoice.store');
     Route::get('{invoice}', 'InvoiceController@edit')->name('invoice.edit');
     Route::put('{invoice}', 'InvoiceController@update')->name('invoice.update');
