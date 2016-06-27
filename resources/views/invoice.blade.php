@@ -136,11 +136,11 @@
             </dl>
             <div class="actions">
               <a class="edit" href="#" data-ajax-interact data-display="blank"
-                 data-url="{{ route('invoice.edit', ['project' => $project->id, 'invoice' => $invoice->id]) }}" >
+                 data-url="{{ route('invoice.edit', ['invoice' => $invoice->id]) }}">
                 <i class="fi-page-edit"></i>
               </a><br>
               <a class="delete" href="#" data-ajax-interact data-method="delete"
-                 data-url="{{ route('invoice.delete', ['project' => $project->id, 'invoice' => $invoice->id]) }}"
+                 data-url="{{ route('invoice.delete', ['invoice' => $invoice->id]) }}"
                  data-confirm="Are you sure you want to delete this invoice?">
                 <i class="fi-trash"></i>
               </a>
