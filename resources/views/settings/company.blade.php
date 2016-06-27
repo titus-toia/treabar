@@ -17,10 +17,28 @@
 #company-settings dd, dt {
   clear: both;
 }
-#company-settings div.columns div {
+#company-settings div.columns > div {
+  position: relative;
+  width: 350px;
   padding: 20px;
   background-color: whitesmoke;
   display: inline-block;
+}
+#company-settings .user-form {
+  width: 350px;
+  position: absolute;
+  top: -10px;
+  left: 380px;
+  display: none;
+}
+#company-settings ul.people img {
+  cursor: pointer;
+}
+#company-settings ul.people img.active ~ .user-form {
+  display: block;
+}
+#company-settings ul.people img:hover ~ .user-form {
+  display: block;
 }
 </style>
 <div id="company-settings" class="row wrapper">
@@ -30,21 +48,30 @@
         <dt>Devs</dt>
         <dd><ul class="people">
         @foreach($devs as $user)
-          <li><img height="35" width="35" src="{{ $user->icon() }}"/></li>
+          <li>
+            <img height="35" width="35" src="{{ $user->icon() }}"/>
+            @include('partials.settings-user-form', ['user' => $user])
+          </li>
         @endforeach
         </ul></dd>
         <dt>Managers</dt>
         <dd><ul class="people">
         @foreach($managers as $user)
-          <li><img height="35" width="35" src="{{ $user->icon() }}"/></li>
+          <li>
+            <img height="35" width="35" src="{{ $user->icon() }}"/>
+            @include('partials.settings-user-form', ['user' => $user])
+          </li>
         @endforeach
           </ul></dd>
         <dt>Clients</dt>
         <dd><ul class="people">
         @foreach($clients as $user)
-          <li><img height="35" width="35" src="{{ $user->icon() }}"/></li>
+          <li>
+            <img height="35" width="35" src="{{ $user->icon() }}"/>
+            @include('partials.settings-user-form', ['user' => $user])
+          </li>
         @endforeach
-          </ul></dd>
+        </ul></dd>
       </dl>
     </div>
   </div>

@@ -8,6 +8,8 @@ $(window).on('hashchange', function() {
     LoadDashboard();
   } else if(page == 'invoices') {
     LoadInvoices();
+  } else if(page == 'settings') {
+    LoadSettings();
   }
 });
 
@@ -521,4 +523,13 @@ function FilterInvoices(project_id) {
   }
 
   $('body').append('<style>' + selector + '{ display: none; }</style>');
+}
+
+function LoadSettings() {
+  $('#company-settings').find('ul.people img').click(function() {
+    $('#company-settings').find('ul.people img').removeClass('active');
+    $(this).addClass('active');
+  });
+
+
 }
