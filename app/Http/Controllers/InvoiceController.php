@@ -4,9 +4,8 @@ namespace Treabar\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Input;
 use Treabar\Http\Requests;
-use Treabar\Http\Controllers\Controller;
 use Treabar\Models\Invoice;
 
 class InvoiceController extends Controller {
@@ -22,21 +21,16 @@ class InvoiceController extends Controller {
       'invoices' => $invoices
     ]);
   }
-
-  public function create() {
-    return view('invoice.editor');
-  }
-
   public function store() {
-    echo 'create';
+    echo 'creating';
   }
 
   public function edit(Invoice $invoice) {
-    return view('invoice.editor');
+    return view('invoice.editor', ['invoice' => $invoice]);
   }
 
   public function update(Invoice $invoice) {
-    echo 'create';
+    $invoice->update(Input::get('invoice'));
   }
 
   public function destroy(Invoice $invoice) {

@@ -68,11 +68,11 @@
 function generateTableRow() {
 	var emptyColumn = document.createElement('tr');
 
-	emptyColumn.innerHTML = '<td><a class="cut">-</a><span contenteditable></span></td>' +
-		'<td><span contenteditable></span></td>' +
-		'<td><span data-prefix>$</span><span contenteditable>0.00</span></td>' +
-		'<td><span contenteditable>0</span></td>' +
-		'<td><span data-prefix>$</span><span>0.00</span></td>';
+	emptyColumn.innerHTML = '<td><a class="cut">-</a><span data-field="name" contenteditable></span></td>' +
+		'<td><span data-field="description" contenteditable></span></td>' +
+		'<td><span data-prefix>$</span><span data-field="rate" contenteditable>0.00</span></td>' +
+		'<td><span data-field="hours" contenteditable>0</span></td>' +
+		'<td><span data-field="total" data-prefix>$</span><span>0.00</span></td>';
 
 	return emptyColumn;
 }
@@ -108,7 +108,7 @@ function updateNumber(e) {
 
 /* Update Invoice
 /* ========================================================================== */
-
+var ajax = null
 function updateInvoice(doAjax) {
   if(doAjax === undefined) doAjax = true;
 	var total = 0;
@@ -154,15 +154,23 @@ function updateInvoice(doAjax) {
       data[$(this).data('attribute')] = $(this).text();
     });
     data.items = [];
-    $('.inventory').find('tr').each(function() {
+    $('.inventory').find('tbody tr').each(function() {
       var item = {};
       var $row = $(this);
       $row.find('[data-field]').each(function() {
         item[$(this).data('field')] = $(this).text();
       });
+
+      data.items.push(item);
     });
 
-    var ajax = $.post('')
+    ajax && ajax.abort();
+    ajax = $.post(url, {
+      _method: method,
+      invoice: data
+    }, function() {
+
+    }, 'json');
   }
 }
 

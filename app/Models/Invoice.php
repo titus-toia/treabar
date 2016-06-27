@@ -13,6 +13,7 @@ class Invoice extends Model
   protected $casts = [
     'items' => 'object'
   ];
+  protected $guarded = ['company_id', 'project_id'];
 
   public function project() {
     return $this->belongsTo('Treabar\Models\Project');
@@ -29,9 +30,14 @@ class Invoice extends Model
   public function total() {
     $hours = 0;
     $total = 0;
-    foreach($this->items as $item) {
-      $hours += $item->hours;
-      $total += $item->total;
+    if(is_array($this->items)) {
+      foreach ($this->items as $item) {
+        $hours += $item->hours;
+        $total += $item->total;
+      }
+    } else {
+      $hours = 0;
+      $total = 0;
     }
 
     return [

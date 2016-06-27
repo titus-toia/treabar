@@ -8,6 +8,13 @@
     <script src="{{ asset('foundation/js/vendor/jquery.js') }}"></script>
 		<script src="{{ asset('js/invoice.js') }}"></script>
     <script>
+      @if(isset($invoice))
+      var url = '{{ route("invoice.update", ['invoice' => $invoice]) }}';
+      var method = 'put';
+      @else
+      var method = 'post';
+      var url = '{{ route("invoice.store") }}';
+      @endif
       $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -25,7 +32,7 @@
 		</header>
 		<article>
 			<h1>Recipient</h1>
-			<address contenteditable data-attribute="client">
+			<address contenteditable data-attribute="company">
 				{{ $invoice->company or 'Issuing Company' }}
 			</address>
 			<table class="meta">
@@ -44,20 +51,30 @@
 						<th><span>Item</span></th>
 						<th><span>Description</span></th>
 						<th><span>Rate</span></th>
-						<th><span>Quantity</span></th>
+						<th><span>Hours</span></th>
 						<th><span>Price</span></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-            @foreach($invoice->items as $item)
-						<td><a class="cut">-</a><span data-field="name" contenteditable>{{ $item->name or '' }}</span></td>
-						<td><span class="" contenteditable data-field="description">{{ $item->description or '' }}</span></td>
-						<td><span data-prefix>$</span><span contenteditable data-field="rate">{{ $item->rate or 0 }}</span></td>
-						<td><span contenteditable data-field="hours">{{ $item->hours or 0 }}</span></td>
-						<td><span data-prefix data-field="total">$</span><span>{{ $item->total or 0 }}</span></td>
-            @endforeach
-					</tr>
+            @if(is_array($invoice->items))
+              @foreach($invoice->items as $item)
+              <tr>
+                <td><a class="cut">-</a><span data-field="name" contenteditable>{{ $item->name or '' }}</span></td>
+                <td><span data-field="description" contenteditable>{{ $item->description or '' }}</span></td>
+                <td><span data-prefix>$</span><span data-field="rate" contenteditable>{{ $item->rate or 0 }}</span></td>
+                <td><span data-field="hours" contenteditable>{{ $item->hours or 0 }}</span></td>
+                <td><span data-field="total" data-prefix >$</span><span>{{ $item->total or 0 }}</span></td>
+              </tr>
+              @endforeach
+            @else
+              <tr>
+                <td><a class="cut">-</a><span data-field="name" contenteditable></span></td>
+                <td><span data-field="description" contenteditable></span></td>
+                <td><span data-prefix>$</span><span data-field="rate" contenteditable>0.00</span></td>
+                <td><span data-field="hours" contenteditable>0</span></td>
+                <td><span data-field="total" data-prefix >$</span><span>0.00</span></td>
+              </tr>
+            @endif
 				</tbody>
 			</table>
 			<a class="add">+</a>
