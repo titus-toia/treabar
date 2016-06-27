@@ -177,8 +177,14 @@ nav.top-bar .profile a.icon img {
   display: block;
 }
 nav.top-bar .profile a > i {
-  font-size: 25px;
 }
+nav.top-bar .profile .dropdown a {
+  color: #002056 !important;
+}
+nav.top-bar .profile .dropdown a:hover {
+  color: white !important;
+}
+
 #page-state-button {
   cursor: pointer;
   padding-left: 10px;

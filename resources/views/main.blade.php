@@ -42,6 +42,10 @@
         </a>
         @endif
         <ul class="dropdown">
+          @if(\Auth::user()->type == \Treabar\Models\User::ROLE_MANAGER ||
+            \Auth::user()->type == \Treabar\Models\User::ROLE_ROOT)
+          <li a href="#">Company Settings</li>
+          @endif
           <li><a href="#">Profile</a></li>
           <li><a href="#">Log Out</a></li>
         </ul>
