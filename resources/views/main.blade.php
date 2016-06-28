@@ -42,11 +42,11 @@
         </a>
         @endif
         <ul class="dropdown">
-          @if(\Auth::user()->type == \Treabar\Models\User::ROLE_MANAGER ||
-            \Auth::user()->type == \Treabar\Models\User::ROLE_ROOT)
-          <li a href="#">Company Settings</li>
+          @if(\Auth::user()->role == \Treabar\Models\User::ROLE_MANAGER ||
+            \Auth::user()->role == \Treabar\Models\User::ROLE_ROOT)
+          <li><a href="{{ route('settings.company') }}">Company Settings</a></li>
           @endif
-          <li><a href="#">Profile</a></li>
+          <li><a href="{{ route('settings.user') }}">Profile</a></li>
           <li><a href="#">Log Out</a></li>
         </ul>
       </li>

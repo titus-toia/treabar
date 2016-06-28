@@ -13,10 +13,6 @@ $(window).on('hashchange', function() {
   }
 });
 
-$(function() {
-  $(window).trigger('hashchange');
-});
-
 var onLoad = {
   projects: LoadProjectsPage,
   tasks: LoadTasksPage,
@@ -24,6 +20,13 @@ var onLoad = {
   chart: LoadChartPage,
   feed: LoadFeedPage
 };
+
+$('.profile a.icon').click(function() {
+  $(this).toggleClass('show-dropdown');
+});
+$('.profile .dropdown a').click(function() {
+  $(this).closest('profile').find('a.icon').removeClass('show-dropdown');
+});
 
 var $body = $('body');
 $body.on('click', '#page-state-button', function() {

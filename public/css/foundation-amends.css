@@ -8,3 +8,12 @@ textarea {
 .top-bar-section .has-dropdown > a::after {
   display: none;
 }
+
+.top-bar-section .has-dropdown > a.show-dropdown + .dropdown {
+  position: static !important;
+  height: auto;
+  width: auto;
+  overflow: visible;
+  clip: auto;
+  display: block;
+  position: absolute !important; }
