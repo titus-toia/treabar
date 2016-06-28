@@ -20,7 +20,7 @@
             <span class="date">{{ $invoice->issued_at  }}</span>
             <dl>
               <dt>Client</dt>
-              <dd>{{ $invoice->client }}</dd>
+              <dd>{{ $invoice->client_name }}</dd>
               <dt>Hours</dt>
               <dd class="hours">{{ $invoice->total()['hours'] }}h</dd>
               <dt>Amount billed</dt>
@@ -32,6 +32,7 @@
                 <i class="fi-page-edit"></i>
               </a><br>
               <a class="delete" href="#" data-ajax-interact data-method="delete"
+                 data-display="reload"
                  data-url="{{ route('invoice.delete', ['invoice' => $invoice->id]) }}"
                  data-confirm="Are you sure you want to delete this invoice?">
                 <i class="fi-trash"></i>

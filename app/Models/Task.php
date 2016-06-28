@@ -130,10 +130,10 @@ class Task extends Node {
 
   protected static function boot() {
     parent::boot();
-
     static::deleting(function($task) {
       $task->comments()->delete();
       $task->activities()->delete();
+      $task->children()->delete();
     });
   }
 

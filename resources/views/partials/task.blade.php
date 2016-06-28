@@ -28,7 +28,8 @@
     @endif
 
     <a class="delete" href="#" data-ajax-interact data-method="delete"
-       data-url="{{ route('manager.tasks.delete', ['project' => $project->id]) }}"
+       data-display="reload"
+       data-url="{{ route('manager.tasks.delete', ['project' => $project->id, 'task' => $task->id]) }}"
        data-confirm="Are you sure you want to delete this task?">
       <i class="fi-trash"></i>
     </a>

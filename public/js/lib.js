@@ -175,8 +175,8 @@ function AjaxHandler(self) {
         if (display == 'slider') {
           $slider.html(response);
           $slider.removeClass('loading');
-        } else {
-          //console.log(response);
+        } else if(display == 'reload') {
+          location.reload();
         }
         $(document).foundation('dropdown', 'reflow');
       },
