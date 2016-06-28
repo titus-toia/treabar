@@ -17,6 +17,7 @@ class Activity extends Feedable {
   const TYPE_COMPLETION = 'completion';
 
   public function content() {
+
     if($this->type === self::TYPE_ACTIVITY) {
       return "{$this->user->name} logged {$this->duration()} in task {$this->task->name}.";
     } else if($this->type === self::TYPE_COMPLETION) {

@@ -68,5 +68,7 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 Route::get('test', function() {
-  echo 'test';
+  $task = \Treabar\Models\Task::find(1);
+  $task->delete();
+  dd($task, $task->activities);
 });
