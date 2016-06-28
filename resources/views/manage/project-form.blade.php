@@ -36,13 +36,13 @@
         <div class="columns large-6">
           <label>
             From
-            <input type="text" name="from" value="{{ $project->from? $project->from->format('d-m-Y'): '' }}" />
+            <input type="text" name="from" value="{{ isset($project) && $project->from? $project->from->format('d-m-Y'): '' }}" />
           </label>
         </div>
         <div class="columns large-6">
           <label>
             To
-            <input type="text" name="to" value="{{ $project->to? $project->to->format('d-m-Y'):  '' }}" />
+            <input type="text" name="to" value="{{ isset($project) && $project->to? $project->to->format('d-m-Y'):  '' }}" />
           </label>
         </div>
       </div>
@@ -86,7 +86,11 @@
   </div>
 </form>
 <script>
-  $('form').on('click', 'span.delete', function() {
+  var $form = $('#project-form');
+  $form.on('click', 'span.delete', function() {
     $(this).parent().remove();
+  });
+  $form.find('[name=from], [name=to]').fdatepicker({
+    format: 'dd-mm-yyyy'
   });
 </script>

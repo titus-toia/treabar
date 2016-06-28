@@ -31,19 +31,44 @@
   left: 380px;
   display: none;
 }
+#company-settings .new-user .user-form {
+  top: -29px;
+  left: 500px;
+}
+#company-settings dl {
+  font-size: 13px;
+}
 #company-settings ul.people img {
   cursor: pointer;
 }
 #company-settings ul.people img.active ~ .user-form {
   display: block;
 }
+#company-settings .new-user.active .user-form {
+  display: block;
+}
 #company-settings ul.people img:hover ~ .user-form {
   display: block;
 }
+#company-settings .new-user {
+  position: relative;
+  float: right;
+  display: inline-block;
+}
 </style>
+<script>
+  page = '{{ $page }}';
+</script>
 <div id="company-settings" class="row wrapper">
   <div class="columns large-12">
     <div>
+      <div class="new-user">
+        <a href="#">
+          New User
+          <i class="fi-page-add"></i>
+        </a>
+        @include('partials.settings-user-form')
+      </div>
       <dl>
         <dt>Devs</dt>
         <dd><ul class="people">

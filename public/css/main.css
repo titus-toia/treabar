@@ -113,6 +113,9 @@ nav.top-bar.manager, nav.top-bar.manager ul.right li {
 nav.top-bar.invoices, nav.top-bar.invoices ul.right li {
   background-color: #c8Aedb;
 }
+nav.top-bar.settings, nav.top-bar.settings ul.right li {
+  background-color: #e3e3e3;
+}
 
 
 
@@ -848,7 +851,6 @@ div.manager-project div.banner {
 #tasks-container .tasks.master .task.new:nth-child(2):nth-last-child(1) {
   display: none;
 }
-
 
 /* Slider - Project form */
 #color-dropdown {

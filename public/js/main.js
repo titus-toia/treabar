@@ -37,6 +37,8 @@ $body.on('click', '#page-state-button', function() {
 
 var $manager_page = $('#manager-page');
 
+$(window).trigger('hashchange');
+
 function LoadDashboard() {
   var tabScroll = function($tab) {
     var $content = $($tab.find('a').attr('href'));
@@ -529,10 +531,9 @@ function FilterInvoices(project_id) {
 }
 
 function LoadSettings() {
-  $('#company-settings').find('ul.people img').click(function() {
+  $('#company-settings').find('ul.people img, .new-user').click(function() {
+    console.warn('here');
     $('#company-settings').find('ul.people img').removeClass('active');
     $(this).addClass('active');
   });
-
-
 }

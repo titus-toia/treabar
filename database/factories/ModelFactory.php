@@ -26,7 +26,7 @@ $factory->define(User::class, function (Faker\Generator $faker) use($random_img)
   return [
     'name' => $faker->name,
     'email' => $faker->email,
-    'password' => bcrypt(str_random(10)),
+    'password' => Hash::make('123qweasd'),
     'remember_token' => str_random(10),
     'icon' => call_user_func($random_img, 'img/dev/users', 'img/users/')
   ];

@@ -12,19 +12,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Treabar\Models\Project[] $projects
  */
 class User extends Authenticatable {
+  protected $guarded = [];
   const ROLE_ROOT = 'root';
   const ROLE_MANAGER = 'manager';
   const ROLE_DEV = 'dev';
   const ROLE_CLIENT = 'client';
-
-  /**
-   * The attributes that are mass assignable.
-   *
-   * @var array
-   */
-  protected $fillable = [
-    'name', 'email', 'password',
-  ];
 
   /**
    * The attributes excluded from the model's JSON form.
@@ -37,6 +29,10 @@ class User extends Authenticatable {
 
   public function activities() {
     return $this->hasMany('Treabar\Models\Activity');
+  }
+
+  public function comments() {
+    return $this->hasMany('Treabar\Models\Comment');
   }
 
   public function company() {
@@ -58,9 +54,10 @@ class User extends Authenticatable {
 
   public function getProjects() {
     if($this->role === self::ROLE_MANAGER || $this->role === self::ROLE_ROOT)
-      $projects = $this->company->projects;
+      $projects = $this->company->projects();
     else
-      $projects = $this->projects;
+      $projects = $this->projects();
+    $projects = $projects->orderBy('created_at', 'desc')->get();
 
     return $projects;
   }

@@ -60,6 +60,9 @@ Route::group(['middleware' => ['web']], function () {
   Route::group(['prefix' => 'settings'], function() {
     Route::get('/', 'SettingsController@userSettings')->name('settings.user');
     Route::get('company', 'SettingsController@companySettings')->name('settings.company');
+
+    Route::post('{company}/user', 'SettingsController@storeUser')->name('settings.userstore');
+    Route::put('{company}/user/{user}', 'SettingsController@updateUser')->name('settings.userupdate');
   });
 });
 
