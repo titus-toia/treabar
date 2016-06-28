@@ -106,6 +106,7 @@ function LoadDashboard() {
       $overview.slideUp(100);
     }
   });
+  //Test comment
 
   //Task/notif filter
   var $filter = $('.filter');
