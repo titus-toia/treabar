@@ -21,7 +21,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('projects/create', 'ManagerController@createProject')->name('manager.projects.create');
     Route::post('projects', 'ManagerController@storeProject')->name('manager.projects.store');
-    Route::post('projects/{project}/edit', 'ManagerController@editProject')->name('manager.projects.edit');
+    Route::get('projects/{project}/edit', 'ManagerController@editProject')->name('manager.projects.edit');
     Route::post('projects/{project}/update', 'ManagerController@updateProject')->name('manager.projects.update');
 
     Route::get('{project}/tasks', 'ManagerController@tasks')->name('manager.tasks');

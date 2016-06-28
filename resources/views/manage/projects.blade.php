@@ -29,8 +29,19 @@
 <div id="current-project" class="columns large-12">
   @foreach($projects as $project)
     <div class="project-listing" data-id="{{ $project->id }}">
-      Stuff about project #{{ $project->id }}
       <h3>{{ $project->name }}</h3>
+      <a href="#" data-ajax-interact data-display="slider"
+           data-url="{{ route('manager.projects.edit', ['project' => $project]) }}">
+        Edit Project<i class="fi-edit-page"></i></span>
+      </a>
+      <dl>
+        <dt>Number of root tasks:</dt>
+        <dd>{{ $project->tasks(true)->count() }}</dd>
+        <dt>Total number of tasks:</dt>
+        <dd>{{ $project->tasks()->count() }}</dd>
+        <dt>Number of invoices:</dt>
+        <dd>{{ $project->invoices()->count() }}</dd>
+      </dl>
     </div>
   @endforeach
 </div>
