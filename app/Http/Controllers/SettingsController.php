@@ -36,8 +36,20 @@ class SettingsController extends Controller
     ]);
   }
 
-  public function updateCompany() {
+  public function updateCompany(Company $company) {
+    $company->update([
+      'name' => Input::get('name')
+    ]);
 
+    if(Input::hasFile('icon')) {
+      if (file_exists(public_path('img/companies/' . $company->icon))) unlink(public_path('img/companies/' . $company->icon));
+      $filename = uniqid() . $company->id . '.' . request()->file('icon')->getClientOriginalExtension();
+      request()->file('icon')->move(public_path('img/companies'), $filename);
+      $company->icon = $filename;
+      $company->save();
+    }
+
+    return redirect()->route('settings.company');
   }
   public function storeUser(Company $company) {
     if(Input::get('name') && Input::get('password') && Input::hasFile('icon')) {
@@ -65,7 +77,7 @@ class SettingsController extends Controller
       ]);
 
       if(Input::hasFile('icon')) {
-        if(public_path('img/users/' . $user->icon)) unlink(public_path('img/users/' . $user->icon));
+        if(file_exists(public_path('img/users/' . $user->icon))) unlink(public_path('img/users/' . $user->icon));
         $filename = uniqid() . $user->id . '.' . request()->file('icon')->getClientOriginalExtension();
         request()->file('icon')->move(public_path('img/users'), $filename);
         $user->icon = $filename;
@@ -80,7 +92,7 @@ class SettingsController extends Controller
   }
 
   public function deleteUser(User $user) {
-    if(public_path('img/users/' . $user->icon)) unlink(public_path('img/users/' . $user->icon));
+    if(file_exists(public_path('img/users/' . $user->icon))) unlink(public_path('img/users/' . $user->icon));
     $user->activities()->delete();
     $user->comments()->delete();
     $user->delete();

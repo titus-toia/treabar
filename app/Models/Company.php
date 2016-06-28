@@ -10,7 +10,7 @@ namespace Treabar\Models;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Treabar\Models\Invoice[] $invoices
  */
 class Company extends Model {
-
+  protected $guarded = [];
   public function projects() {
     return $this->hasMany('Treabar\Models\Project');
   }

@@ -42,6 +42,29 @@
         @endforeach
         </ul></dd>
       </dl>
+      <div style="clear:both"></div>
+      <div>
+        <br /><br />
+        <form method="post" action="{{ route('settings.company.update', ['company' => $company]) }}" enctype="multipart/form-data">
+          <h4>Misc. settings</h4>
+          <div class="large-12 columns">
+            <label>Name
+              <textarea name="name">{{ $company->name }}"</textarea>
+            </label>
+          </div>
+          <div class="large-12 columns">
+            <img height="200" width="200" src="{{ asset('img/companies/' . $company->icon) }}"/>
+          </div>
+          <div class="large-12 columns">
+            <label>Picture
+              <input type="file" name="icon" />
+            </label>
+          </div>
+          <div class="form-buttons">
+            <input type="submit" value="Save" class="button tiny" />
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
