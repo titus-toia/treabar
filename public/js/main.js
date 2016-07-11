@@ -417,7 +417,6 @@ function LoadChartPage() {
 
     if(task.from && task.to) {
       if(task.critical) {
-        console.warn($task, 'here');
         $task.addClass('critical');
       }
       $task.find('.date').text(task.from + ' - ' + task.to);
