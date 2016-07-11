@@ -81,7 +81,6 @@ class CriticalPath {
         $max['trail'] = $newTrail;
       }
     }
-
     if(empty($trail)) { //At top level
       foreach($max['trail'] as &$task) {
         $task['critical'] = true;

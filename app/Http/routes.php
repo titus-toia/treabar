@@ -2,7 +2,12 @@
 
 use Illuminate\Support\Facades\Input;
 
+
+
 Route::group(['middleware' => ['web']], function () {
+  Route::get('login', 'SettingsController@loginForm')->name('login.form');
+  Route::post('login', 'SettingsController@login')->name('login');
+
   Route::get('/', 'DashboardController@index')->name('dashboard');
   Route::post('state', function() {
     $state = Input::get('state');

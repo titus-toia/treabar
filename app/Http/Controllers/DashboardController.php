@@ -36,8 +36,6 @@ class DashboardController extends Controller
     ]);
   }
 
-
-
   public function index() {
     $projects = \Auth::user()->getProjects();
     $comments = Feedable::feed(Comment::ofProjects($projects));

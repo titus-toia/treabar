@@ -410,12 +410,16 @@ function LoadChartPage() {
   });
 
   var PlaceTask = function(task, $task, $divisions, height, width) {
+    var $task_original = $task;
     $task = $task.clone().removeAttr('id');
     $task.attr('data-id', task.id);
     var $division;
 
     if(task.from && task.to) {
-      if(task.critical) $task.addClass('critical');
+      if(task.critical) {
+        console.warn($task, 'here');
+        $task.addClass('critical');
+      }
       $task.find('.date').text(task.from + ' - ' + task.to);
       $division = $divisions.filter('[data-date=' + task.from + ']');
 
@@ -429,11 +433,11 @@ function LoadChartPage() {
         .text('Slack: ' + task.slack + ' days');
 
       for(var i in task.slaves) {
-        $child = PlaceTask(task.slaves[i], $task, $divisions, height, width);
+        $child = PlaceTask(task.slaves[i], $task_original, $divisions, height, width);
         jsPlumb.connect({
           source: $task,
           target: $child,
-          paintStyle: !task.critical? null: {
+          paintStyle: !(task.critical && task.slaves[i].critical)? null: {
             strokeStyle: "red",
             fillStyle: "red"
           }

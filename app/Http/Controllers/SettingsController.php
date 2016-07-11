@@ -12,6 +12,17 @@ use Treabar\Models\User;
 
 class SettingsController extends Controller
 {
+  public function loginForm() {
+    return view()->make('login');
+  }
+  public function login() {
+    if(\Auth::attempt(['email' => Input::get('email'), 'password'=> Input::get('password')])) {
+      return redirect()->route('dashboard');
+    } else {
+      return redirect()->route('login.form');
+    }
+  }
+
   public function __construct() {
     view()->share('page', 'settings');
   }
@@ -42,7 +53,7 @@ class SettingsController extends Controller
     ]);
 
     if(Input::hasFile('icon')) {
-      if (file_exists(public_path('img/companies/' . $company->icon))) unlink(public_path('img/companies/' . $company->icon));
+      if ($company->icon && file_exists(public_path('img/companies/' . $company->icon))) unlink(public_path('img/companies/' . $company->icon));
       $filename = uniqid() . $company->id . '.' . request()->file('icon')->getClientOriginalExtension();
       request()->file('icon')->move(public_path('img/companies'), $filename);
       $company->icon = $filename;
@@ -77,7 +88,7 @@ class SettingsController extends Controller
       ]);
 
       if(Input::hasFile('icon')) {
-        if(file_exists(public_path('img/users/' . $user->icon))) unlink(public_path('img/users/' . $user->icon));
+        if($user->icon && file_exists(public_path('img/users/' . $user->icon))) unlink(public_path('img/users/' . $user->icon));
         $filename = uniqid() . $user->id . '.' . request()->file('icon')->getClientOriginalExtension();
         request()->file('icon')->move(public_path('img/users'), $filename);
         $user->icon = $filename;
@@ -92,7 +103,7 @@ class SettingsController extends Controller
   }
 
   public function deleteUser(User $user) {
-    if(file_exists(public_path('img/users/' . $user->icon))) unlink(public_path('img/users/' . $user->icon));
+    if($user->icon && file_exists(public_path('img/users/' . $user->icon))) unlink(public_path('img/users/' . $user->icon));
     $user->activities()->delete();
     $user->comments()->delete();
     $user->delete();

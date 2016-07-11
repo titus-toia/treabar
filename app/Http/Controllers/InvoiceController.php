@@ -31,7 +31,7 @@ class InvoiceController extends Controller {
     $invoice = new Invoice([
       'name' => ($client?: 'Invoice') . ' ' . date('Y-m-d'),
       'issued_at' => date('Y-m-d'),
-      'invoiceno' => 1,
+      'invoiceno' => $task->project->company->invoiceno + 1,
       'client_name' => $client?: '',
       'company_name' => $task->project->company->name,
       'items' => [[
@@ -44,6 +44,9 @@ class InvoiceController extends Controller {
       'company_id' => $task->project->company_id,
       'client_id' => $task->project->client_id,
       'project_id' => $task->project_id
+    ]);
+    $task->project->company->update([
+      'invoiceno' => $task->project->company->invoiceno + 1
     ]);
     $invoice->save();
     $task->invoice_id = $invoice->id;

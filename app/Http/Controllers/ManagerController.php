@@ -24,7 +24,8 @@ class ManagerController extends Controller {
   }
 
   public function createProject() {
-    return view('manage.project-form')->with('users', \Auth::user()->company->users);
+    return view('manage.project-form')->with('users', \Auth::user()->company->users)
+      ->with('clients', \Auth::user()->company->clients);
   }
 
   public function storeProject() {
@@ -37,7 +38,7 @@ class ManagerController extends Controller {
       'client_id' => Input::get('client_id'),
       'company_id' => Input::get('company_id')?: \Auth::user()->company_id
     ]);
-    $project->users()->sync(Input::get('user_ids'));
+    $project->users()->sync(Input::get('user_ids', []));
 
     return $project;
   }

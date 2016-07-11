@@ -47,6 +47,17 @@
         </div>
       </div>
     </div>
+    @if(!isset($project))
+    <div class="large-12 columns">
+      <label>Client
+        <select name="client_id">
+          @foreach($clients as $client)
+          <option value="{{ $client->id }}">{{ $client->name }}</option>
+          @endforeach
+        </select>
+      </label>
+    </div>
+    @endif
     <div class="large-12 columns" style="margin-bottom: 20px;">
       <label for="user-dropdown-head">Add Users to Project</label>
       <div id="user-dropdown-head" class="user-image-div head" data-dropdown="user-dropdown"

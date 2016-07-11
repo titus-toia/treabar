@@ -126,5 +126,12 @@
   </div>
 </form>
 <script>
-  $('#activity-form').find('.faceter').faceter();
+  var $form = $('#activity-form');
+  $form.find('.faceter').faceter();
+
+  $form.find('[name=started_at], [name=finished_at]').fdatepicker({
+    format: 'hh:ii',
+    startView: 0
+  });
+
 </script>
