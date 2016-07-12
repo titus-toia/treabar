@@ -59,7 +59,7 @@ class ManagerController extends Controller {
       'color' => Input::get('color'),
       'client_id' => Input::get('client_id')
     ]);
-    $project->users()->sync(Input::get('user_ids'));
+    $project->users()->sync(Input::get('user_ids', []));
   }
 
   /* Tasks */
